@@ -21,7 +21,7 @@ const Tab = createBottomTabNavigator();
 function LoggedInFlow() {
   const notifications = useSelector(selectNotifications);
   const dispatch = useDispatch();
-  const consumer = createConsumer("ws://192.168.68.229:3000/cable");
+  const consumer = createConsumer("ws://192.168.88.230:3000/cable");
   const userId = useSelector(selectUserId);
 
   // For now, we will just sub to notification channel when in component
