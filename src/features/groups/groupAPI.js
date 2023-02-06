@@ -1,6 +1,6 @@
 import { getValueFor } from "../sessions/sessionAPI.js";
 
-const API_URL = "http://192.168.88.230:3000/api/v1";
+const API_URL = "https://obscure-bayou-87583.herokuapp.com/api/v1";
 
 export async function fetchGroups() {
   const auth_token = await getValueFor("auth_token");

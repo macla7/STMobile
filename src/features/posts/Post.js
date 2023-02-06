@@ -22,7 +22,7 @@ import Comments from "./comments/Comments";
 global.addEventListener = () => {};
 global.removeEventListener = () => {};
 
-const consumer = createConsumer("ws://192.168.88.230:3000/cable");
+const consumer = createConsumer("ws://obscure-bayou-87583.herokuapp.com/cable");
 
 function Post(props) {
   const [bids, setBids] = useState(props.post.bids);

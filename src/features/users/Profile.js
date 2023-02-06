@@ -32,10 +32,8 @@ function Profile() {
       quality: 1,
     });
 
-    console.log(result);
-
-    if (!result.cancelled) {
-      setImage(result.uri);
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
     }
   };
 
@@ -98,7 +96,6 @@ function Profile() {
                 )}
               </Box>
             </Pressable>
-            {/* <Text>{userAvatarUrl}</Text> */}
             <VStack w="100%">
               {image ? (
                 <Button
