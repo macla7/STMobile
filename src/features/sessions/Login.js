@@ -86,25 +86,38 @@ function Login({ navigation }) {
             <Button mt="2" colorScheme="indigo" onPress={() => onSubmit()}>
               Sign in
             </Button>
-            <HStack mt="6" justifyContent="center">
-              <Text
-                fontSize="sm"
-                color="coolGray.600"
-                _dark={{
-                  color: "warmGray.200",
-                }}
-              >
-                I'm a new user.{" "}
-              </Text>
-              <Text
-                fontSize="xs"
-                fontWeight="500"
-                color="indigo.500"
-                onPress={() => navigation.navigate("Register")}
-              >
-                Sign up
-              </Text>
-            </HStack>
+            <VStack>
+              <HStack mt="6" justifyContent="center">
+                <Text
+                  fontSize="sm"
+                  color="coolGray.600"
+                  _dark={{
+                    color: "warmGray.200",
+                  }}
+                >
+                  I'm a new user.{" "}
+                </Text>
+                <Text
+                  fontSize="xs"
+                  fontWeight="500"
+                  color="indigo.500"
+                  onPress={() => navigation.navigate("Register")}
+                >
+                  Sign up
+                </Text>
+              </HStack>
+
+              <HStack mt="6" justifyContent="center">
+                <Text
+                  fontSize="xs"
+                  fontWeight="500"
+                  color="indigo.500"
+                  onPress={() => navigation.navigate("EmailForm")}
+                >
+                  Forgot password
+                </Text>
+              </HStack>
+            </VStack>
           </VStack>
         </Box>
       </Center>

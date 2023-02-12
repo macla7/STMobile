@@ -1,6 +1,7 @@
 import * as SecureStore from "expo-secure-store";
+import { URL } from "@env";
 
-const API_URL = "https://obscure-bayou-87583.herokuapp.com/api/v1";
+const API_URL = URL;
 
 export async function getValueFor(key) {
   let result = await SecureStore.getItemAsync(key);

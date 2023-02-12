@@ -1,6 +1,7 @@
 import { getValueFor } from "../../sessions/sessionAPI.js";
+import { URL } from "@env";
 
-const API_URL = "https://obscure-bayou-87583.herokuapp.com/api/v1";
+const API_URL = URL;
 
 export async function fetchComments(postId) {
   return fetch(`${API_URL}/posts/${postId}/comments.json`, {

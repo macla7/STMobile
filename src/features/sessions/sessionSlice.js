@@ -7,6 +7,7 @@ import {
   loginUserWithToken,
 } from "./sessionAPI";
 import * as SecureStore from "expo-secure-store";
+import { client_id, client_secret } from "@env";
 
 export async function save(key, value) {
   await SecureStore.setItemAsync(key, value);
@@ -15,9 +16,6 @@ export async function save(key, value) {
 export async function deleteValueFor(key) {
   await SecureStore.deleteItemAsync(key);
 }
-
-const client_id = "Hnh_BkCS1zi7kGappmZpB9Nu5hyQC758Izm8-sl-6f8";
-const client_secret = "Aft-ktTRylnGFGe1f66PXkQZrlzAXFqmr9rjjVPp9GY";
 
 const initialState = {
   goToRegister: false,

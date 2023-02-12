@@ -1,6 +1,6 @@
 import { getValueFor } from "../../sessions/sessionAPI.js";
-
-const API_URL = "https://obscure-bayou-87583.herokuapp.com/api/v1";
+import { URL } from "@env";
+const API_URL = URL;
 
 export async function fetchInvites() {
   const auth_token = await getValueFor("auth_token");
