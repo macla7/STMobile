@@ -13,10 +13,8 @@ import {
 } from "native-base";
 import { Keyboard } from "react-native";
 
-export default function App() {
+function ChangePassword({ navigation }) {
   const dispatch = useDispatch();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   // const [avatar, setAvatar] = useState("");
@@ -87,3 +85,5 @@ export default function App() {
     </Pressable>
   );
 }
+
+export default ChangePassword;

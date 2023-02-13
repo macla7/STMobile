@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { registerUserAsync } from "../sessions/sessionSlice";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { checkResetTokenAsync } from "./passwordSlice";
 import {
   Center,
   Box,
@@ -12,14 +12,42 @@ import {
   Pressable,
 } from "native-base";
 import { Keyboard } from "react-native";
+import { selectTokenValidity, tokenIsNoLongerValid } from "./passwordSlice";
 
-export default function App() {
+function Token({ navigation }) {
+  const dispatch = useDispatch();
   const [token, setToken] = useState("");
+  const [errors, setErrors] = useState(null);
+  const tokenValidity = useSelector(selectTokenValidity);
 
-  function onSubmit() {
-    // just want to go to the next screen, with token now.
-    // Is there a way to validate the token first
-  }
+  useEffect(() => {
+    if (tokenValidity) {
+      dispatch(tokenIsNoLongerValid());
+      navigation.navigate("ChangePassword");
+    } else if (tokenValidity == false) {
+      setErrors("Invalid token.");
+    }
+  }, [dispatch, tokenValidity]);
+
+  const validate = () => {
+    let valid = true;
+
+    if (token === "") {
+      setErrors("Please enter the token sent to your email.");
+      valid = false;
+    }
+
+    if (valid) {
+      dispatch(checkResetTokenAsync(token));
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const onSubmit = () => {
+    validate() ? console.log("Submitted") : console.log("Validation Failed");
+  };
 
   return (
     <Pressable onPress={Keyboard.dismiss}>
@@ -33,7 +61,7 @@ export default function App() {
             }}
             fontWeight="semibold"
           >
-            Reset Password
+            Reset Password Token
           </Heading>
           <Heading
             mt="1"
@@ -46,13 +74,22 @@ export default function App() {
           >
             Enter token to continue!
           </Heading>
-          <VStack space={3} mt="5">
-            <FormControl>
+          <VStack space={3}>
+            <FormControl isRequired isInvalid={errors}>
+              {errors ? (
+                <FormControl.ErrorMessage>{errors}</FormControl.ErrorMessage>
+              ) : (
+                <FormControl.HelperText> </FormControl.HelperText>
+              )}
               <FormControl.Label>Token</FormControl.Label>
               <Input
                 type="token"
                 value={token}
-                onChange={(e) => setToken(e.nativeEvent.text)}
+                borderColor={errors ? "error.600" : "muted.300"}
+                onChange={(e) => {
+                  setToken(e.nativeEvent.text);
+                  setErrors(null);
+                }}
               />
             </FormControl>
             <Button mt="2" colorScheme="indigo" onPress={() => onSubmit()}>
@@ -64,3 +101,5 @@ export default function App() {
     </Pressable>
   );
 }
+
+export default Token;
