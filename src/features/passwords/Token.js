@@ -23,7 +23,9 @@ function Token({ navigation }) {
   useEffect(() => {
     if (tokenValidity) {
       dispatch(tokenIsNoLongerValid());
-      navigation.navigate("ChangePassword");
+      navigation.navigate("ChangePassword", {
+        resetToken: token,
+      });
     } else if (tokenValidity == false) {
       setErrors("Invalid token.");
     }

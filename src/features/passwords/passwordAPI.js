@@ -39,3 +39,19 @@ export async function checkResetToken(token) {
       return {};
     });
 }
+
+export async function changePassword(payload) {
+  return fetch(`${REGULAR_URL}/users/password`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  })
+    .then(async (response) => response.json())
+    .catch((error) => {
+      console.log("Error: ", error);
+      // Not a longer term proper soloution
+      return {};
+    });
+}

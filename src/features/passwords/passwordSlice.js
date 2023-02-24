@@ -1,6 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import produce from "immer";
-import { getResetPasswordInstructions, checkResetToken } from "./passwordAPI";
+import {
+  getResetPasswordInstructions,
+  checkResetToken,
+  changePassword,
+} from "./passwordAPI";
 
 export const Statuses = {
   Initial: "Not Fetched",
@@ -14,6 +18,9 @@ const initialState = {
   status: Statuses.Initial,
   emailValidity: null,
   tokenValidity: null,
+  passwordValidity: null,
+  email: null,
+  flashMessage: null,
 };
 
 export const getResetPasswordInstructionsAsync = createAsyncThunk(
@@ -32,6 +39,14 @@ export const checkResetTokenAsync = createAsyncThunk(
   }
 );
 
+export const changePasswordAsync = createAsyncThunk(
+  "users/password/change",
+  async (payload) => {
+    const response = await changePassword(payload);
+    return response;
+  }
+);
+
 export const passwordSlice = createSlice({
   name: "password",
   initialState,
@@ -42,6 +57,15 @@ export const passwordSlice = createSlice({
     },
     tokenIsNoLongerValid: (state) => {
       state.tokenValidity = null;
+    },
+    passwordIsNoLongerValid: (state) => {
+      state.passwordValidity = null;
+    },
+    clearChangePasswordEmail: (state) => {
+      state.email = null;
+    },
+    clearFlashMessage: (state) => {
+      state.flashMessage = null;
     },
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -85,15 +109,51 @@ export const passwordSlice = createSlice({
         return produce(state, (draftState) => {
           draftState.status = Statuses.Error;
         });
+      })
+      // while you wait
+      .addCase(changePasswordAsync.pending, (state) => {
+        return produce(state, (draftState) => {
+          draftState.status = Statuses.Loading;
+        });
+      })
+      // you got the thing
+      .addCase(changePasswordAsync.fulfilled, (state, action) => {
+        return produce(state, (draftState) => {
+          draftState.passwordValidity = action.payload.passwordValidity;
+          draftState.flashMessage =
+            Object.keys(action.payload.flash_message)[0].replaceAll("_", " ") +
+            " " +
+            Object.values(action.payload.flash_message)[0];
+          draftState.email = action.payload.email;
+          draftState.status = Statuses.UpToDate;
+        });
+      })
+      // error
+      .addCase(changePasswordAsync.rejected, (state) => {
+        return produce(state, (draftState) => {
+          draftState.status = Statuses.Error;
+        });
       });
   },
 });
 
-export const { emailIsNoLongerValid, tokenIsNoLongerValid } =
-  passwordSlice.actions;
+export const {
+  emailIsNoLongerValid,
+  tokenIsNoLongerValid,
+  passwordIsNoLongerValid,
+  clearChangePasswordEmail,
+  clearFlashMessage,
+} = passwordSlice.actions;
 
 export const selectEmailValidity = (state) => state.passwords.emailValidity;
 
 export const selectTokenValidity = (state) => state.passwords.tokenValidity;
+
+export const selectPasswordValidity = (state) =>
+  state.passwords.passwordValidity;
+
+export const selectEmail = (state) => state.passwords.email;
+
+export const selectFlashMessage = (state) => state.passwords.flashMessage;
 
 export default passwordSlice.reducer;

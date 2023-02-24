@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { registerUserAsync } from "../sessions/sessionSlice";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Center,
   Box,
@@ -12,27 +11,86 @@ import {
   Pressable,
 } from "native-base";
 import { Keyboard } from "react-native";
+import {
+  selectPasswordValidity,
+  passwordIsNoLongerValid,
+  changePasswordAsync,
+  selectEmail,
+  clearChangePasswordEmail,
+  selectFlashMessage,
+  clearFlashMessage,
+} from "./passwordSlice";
+import { loginUserAsync } from "../sessions/sessionSlice";
 
-function ChangePassword({ navigation }) {
+function ChangePassword({ route, navigation }) {
   const dispatch = useDispatch();
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  // const [avatar, setAvatar] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [errors, setErrors] = useState(null);
+  const { resetToken } = route.params;
+  const passwordValidity = useSelector(selectPasswordValidity);
+  const email = useSelector(selectEmail);
+  const flashMessage = useSelector(selectFlashMessage);
 
-  function onSubmit() {
-    const formData = new FormData();
-
-    // formData.append("user[avatar]", e.target.avatar.files[0]);
-    formData.append("user[name]", name);
-    formData.append("user[email]", email);
-    formData.append("user[password]", password);
-    formData.append(
-      "user[client_id]",
-      "Lm-9XiqY8dZOCoeX3mZrDhCjFY99IAUnp-Y82YpZz_k"
-    );
-
-    dispatch(registerUserAsync(formData));
+  function submit() {
+    const userDetails = {
+      user: {
+        password: password,
+        password_confirmation: passwordConfirmation,
+        reset_password_token: resetToken,
+      },
+    };
+    dispatch(changePasswordAsync(userDetails));
   }
+
+  useEffect(() => {
+    if (passwordValidity) {
+      dispatch(passwordIsNoLongerValid());
+
+      const loginUserDetails = {
+        email: email,
+        password: password,
+      };
+
+      dispatch(loginUserAsync(loginUserDetails));
+      clearChangePasswordEmail();
+      clearFlashMessage();
+    } else if (passwordValidity == false) {
+      setErrors(flashMessage);
+    }
+  }, [dispatch, passwordValidity, flashMessage]);
+
+  useEffect(() => {
+    dispatch(clearFlashMessage());
+  }, []);
+
+  const validate = () => {
+    let valid = true;
+
+    if (passwordConfirmation !== password) {
+      setErrors("Your passwords are not the same.");
+      valid = false;
+    }
+    if (passwordConfirmation === "") {
+      setErrors("Please confirm your password.");
+      valid = false;
+    }
+    if (password === "") {
+      setErrors("Please enter a password.");
+      valid = false;
+    }
+
+    if (valid) {
+      submit();
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const onSubmit = () => {
+    validate() ? console.log("Submitted") : console.log("Validation Failed");
+  };
 
   return (
     <Pressable onPress={Keyboard.dismiss}>
@@ -60,7 +118,12 @@ function ChangePassword({ navigation }) {
             Add numbers and symbols to make password more secure
           </Heading>
           <VStack space={3} mt="5">
-            <FormControl>
+            <FormControl isRequired isInvalid={errors}>
+              {errors ? (
+                <FormControl.ErrorMessage>{errors}</FormControl.ErrorMessage>
+              ) : (
+                <FormControl.HelperText> </FormControl.HelperText>
+              )}
               <FormControl.Label>Password</FormControl.Label>
               <Input
                 type="password"
@@ -72,8 +135,8 @@ function ChangePassword({ navigation }) {
               <FormControl.Label>Confirm Password</FormControl.Label>
               <Input
                 type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.nativeEvent.text)}
+                value={passwordConfirmation}
+                onChange={(e) => setPasswordConfirmation(e.nativeEvent.text)}
               />
             </FormControl>
             <Button mt="2" colorScheme="indigo" onPress={() => onSubmit()}>
