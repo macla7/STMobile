@@ -18,11 +18,12 @@ import ButtonGroup from "./ButtonGroup";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faClock } from "@fortawesome/free-regular-svg-icons/faClock";
 import Comments from "./comments/Comments";
+import { domain } from "@env";
 
 global.addEventListener = () => {};
 global.removeEventListener = () => {};
 
-const consumer = createConsumer("ws://obscure-bayou-87583.herokuapp.com/cable");
+const consumer = createConsumer(`ws://${domain}/cable`);
 
 function Post(props) {
   const [bids, setBids] = useState(props.post.bids);

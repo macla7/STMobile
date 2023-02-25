@@ -16,14 +16,14 @@ import {
 } from "../notifications/notificationSlice";
 import { createConsumer } from "@rails/actioncable";
 import { selectUserId } from "../sessions/sessionSlice";
+import { domain } from "@env";
+
 const Tab = createBottomTabNavigator();
 
 function LoggedInFlow() {
   const notifications = useSelector(selectNotifications);
   const dispatch = useDispatch();
-  const consumer = createConsumer(
-    "ws://obscure-bayou-87583.herokuapp.com/cable"
-  );
+  const consumer = createConsumer(`ws://${domain}/cable`);
   const userId = useSelector(selectUserId);
 
   // For now, we will just sub to notification channel when in component
