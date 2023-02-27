@@ -12,6 +12,7 @@ import {
   Pressable,
 } from "native-base";
 import { Keyboard } from "react-native";
+import { client_id } from "@env";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -28,10 +29,7 @@ export default function App() {
     formData.append("user[name]", name);
     formData.append("user[email]", email);
     formData.append("user[password]", password);
-    formData.append(
-      "user[client_id]",
-      "Lm-9XiqY8dZOCoeX3mZrDhCjFY99IAUnp-Y82YpZz_k"
-    );
+    formData.append("user[client_id]", client_id);
 
     dispatch(registerUserAsync(formData));
   }
