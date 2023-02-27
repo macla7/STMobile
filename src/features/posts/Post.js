@@ -62,7 +62,11 @@ function Post(props) {
     return () => {
       postsChannel.unsubscribe();
     };
-  }, [JSON.stringify(props.post.likes), JSON.stringify(props.post.bids)]);
+  }, [
+    JSON.stringify(props.post.likes),
+    JSON.stringify(props.post.bids),
+    JSON.stringify(props.post.comments),
+  ]);
 
   function setNewMinimumPrice(bids) {
     if (bids == undefined || bids.length == 0) {
