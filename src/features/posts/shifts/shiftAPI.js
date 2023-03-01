@@ -1,7 +1,7 @@
-const API_URL = "http://localhost:3000/api/v1";
+import { URL } from "@env";
 
 export async function fetchShifts(postId) {
-  return fetch(`${API_URL}/posts/${postId}/shifts.json`, {
+  return fetch(`${URL}/posts/${postId}/shifts.json`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -17,7 +17,7 @@ export async function fetchShifts(postId) {
 }
 
 export async function createShift(shiftDetails) {
-  return fetch(`${API_URL}/shifts.json`, {
+  return fetch(`${URL}/shifts.json`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
