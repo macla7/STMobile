@@ -4,6 +4,11 @@
     "slug": "mobileReactNative",
     "version": "1.0.0",
     "assetBundlePatterns": ["**/*"],
+    "icon": "./src/assets/images/icon.png",
+    "splash": {
+      "image": "./src/assets/images/splash.png",
+      "resizeMode": "cover"
+    },
     "extra": {
       "eas": {
         "projectId": "c3767efb-f9ce-41c2-b4b0-7de2689008bb"
@@ -11,6 +16,18 @@
     },
     "ios": {
       "bundleIdentifier": "ios"
+    },
+    "android": {
+      "icon": "./src/assets/images/adaptive-icon2.png",
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/images/adaptive-icon.png",
+        "backgroundColor": "#064e3b"
+      },
+      "splash": {
+        "image": "./src/assets/images/splash.png",
+        "backgroundColor": "#064e3b"
+      },
+      "package": "com.macla7.mobileReactNative"
     }
   }
 }
