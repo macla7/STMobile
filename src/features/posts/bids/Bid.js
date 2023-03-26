@@ -5,7 +5,6 @@ import { StyleSheet } from "react-native";
 import Money from "../money/Money";
 import { formatDistanceToNow } from "date-fns";
 import DP from "../../layout/DP";
-import { CInternalBorderTile } from "../../layout/LayoutComponents";
 
 function Bid(props) {
   return (
@@ -19,7 +18,6 @@ function Bid(props) {
       p="1"
       mb="1"
       mx="1"
-      borderRadius="10"
       borderWidth="1"
       borderColor={props.bidNum == 0 ? "amber.200" : "coolGray.200"}
     >
@@ -62,7 +60,7 @@ const styles = StyleSheet.create({
   bid: {
     paddingHorizontal: 10,
     height: 25,
-    borderRadius: 5,
+    borderRadius: 0,
     justifyContent: "center",
     alignItems: "center",
     flexGrow: 1,

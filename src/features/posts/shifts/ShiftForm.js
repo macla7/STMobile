@@ -88,7 +88,6 @@ function ShiftForm({ navigation, route }) {
             )}
             <TextArea
               mt="2"
-              borderRadius="10"
               h={20}
               isInvalid={errors["position"]}
               placeholder="Add Description here.."
@@ -122,7 +121,6 @@ function ShiftForm({ navigation, route }) {
               p="2"
               mt="2"
               mx="1"
-              borderRadius="10"
               onPress={() => {
                 navigation.navigate("Time and Date", {
                   initDate: start,
@@ -158,7 +156,6 @@ function ShiftForm({ navigation, route }) {
               p="2"
               mt="2"
               mx="1"
-              borderRadius="10"
               onPress={() => {
                 navigation.navigate("Time and Date", {
                   initDate: end,

@@ -121,7 +121,6 @@ function PostForm({ route, navigation }) {
               p="2"
               mt="2"
               mx="1"
-              borderRadius="10"
               onPress={() => {
                 navigation.navigate("Your Groups", {
                   initGroupId: groupId,
@@ -146,7 +145,6 @@ function PostForm({ route, navigation }) {
               p="2"
               mt="2"
               mx="1"
-              borderRadius="10"
               onPress={() => {
                 navigation.navigate("Time and Date", {
                   initDate: date,
@@ -215,7 +213,6 @@ function PostForm({ route, navigation }) {
               p="2"
               mt="2"
               mx="1"
-              borderRadius="10"
               onPress={() =>
                 navigation.navigate("Add Reserve", {
                   reserve: reserve,
@@ -232,7 +229,6 @@ function PostForm({ route, navigation }) {
             </FormControl.ErrorMessage>
             <TextArea
               mt="2"
-              borderRadius="10"
               h={20}
               placeholder="Add Description here.."
               value={description}

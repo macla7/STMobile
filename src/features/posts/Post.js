@@ -120,31 +120,29 @@ function Post(props) {
       <Flex direction="row">
         <VStack flex={1}>
           <ScrollView maxH="48">
-            <Box width="100%" px="2" mb="2">
-              <Text>{props.post.body}</Text>
-            </Box>
-
             <Shift
               shifts={props.post.shifts}
               editable={false}
               invalidShiftIds={[]}
             />
+
+            <Box width="100%" px="2" mb="2">
+              <Text>{props.post.body}</Text>
+            </Box>
           </ScrollView>
         </VStack>
         <Box flex={1}>
-          <Box>
-            <Bids
-              bids={bids}
-              postId={props.post.id}
-              navigation={props.navigation}
-              reserveBid={{
-                price: props.post.reserve,
-                avatar_url: props.post.avatar_url,
-                created_at: props.post.created_at,
-                bidder: props.post.postor_name,
-              }}
-            />
-          </Box>
+          <Bids
+            bids={bids}
+            postId={props.post.id}
+            navigation={props.navigation}
+            reserveBid={{
+              price: props.post.reserve,
+              avatar_url: props.post.avatar_url,
+              created_at: props.post.created_at,
+              bidder: props.post.postor_name,
+            }}
+          />
         </Box>
       </Flex>
 

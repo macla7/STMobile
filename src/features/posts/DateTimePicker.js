@@ -75,9 +75,6 @@ function MyDateTimePicker({ route, navigation }) {
         >
           {text}
         </Heading>
-      </CContentTile>
-
-      <CContentTile>
         <VStack w="100%">
           {show && (
             <DateTimePicker

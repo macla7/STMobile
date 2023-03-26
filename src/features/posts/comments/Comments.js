@@ -1,8 +1,5 @@
 import React from "react";
-import { VStack, HStack, Text, View, Box } from "native-base";
-import { formatDistanceToNow } from "date-fns";
-import DP from "../../layout/DP";
-import { CInternalBorderTile } from "../../layout/LayoutComponents";
+import { Box } from "native-base";
 import Comment from "./Comment";
 
 function Comments(props) {

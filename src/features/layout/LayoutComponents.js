@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import { Center, Box, Text } from "native-base";
+import { Center, Box, Text, HStack } from "native-base";
 import { RefreshControl, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -80,8 +80,12 @@ export function CScrollBackgroundRefresh({ children, refreshAction }) {
 
 export function CContentTile({ children }) {
   return (
-    <Center p="4" w="100%" bgColor="white" shadow="6">
-      {children}
+    <Center my="1" h="100%">
+      <HStack>
+        <Center flex="1" p="4" bgColor="white" shadow="6">
+          {children}
+        </Center>
+      </HStack>
     </Center>
   );
 }
@@ -120,13 +124,11 @@ export function CInternalBorderTile({ children, borderColor }) {
   return (
     <Box
       borderColor={borderColor}
-      borderWidth="1"
+      borderBottomWidth="1"
       p="1"
       mb="1"
       mx="1"
-      borderRadius="10"
       bgColor="white"
-      shadow="1"
     >
       {children}
     </Box>
@@ -143,7 +145,6 @@ export function CInternalBorderHeaderTile({ children }) {
       borderColor="coolGray.200"
       my="2"
       mx="1"
-      borderRadius="10"
       bgColor="white"
       shadow="1"
     >
