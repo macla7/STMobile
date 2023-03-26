@@ -15,8 +15,9 @@ import {
   addNotification,
 } from "../notifications/notificationSlice";
 import { createConsumer } from "@rails/actioncable";
-import { selectUserId } from "../sessions/sessionSlice";
+import { selectUserId, logoutUserAsync } from "../sessions/sessionSlice";
 import { domain } from "@env";
+import { Button } from "native-base";
 
 const Tab = createBottomTabNavigator();
 
@@ -47,6 +48,10 @@ function LoggedInFlow() {
       notificationsChannel.unsubscribe();
     };
   }, []);
+
+  function onLogout() {
+    dispatch(logoutUserAsync());
+  }
 
   return (
     <>
@@ -85,7 +90,23 @@ function LoggedInFlow() {
           component={Notifications}
           options={{ tabBarBadge: notifications.length }}
         />
-        <Tab.Screen name="Profile" component={Profile} />
+        <Tab.Screen
+          name="Profile"
+          component={Profile}
+          options={{
+            headerTitle: "Edit Profile",
+            headerRight: () => (
+              <Button
+                onPress={() => onLogout()}
+                size="sm"
+                mx="2"
+                colorScheme="indigo"
+              >
+                Logout
+              </Button>
+            ),
+          }}
+        />
       </Tab.Navigator>
     </>
   );

@@ -62,8 +62,8 @@ export const createUserAsync = createAsyncThunk(
 
 export const updateUserAsync = createAsyncThunk(
   "users/updateUser",
-  async (payload) => {
-    const response = await updateUser(payload);
+  async (userDetails) => {
+    const response = await updateUser(userDetails);
     return response;
   }
 );
