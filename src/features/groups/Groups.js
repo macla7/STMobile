@@ -94,28 +94,31 @@ function Groups({ navigation }) {
           )}
           keyExtractor={(item) => item.id}
         />
-        <VStack w="100%">
-          <Button
-            colorScheme="indigo"
-            mx="4"
-            mt="2"
-            onPress={() => navigation.navigate("Discover")}
-          >
-            Discover Groups
-          </Button>
-          <Button
-            colorScheme="indigo"
-            mx="4"
-            my="2"
-            onPress={() =>
-              navigation.navigate("Create Group", {
-                returnScreen: "My Groups",
-              })
-            }
-          >
-            Create Group
-          </Button>
-        </VStack>
+
+        <Box p="2" position="absolute" bottom="0" width="100%">
+          <HStack>
+            <Button
+              mx="4"
+              flex="1"
+              colorScheme="indigo"
+              onPress={() => navigation.navigate("Discover")}
+            >
+              Discover
+            </Button>
+            <Button
+              mx="4"
+              flex="1"
+              colorScheme="indigo"
+              onPress={() =>
+                navigation.navigate("Create Group", {
+                  returnScreen: "My Groups",
+                })
+              }
+            >
+              Create Group
+            </Button>
+          </HStack>
+        </Box>
       </CWholeSpaceContentTile>
     </CBackground>
   );

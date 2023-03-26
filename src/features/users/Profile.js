@@ -89,6 +89,7 @@ function Profile() {
     }
     submitUser();
     setEditingProfile(false);
+    setEditingName(false);
     return true;
   };
 
@@ -170,6 +171,7 @@ function Profile() {
                 <Button
                   onPress={() => {
                     setEditingName(true);
+                    setEditingProfile(true);
                   }}
                   variant="unstyled"
                   _text={{
@@ -229,26 +231,30 @@ function Profile() {
 
           {/* Buttons */}
           {editingProfile ? (
-            <>
-              <Button
-                w="100%"
-                colorScheme="indigo"
-                onPress={() => {
-                  onSubmit();
-                }}
-              >
-                Save
-              </Button>
-              <Button
-                w="100%"
-                colorScheme="indigo"
-                onPress={() => {
-                  cancelEditing();
-                }}
-              >
-                Cancel
-              </Button>
-            </>
+            <Box p="2" position="absolute" bottom="0" width="100%">
+              <HStack>
+                <Button
+                  mx="4"
+                  flex="1"
+                  colorScheme="indigo"
+                  onPress={() => {
+                    onSubmit();
+                  }}
+                >
+                  Save
+                </Button>
+                <Button
+                  mx="4"
+                  flex="1"
+                  colorScheme="indigo"
+                  onPress={() => {
+                    cancelEditing();
+                  }}
+                >
+                  Cancel
+                </Button>
+              </HStack>
+            </Box>
           ) : (
             ""
           )}
