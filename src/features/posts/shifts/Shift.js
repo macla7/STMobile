@@ -12,20 +12,10 @@ function Shift({ navigation, shifts, editable, invalidShiftIds }) {
       return (
         <>
           <Text>Across Days:</Text>
-          <Text
-            color="coolGray.600"
-            _dark={{
-              color: "warmGray.200",
-            }}
-          >
+          <Text color="myMidGrayText">
             {format(new Date(item.start), "EEE do LLL")}
           </Text>
-          <Text
-            color="coolGray.600"
-            _dark={{
-              color: "warmGray.200",
-            }}
-          >
+          <Text color="myMidGrayText">
             {format(new Date(item.end), "EEE do LLL")}
           </Text>
         </>
@@ -34,12 +24,7 @@ function Shift({ navigation, shifts, editable, invalidShiftIds }) {
       return (
         <>
           <Text>Day:</Text>
-          <Text
-            color="coolGray.600"
-            _dark={{
-              color: "warmGray.200",
-            }}
-          >
+          <Text color="myMidGrayText">
             {format(new Date(item.start), "EEE do LLL")}
           </Text>
         </>
@@ -71,37 +56,21 @@ function Shift({ navigation, shifts, editable, invalidShiftIds }) {
                   ? "error.600"
                   : editable
                   ? "muted.300"
-                  : "coolGray.200"
+                  : "myBorderGray"
               }
             >
               <VStack>
-                <Text
-                  _dark={{
-                    color: "warmGray.50",
-                  }}
-                  color="coolGray.800"
-                  bold
-                >
+                <Text color="myDarkGrayText" bold>
                   {item.position}
                 </Text>
                 <HStack space={3} justifyContent="space-between">
                   <VStack>{getDays(item)}</VStack>
                   <VStack>
                     <Text>Time:</Text>
-                    <Text
-                      color="coolGray.600"
-                      _dark={{
-                        color: "warmGray.200",
-                      }}
-                    >
+                    <Text color="myMidGrayText">
                       {format(new Date(item.start), "p")}
                     </Text>
-                    <Text
-                      color="coolGray.600"
-                      _dark={{
-                        color: "warmGray.200",
-                      }}
-                    >
+                    <Text color="myMidGrayText">
                       {format(new Date(item.end), "p")}
                     </Text>
                   </VStack>

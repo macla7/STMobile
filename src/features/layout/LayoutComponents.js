@@ -118,10 +118,7 @@ export function CInternalBorderHeaderTile({ children }) {
   return (
     <Center
       borderWidth="1"
-      _dark={{
-        borderColor: "gray.600",
-      }}
-      borderColor="coolGray.200"
+      borderColor="myBorderGray"
       my="2"
       mx="1"
       bgColor="white"

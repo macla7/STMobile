@@ -112,7 +112,7 @@ function ShiftForm({ navigation, route }) {
             <Button
               fontSize="md"
               fontWeight="400"
-              color="coolGray.800"
+              color="myDarkGrayText"
               variant="Unstyled"
               display="flex"
               justifyContent="flex-start"
@@ -147,7 +147,7 @@ function ShiftForm({ navigation, route }) {
             <Button
               fontSize="md"
               fontWeight="400"
-              color="coolGray.800"
+              color="myDarkGrayText"
               variant="Unstyled"
               display="flex"
               justifyContent="flex-start"

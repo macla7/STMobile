@@ -53,10 +53,7 @@ function Groups({ navigation }) {
           renderItem={({ item }) => (
             <Box
               borderBottomWidth="1"
-              _dark={{
-                borderColor: "gray.600",
-              }}
-              borderColor="coolGray.200"
+              borderColor="myBorderGray"
               pl="4"
               pr="5"
               py="2"
@@ -71,21 +68,10 @@ function Groups({ navigation }) {
                 }
               >
                 <VStack w="100%">
-                  <Text
-                    _dark={{
-                      color: "warmGray.50",
-                    }}
-                    color="coolGray.800"
-                    bold
-                  >
+                  <Text color="myDarkGrayText" bold>
                     {item.name}
                   </Text>
-                  <Text
-                    color="coolGray.600"
-                    _dark={{
-                      color: "warmGray.200",
-                    }}
-                  >
+                  <Text color="myMidGrayText">
                     {item.number_of_memberships} members
                   </Text>
                 </VStack>

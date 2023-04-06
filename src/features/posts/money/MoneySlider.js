@@ -44,14 +44,7 @@ function MoneySlider(props) {
   return (
     <Box alignItems="center" w="100%">
       <Stack space={4} alignItems="center" w="90%">
-        <Heading
-          size="md"
-          fontWeight="600"
-          color="coolGray.800"
-          _dark={{
-            color: "warmGray.50",
-          }}
-        >
+        <Heading size="md" fontWeight="600" color="myDarkGrayText">
           {title()}
         </Heading>
 

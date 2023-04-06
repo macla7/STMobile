@@ -65,25 +65,10 @@ function EmailForm({ navigation }) {
     <Pressable onPress={Keyboard.dismiss}>
       <Center w="100%">
         <Box safeArea p="2" py="8" w="90%" maxW="290">
-          <Heading
-            size="lg"
-            fontWeight="600"
-            color="coolGray.800"
-            _dark={{
-              color: "warmGray.50",
-            }}
-          >
+          <Heading size="lg" fontWeight="600" color="myDarkGrayText">
             Forgot Password
           </Heading>
-          <Heading
-            mt="1"
-            _dark={{
-              color: "warmGray.200",
-            }}
-            color="coolGray.600"
-            fontWeight="medium"
-            size="xs"
-          >
+          <Heading mt="1" color="myMidGrayText" fontWeight="medium" size="xs">
             Enter email to recieve reset password instructions.
           </Heading>
 

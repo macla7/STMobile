@@ -16,10 +16,7 @@ function Memberships({ memberships }) {
       renderItem={({ item }) => (
         <Box
           borderBottomWidth="1"
-          _dark={{
-            borderColor: "gray.600",
-          }}
-          borderColor="coolGray.200"
+          borderColor="myBorderGray"
           pl="4"
           pr="5"
           py="2"
@@ -32,32 +29,15 @@ function Memberships({ memberships }) {
                 ""
               )}
               <VStack ml="2">
-                <Text
-                  _dark={{
-                    color: "warmGray.50",
-                  }}
-                  color="coolGray.800"
-                  bold
-                >
+                <Text color="myDarkGrayText" bold>
                   {item.user.name}
                 </Text>
-                <Text
-                  color="coolGray.600"
-                  _dark={{
-                    color: "warmGray.200",
-                  }}
-                >
+                <Text color="myMidGrayText">
                   {item.role == "admin" ? "Admin" : "member"}
                 </Text>
               </VStack>
             </HStack>
-            <Text
-              fontSize="xs"
-              _dark={{
-                color: "warmGray.50",
-              }}
-              color="coolGray.800"
-            >
+            <Text fontSize="xs" color="myDarkGrayText">
               Since {since(item)}
             </Text>
           </HStack>

@@ -55,25 +55,10 @@ function Token({ navigation }) {
     <Pressable onPress={Keyboard.dismiss}>
       <Center w="100%">
         <Box safeArea p="2" w="90%" maxW="290" py="8">
-          <Heading
-            size="lg"
-            color="coolGray.800"
-            _dark={{
-              color: "warmGray.50",
-            }}
-            fontWeight="semibold"
-          >
+          <Heading size="lg" color="myDarkGrayText" fontWeight="semibold">
             Reset Password Token
           </Heading>
-          <Heading
-            mt="1"
-            color="coolGray.600"
-            _dark={{
-              color: "warmGray.200",
-            }}
-            fontWeight="medium"
-            size="xs"
-          >
+          <Heading mt="1" color="myMidGrayText" fontWeight="medium" size="xs">
             Enter token to continue!
           </Heading>
           <VStack space={3}>

@@ -49,14 +49,7 @@ function BidConfirmation({ route, navigation }) {
       <CBackground>
         <Center h="100%">
           <CContentTile>
-            <Heading
-              size="lg"
-              fontWeight="600"
-              color="coolGray.800"
-              _dark={{
-                color: "warmGray.50",
-              }}
-            >
+            <Heading size="lg" fontWeight="600" color="myDarkGrayText">
               Bid Details
             </Heading>
             <Text>

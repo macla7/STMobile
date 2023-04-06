@@ -41,10 +41,7 @@ function GroupSearch({ navigation, route }) {
           >
             <Box
               borderBottomWidth="1"
-              _dark={{
-                borderColor: "gray.600",
-              }}
-              borderColor="coolGray.200"
+              borderColor="myBorderGray"
               backgroundColor={groupId == item.id ? "primary.100" : null}
               borderWidth={groupId == item.id ? "1" : null}
               pl="4"
@@ -54,21 +51,10 @@ function GroupSearch({ navigation, route }) {
             >
               <HStack space={3} justifyContent="space-between">
                 <VStack w="100%">
-                  <Text
-                    _dark={{
-                      color: "warmGray.50",
-                    }}
-                    color="coolGray.800"
-                    bold
-                  >
+                  <Text color="myDarkGrayText" bold>
                     {item.name}
                   </Text>
-                  <Text
-                    color="coolGray.600"
-                    _dark={{
-                      color: "warmGray.200",
-                    }}
-                  >
+                  <Text color="myMidGrayText">
                     {item.number_of_memberships} members
                   </Text>
                 </VStack>

@@ -28,10 +28,7 @@ function Notifications({ navigation }) {
             renderItem={({ item }) => (
               <Box
                 borderBottomWidth="1"
-                _dark={{
-                  borderColor: "gray.600",
-                }}
-                borderColor="coolGray.200"
+                borderColor="myBorderGray"
                 px="2"
                 py="2"
               >
@@ -41,21 +38,10 @@ function Notifications({ navigation }) {
                   w="100%"
                 >
                   <VStack width="50%">
-                    <Text
-                      _dark={{
-                        color: "warmGray.50",
-                      }}
-                      color="coolGray.800"
-                      bold
-                    >
+                    <Text color="myDarkGrayText" bold>
                       {item.description}
                     </Text>
-                    <Text
-                      color="coolGray.600"
-                      _dark={{
-                        color: "warmGray.200",
-                      }}
-                    >
+                    <Text color="myMidGrayText">
                       {formatDistanceToNow(new Date(item.created_at))} ago
                     </Text>
                   </VStack>

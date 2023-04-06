@@ -14,12 +14,12 @@ function Bid(props) {
       flex={1}
       shadow="1"
       flexDirection="row"
-      bgColor={props.bid.price < 0 ? "#F4A9C7" : "#23A393"}
+      bgColor={props.bid.price < 0 ? "myPink" : "myLightGreen"}
       p="1"
       mb="1"
       mx="1"
       borderWidth="1"
-      borderColor={props.bidNum == 0 ? "amber.200" : "coolGray.200"}
+      borderColor={props.bidNum == 0 ? "amber.200" : "myBorderGray"}
     >
       <VStack flexGrow={1}>
         <HStack justifyContent="space-between" flexGrow={1}>

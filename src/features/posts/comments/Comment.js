@@ -15,19 +15,13 @@ function Comment(props) {
           ""
         )}
         <VStack ml="2">
-          <Box bgColor="gray.200" borderRadius="15" px="2" py="1">
-            <Text
-              _dark={{
-                color: "warmGray.50",
-              }}
-              color="coolGray.800"
-              bold
-            >
+          <Box bgColor="myBorderGray" borderRadius="15" px="2" py="1">
+            <Text color="myDarkGrayText" bold>
               {props.comment.commentor}
             </Text>
             <Text>{props.comment.body}</Text>
           </Box>
-          <Text fontSize="2xs" px="2" color="gray.600" py="1">
+          <Text fontSize="2xs" px="2" color="myMidGrayText" py="1">
             {format(new Date(props.comment.created_at), "d MMM")}
           </Text>
         </VStack>

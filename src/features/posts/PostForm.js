@@ -112,7 +112,7 @@ function PostForm({ route, navigation }) {
             <Button
               fontSize="md"
               fontWeight="400"
-              color="coolGray.800"
+              color="myDarkGrayText"
               variant="Unstyled"
               display="flex"
               justifyContent="flex-start"
@@ -136,7 +136,7 @@ function PostForm({ route, navigation }) {
             <Button
               fontSize="md"
               fontWeight="400"
-              color="coolGray.800"
+              color="myDarkGrayText"
               variant="Unstyled"
               display="flex"
               justifyContent="flex-start"
@@ -178,7 +178,7 @@ function PostForm({ route, navigation }) {
             <Button
               fontSize="md"
               fontWeight="400"
-              color="coolGray.800"
+              color="myDarkGrayText"
               variant="myButtonYellowVariant"
               onPress={() => {
                 navigation.navigate("Add Shift", {
@@ -204,7 +204,7 @@ function PostForm({ route, navigation }) {
             <Button
               fontSize="md"
               fontWeight="400"
-              color="coolGray.800"
+              color="myDarkGrayText"
               variant="Unstyled"
               display="flex"
               justifyContent="flex-start"

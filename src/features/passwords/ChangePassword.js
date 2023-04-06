@@ -96,25 +96,10 @@ function ChangePassword({ route, navigation }) {
     <Pressable onPress={Keyboard.dismiss}>
       <Center w="100%">
         <Box safeArea p="2" w="90%" maxW="290" py="8">
-          <Heading
-            size="lg"
-            color="coolGray.800"
-            _dark={{
-              color: "warmGray.50",
-            }}
-            fontWeight="semibold"
-          >
+          <Heading size="lg" color="myDarkGrayText" fontWeight="semibold">
             Change Password
           </Heading>
-          <Heading
-            mt="1"
-            color="coolGray.600"
-            _dark={{
-              color: "warmGray.200",
-            }}
-            fontWeight="medium"
-            size="xs"
-          >
+          <Heading mt="1" color="myMidGrayText" fontWeight="medium" size="xs">
             Add numbers and symbols to make password more secure
           </Heading>
           <VStack space={3} mt="5">

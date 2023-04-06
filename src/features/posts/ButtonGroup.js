@@ -35,7 +35,7 @@ function ButtonGroup({
       justifyContent="space-between"
       h="10"
       borderTopWidth="1"
-      borderColor="coolGray.200"
+      borderColor="myBorderGray"
     >
       <Likes likes={likes} postId={postId} />
 

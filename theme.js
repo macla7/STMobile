@@ -5,6 +5,12 @@ export const theme = extendTheme({
     // Add new color
     // note that the tab navidatior icons need to be changed independently
     myDarkGreen: "#20716A",
+    myLightGreen: "#23A393",
+    myPink: "#F4A9C7",
+    myYellow: "#FFF78C",
+    myBorderGray: "#e5e7eb",
+    myDarkGrayText: "#1f2937",
+    myMidGrayText: "#4b5563",
 
     myButtonTextScheme: {
       600: "myDarkGreen",
@@ -15,7 +21,7 @@ export const theme = extendTheme({
     Button: {
       variants: {
         myButtonYellowVariant: {
-          bgColor: "#FFF78C",
+          bgColor: "myYellow",
           _text: {
             color: "myDarkGreen",
           },

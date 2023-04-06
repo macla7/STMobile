@@ -57,10 +57,7 @@ function DiscoverGroups() {
           {otherGroups.map((item, index) => (
             <Box
               borderBottomWidth="1"
-              _dark={{
-                borderColor: "gray.600",
-              }}
-              borderColor="coolGray.200"
+              borderColor="myBorderGray"
               pl="4"
               pr="5"
               py="2"
@@ -68,21 +65,10 @@ function DiscoverGroups() {
             >
               <HStack space={3} justifyContent="space-between">
                 <VStack w="80%">
-                  <Text
-                    _dark={{
-                      color: "warmGray.50",
-                    }}
-                    color="coolGray.800"
-                    bold
-                  >
+                  <Text color="myDarkGrayText" bold>
                     {item.name}
                   </Text>
-                  <Text
-                    color="coolGray.600"
-                    _dark={{
-                      color: "warmGray.200",
-                    }}
-                  >
+                  <Text color="myMidGrayText">
                     {item.number_of_memberships} members
                   </Text>
                 </VStack>

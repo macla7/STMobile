@@ -115,10 +115,7 @@ function Search({ route }) {
             pr="5"
             py="4"
             borderBottomWidth="1"
-            _dark={{
-              borderColor: "gray.600",
-            }}
-            borderColor="coolGray.200"
+            borderColor="myBorderGray"
             width="100%"
           >
             <FormControl
@@ -171,10 +168,7 @@ function Search({ route }) {
               >
                 <Box
                   borderBottomWidth="1"
-                  _dark={{
-                    borderColor: "gray.600",
-                  }}
-                  borderColor="coolGray.200"
+                  borderColor="myBorderGray"
                   pl="4"
                   pr="5"
                   py="2"
@@ -182,14 +176,7 @@ function Search({ route }) {
                   <HStack alignItems="center">
                     {item.avatar_url ? <DP uri={`${item.avatar_url}`} /> : ""}
 
-                    <Text
-                      ml="2"
-                      _dark={{
-                        color: "warmGray.50",
-                      }}
-                      color="coolGray.800"
-                      bold
-                    >
+                    <Text ml="2" color="myDarkGrayText" bold>
                       {item.email}
                     </Text>
                   </HStack>

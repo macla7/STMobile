@@ -108,7 +108,7 @@ function Profile() {
                 <Heading
                   size="md"
                   fontWeight="600"
-                  color="coolGray.800"
+                  color="myDarkGrayText"
                   _dark={{
                     color: "warmGray.50",
                   }}
@@ -158,7 +158,7 @@ function Profile() {
                 <Heading
                   size="md"
                   fontWeight="600"
-                  color="coolGray.800"
+                  color="myDarkGrayText"
                   _dark={{
                     color: "warmGray.50",
                   }}
@@ -214,7 +214,7 @@ function Profile() {
                 <Heading
                   size="md"
                   fontWeight="600"
-                  color="coolGray.800"
+                  color="myDarkGrayText"
                   _dark={{
                     color: "warmGray.50",
                   }}

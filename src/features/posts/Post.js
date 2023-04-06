@@ -79,27 +79,14 @@ function Post(props) {
   return (
     <Center my="1" bgColor="white">
       <Center width="100%" px="2" py="1">
-        <Text
-          _dark={{
-            color: "warmGray.50",
-          }}
-          color="coolGray.800"
-        >
-          {props.post.group_name}
-        </Text>
+        <Text color="myDarkGrayText">{props.post.group_name}</Text>
       </Center>
       <Box width="100%" p="2">
         <HStack width="100%">
           {props.post.avatar_url ? <DP uri={`${props.post.avatar_url}`} /> : ""}
           <Box ml="2" flexGrow={1}>
             <VStack>
-              <Text
-                _dark={{
-                  color: "warmGray.50",
-                }}
-                color="coolGray.800"
-                bold
-              >
+              <Text color="myDarkGrayText" bold>
                 {props.post.postor_name}
               </Text>
               <HStack justifyContent="space-between">
@@ -151,7 +138,7 @@ function Post(props) {
         h="10"
         w="100%"
         borderTopWidth="1"
-        borderColor="coolGray.200"
+        borderColor="myBorderGray"
       >
         <HStack flex="1" justifyContent="flex-start">
           <Center mx="2">
