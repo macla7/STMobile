@@ -83,7 +83,11 @@ function Login({ navigation }) {
               Forget Password?
             </Link> */}
             </FormControl>
-            <Button mt="2" colorScheme="indigo" onPress={() => onSubmit()}>
+            <Button
+              mt="2"
+              variant="myButtonYellowVariant"
+              onPress={() => onSubmit()}
+            >
               Sign in
             </Button>
             <VStack>

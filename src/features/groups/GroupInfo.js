@@ -34,12 +34,12 @@ function GroupInfo({ route, navigation }) {
         <Memberships memberships={memberships} />
         <VStack w="100%">
           <Button
-            colorScheme="indigo"
+            variant="myButtonYellowVariant"
             mx="4"
             my="2"
             onPress={() =>
               navigation.navigate("Invite", {
-                item: item,
+                group: group,
               })
             }
           >

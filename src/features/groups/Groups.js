@@ -66,7 +66,7 @@ function Groups({ navigation }) {
                 justifyContent="space-between"
                 onTouchEnd={() =>
                   navigation.navigate("Group", {
-                    item: item,
+                    group: item,
                   })
                 }
               >
@@ -95,20 +95,21 @@ function Groups({ navigation }) {
           keyExtractor={(item) => item.id}
         />
 
-        <Box p="2" position="absolute" bottom="0" width="100%">
+        <Box position="absolute" bottom="0" width="100%">
           <HStack>
             <Button
-              mx="4"
+              borderRadius="0"
               flex="1"
-              colorScheme="indigo"
+              variant="myButtonYellowVariant"
               onPress={() => navigation.navigate("Discover")}
             >
               Discover
             </Button>
             <Button
-              mx="4"
+              borderLeftWidth="0"
+              borderRadius="0"
               flex="1"
-              colorScheme="indigo"
+              variant="myButtonYellowVariant"
               onPress={() =>
                 navigation.navigate("Create Group", {
                   returnScreen: "My Groups",

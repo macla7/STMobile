@@ -9,24 +9,53 @@ import ReserveForm from "../posts/ReserveForm";
 import BidForm from "../posts/bids/BidForm";
 import BidConfirmation from "../posts/bids/BidConfirmation";
 import PostScreen from "../posts/PostScreen.js";
+import { Button, HStack, Text } from "native-base";
 
 const HomeStack = createNativeStackNavigator();
 
-function GroupsStackScreen() {
+function GroupsStackScreen({ navigation }) {
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen
         name="Home Feed"
         component={Home}
         options={({ route }) => ({
-          title: "Shift Market",
           headerStyle: {
             backgroundColor: "#fff",
           },
-          headerTintColor: "#047857",
+          headerTintColor: "myDarkGreen",
           headerTitleStyle: {
             fontSize: 28,
           },
+          headerTitle: (props) => (
+            <HStack flex="1">
+              <Text fontSize="3xl" color="myDarkGreen" fontWeight="500">
+                Shift Market
+              </Text>
+            </HStack>
+          ),
+          headerRight: () => (
+            <Button
+              onPress={() =>
+                navigation.navigate("Create Post", {
+                  date: Date.now(),
+                  groupId: 0,
+                  groupName: "Group Not Selected..",
+                  description: "",
+                  reserve: 0,
+                  returnScreen: "Home Feed",
+                })
+              }
+              size="sm"
+              variant="outline"
+              _text={{
+                color: "myDarkGreen",
+                borderColor: "myDarkGreen",
+              }}
+            >
+              Create Post
+            </Button>
+          ),
         })}
       />
       <HomeStack.Screen name="Create Post" component={PostForm} />

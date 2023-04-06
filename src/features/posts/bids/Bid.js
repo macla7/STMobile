@@ -14,7 +14,7 @@ function Bid(props) {
       flex={1}
       shadow="1"
       flexDirection="row"
-      bgColor={props.bid.price < 0 ? "lightBlue.200" : "green.200"}
+      bgColor={props.bid.price < 0 ? "#F4A9C7" : "#23A393"}
       p="1"
       mb="1"
       mx="1"
@@ -27,25 +27,27 @@ function Bid(props) {
           <Box ml="2" flexGrow={1}>
             <VStack justifyContent="flex-start" flexGrow={1}>
               <HStack>
-                <Text
-                  color={props.bid.price < 0 ? "lightBlue.800" : "green.800"}
-                >
+                <Text bold color={props.bid.price < 0 ? "white" : "white"}>
                   {props.bid.price < 0 ? "Asking " : "Offering "}
                 </Text>
                 <Money
                   microDollars={props.bid.price}
-                  color={props.bid.price < 0 ? "lightBlue.800" : "green.800"}
+                  color={props.bid.price < 0 ? "white" : "white"}
                 />
                 <Text>{props.bidNum == 0 ? "🏆" : ""}</Text>
               </HStack>
-              <Text fontSize="2xs">
+              <Text
+                bold
+                fontSize="2xs"
+                color={props.bid.price < 0 ? "white" : "white"}
+              >
                 {props.reserve == true ? "Reserve" : props.bid.biddor}
               </Text>
             </VStack>
           </Box>
         </HStack>
         <HStack flexGrow={1}>
-          <Text fontSize="2xs">
+          <Text fontSize="2xs" color={props.bid.price < 0 ? "white" : "white"}>
             {formatDistanceToNow(new Date(props.bid.created_at), {
               addSuffix: true,
             })}

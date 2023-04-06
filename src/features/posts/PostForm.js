@@ -179,7 +179,7 @@ function PostForm({ route, navigation }) {
               fontSize="md"
               fontWeight="400"
               color="coolGray.800"
-              colorScheme="indigo"
+              variant="myButtonYellowVariant"
               onPress={() => {
                 navigation.navigate("Add Shift", {
                   start: new Date(date).toString(),
@@ -239,7 +239,7 @@ function PostForm({ route, navigation }) {
               isInvalid={errors["description"]}
             />
           </FormControl>
-          <Button mt="2" colorScheme="indigo" onPress={onSubmit}>
+          <Button mt="2" variant="myButtonYellowVariant" onPress={onSubmit}>
             Make Post
           </Button>
         </VStack>

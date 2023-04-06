@@ -25,21 +25,27 @@ function GroupsStackScreen() {
         name="Group"
         component={Group}
         options={({ route, navigation }) => ({
-          title: route.params.item.name,
+          title: route.params.group.name,
           headerRight: () => (
             <Button
-              colorScheme="indigo"
-              variant="unstyled"
-              h="44px"
-              w="44px"
-              p="0"
               onPress={() =>
-                navigation.navigate("GroupInfo", {
-                  item: route.params.item,
+                navigation.navigate("Create Post", {
+                  date: Date.now(),
+                  groupId: 0,
+                  groupName: "Group Not Selected..",
+                  description: "",
+                  reserve: 0,
+                  returnScreen: "Home Feed",
                 })
               }
+              size="sm"
+              variant="outline"
+              _text={{
+                color: "myDarkGreen",
+                borderColor: "myDarkGreen",
+              }}
             >
-              <InfoIcon width="30" height="30" />
+              Create Post
             </Button>
           ),
         })}
@@ -57,7 +63,7 @@ function GroupsStackScreen() {
         name="GroupInfo"
         component={GroupInfo}
         options={({ route }) => ({
-          title: `${route.params.item.name} Details`,
+          title: `${route.params.group.name} Details`,
         })}
       />
       <GroupsStack.Screen

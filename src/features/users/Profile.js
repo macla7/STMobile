@@ -236,7 +236,7 @@ function Profile() {
                 <Button
                   mx="4"
                   flex="1"
-                  colorScheme="indigo"
+                  variant="myButtonYellowVariant"
                   onPress={() => {
                     onSubmit();
                   }}
@@ -246,7 +246,7 @@ function Profile() {
                 <Button
                   mx="4"
                   flex="1"
-                  colorScheme="indigo"
+                  variant="myButtonYellowVariant"
                   onPress={() => {
                     cancelEditing();
                   }}

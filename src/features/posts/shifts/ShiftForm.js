@@ -172,7 +172,7 @@ function ShiftForm({ navigation, route }) {
             </Button>
           </FormControl>
 
-          <Button mt="2" colorScheme="indigo" onPress={onSubmit}>
+          <Button mt="2" variant="myButtonYellowVariant" onPress={onSubmit}>
             {editingMode ? "Edit Shift" : "Add Shift"}
           </Button>
         </VStack>

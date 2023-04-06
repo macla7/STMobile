@@ -41,7 +41,7 @@ function BidForm({ route, navigation }) {
         />
         <Button
           mt="2"
-          colorScheme="indigo"
+          variant="myButtonYellowVariant"
           onPress={() => {
             // Pass and merge params back to home screen
             navigation.navigate("Bid Confirmation", {

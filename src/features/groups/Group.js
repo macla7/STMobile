@@ -20,21 +20,21 @@ import { CScrollBackgroundRefresh } from "../layout/LayoutComponents";
 // if I try and grab from state.
 function Group({ route, navigation }) {
   const dispatch = useDispatch();
-  const { item } = route.params;
+  const { group } = route.params;
   const [groupDetails, setGroupDetails] = useState(null);
   const status = useSelector(selectStatus);
   const posts = useSelector(selectPosts);
 
   useEffect(() => {
-    dispatch(fetchPostsAsync(item.id));
+    dispatch(fetchPostsAsync(group.id));
   }, [posts.length]);
 
   useEffect(() => {
-    dispatch(fetchMembershipsAsync(item.id));
+    dispatch(fetchMembershipsAsync(group.id));
   }, []);
 
   function refresh() {
-    dispatch(fetchPostsAsync(item.id));
+    dispatch(fetchPostsAsync(group.id));
   }
 
   let contents;
@@ -47,22 +47,16 @@ function Group({ route, navigation }) {
   return (
     <CScrollBackgroundRefresh refreshAction={() => refresh()}>
       <Button
-        colorScheme="indigo"
+        variant="myButtonYellowVariant"
         onPress={() =>
-          navigation.navigate("Create Post", {
-            date: Date.now(),
-            groupId: item.id,
-            groupName: item.name,
-            description: "",
-            reserve: 0,
-            returnScreen: "Group",
+          navigation.navigate("GroupInfo", {
+            group: route.params.group,
           })
         }
-        mx="6"
-        my="4"
-        w="90%"
+        w="100%"
+        borderRadius="0"
       >
-        Create Post
+        Group Details
       </Button>
       <Posts navigation={navigation} posts={posts} />
     </CScrollBackgroundRefresh>

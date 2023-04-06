@@ -84,7 +84,6 @@ function Post(props) {
             color: "warmGray.50",
           }}
           color="coolGray.800"
-          bold
         >
           {props.post.group_name}
         </Text>

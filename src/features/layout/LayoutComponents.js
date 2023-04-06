@@ -6,18 +6,11 @@ import { LinearGradient } from "expo-linear-gradient";
 export function CBackground({ children }) {
   return (
     <Center w="100%" h="100%">
-      <LinearGradient
-        // Button Linear Gradient
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 0 }}
-        colors={["#064e3b", "#064e3b", "#065f46", "#047857"]}
-        width="100%"
-        height="100%"
-      >
+      <Box bgColor="myDarkGreen" width="100%" flex={1}>
         <Box w="100%" h="100%">
           {children}
         </Box>
-      </LinearGradient>
+      </Box>
     </Center>
   );
 }
@@ -29,18 +22,11 @@ export function CScrollBackground({ children }) {
       minHeight="100%"
       w="100%"
     >
-      <LinearGradient
-        // Button Linear Gradient
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 0 }}
-        colors={["#064e3b", "#064e3b", "#065f46", "#047857"]}
-        width="100%"
-        flex={1}
-      >
+      <Box bgColor="myDarkGreen" width="100%" flex={1}>
         <Center w="100%" py="1" flex={1}>
           {children}
         </Center>
-      </LinearGradient>
+      </Box>
     </ScrollView>
   );
 }
@@ -62,18 +48,11 @@ export function CScrollBackgroundRefresh({ children, refreshAction }) {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
     >
-      <LinearGradient
-        // Button Linear Gradient
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 0 }}
-        colors={["#064e3b", "#064e3b", "#065f46", "#047857"]}
-        width="100%"
-        minHeight="100%"
-      >
+      <Box bgColor="myDarkGreen" width="100%" minHeight="100%">
         <Box p="0" w="100%" minHeight="100%">
           {children}
         </Box>
-      </LinearGradient>
+      </Box>
     </ScrollView>
   );
 }
@@ -92,7 +71,7 @@ export function CContentTile({ children }) {
 
 export function CWholeSpaceContentTile({ children }) {
   return (
-    <Center w="100%" h="100%" bgColor="white" shadow="6">
+    <Center w="100%" h="100%" shadow="6">
       {children}
     </Center>
   );

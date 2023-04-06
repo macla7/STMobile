@@ -60,7 +60,7 @@ function Notifications({ navigation }) {
                     </Text>
                   </VStack>
                   <Button
-                    colorScheme="indigo"
+                    variant="myButtonYellowVariant"
                     mt="2"
                     ml="2"
                     onPress={() => {
@@ -74,7 +74,7 @@ function Notifications({ navigation }) {
                     {handleActionButtonText(item)}
                   </Button>
                   <Button
-                    colorScheme="indigo"
+                    variant="myButtonYellowVariant"
                     mt="2"
                     ml="2"
                     onPress={() => {

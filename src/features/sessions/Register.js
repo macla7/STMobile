@@ -92,7 +92,11 @@ export default function App() {
                 onChange={(e) => setConfirmPassword(e.nativeEvent.text)}
               />
             </FormControl>
-            <Button mt="2" colorScheme="indigo" onPress={() => onSubmit()}>
+            <Button
+              mt="2"
+              variant="myButtonYellowVariant"
+              onPress={() => onSubmit()}
+            >
               Sign up
             </Button>
           </VStack>

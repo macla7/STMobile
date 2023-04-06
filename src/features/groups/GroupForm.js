@@ -80,7 +80,7 @@ function GroupForm({ route, navigation }) {
                 </FormControl.HelperText>
               )}
             </FormControl>
-            <Button colorScheme="indigo" onPress={onSubmit} mt="5">
+            <Button variant="myButtonYellowVariant" onPress={onSubmit} mt="5">
               Submit
             </Button>
           </VStack>

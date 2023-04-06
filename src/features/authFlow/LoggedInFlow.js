@@ -59,15 +59,15 @@ function LoggedInFlow() {
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
             if (route.name === "Home") {
-              return <HomeIcon width="25" height="25" fill="#064e3b" />;
+              return <HomeIcon width="25" height="25" fill="#20716A" />;
             } else if (route.name === "Groups") {
-              return <GroupsIcon width="40" height="40" fill="#064e3b" />;
+              return <GroupsIcon width="40" height="40" fill="#20716A" />;
             } else if (route.name === "Notifications") {
               return (
-                <NotificationsIcon width="25" height="25" fill="#064e3b" />
+                <NotificationsIcon width="25" height="25" fill="#20716A" />
               );
             } else if (route.name === "Profile") {
-              return <ProfileIcon width="25" height="25" fill="#064e3b" />;
+              return <ProfileIcon width="25" height="25" fill="#20716A" />;
             }
           },
           tabBarActiveTintColor: "tomato",
@@ -100,7 +100,7 @@ function LoggedInFlow() {
                 onPress={() => onLogout()}
                 size="sm"
                 mx="2"
-                colorScheme="indigo"
+                variant="myButtonYellowVariant"
               >
                 Logout
               </Button>

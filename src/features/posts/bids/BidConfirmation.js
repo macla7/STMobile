@@ -65,7 +65,7 @@ function BidConfirmation({ route, navigation }) {
             </Text>
             <Button
               mt="2"
-              colorScheme="indigo"
+              variant="myButtonYellowVariant"
               onPress={() => {
                 // Pass and merge params back to home screen
                 bidPost(currentMicroDollars);

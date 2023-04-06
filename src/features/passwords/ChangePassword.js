@@ -139,7 +139,11 @@ function ChangePassword({ route, navigation }) {
                 onChange={(e) => setPasswordConfirmation(e.nativeEvent.text)}
               />
             </FormControl>
-            <Button mt="2" colorScheme="indigo" onPress={() => onSubmit()}>
+            <Button
+              mt="2"
+              variant="myButtonYellowVariant"
+              onPress={() => onSubmit()}
+            >
               Submit
             </Button>
           </VStack>

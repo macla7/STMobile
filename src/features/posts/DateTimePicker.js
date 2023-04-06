@@ -93,7 +93,7 @@ function MyDateTimePicker({ route, navigation }) {
               <HStack>
                 <Button
                   onPress={showDatepicker}
-                  colorScheme="indigo"
+                  variant="myButtonYellowVariant"
                   mt="2"
                   flex={1}
                   mx="2"
@@ -102,7 +102,7 @@ function MyDateTimePicker({ route, navigation }) {
                 </Button>
                 <Button
                   onPress={showTimepicker}
-                  colorScheme="indigo"
+                  variant="myButtonYellowVariant"
                   mt="2"
                   mr="2"
                   flex={1}
@@ -120,7 +120,7 @@ function MyDateTimePicker({ route, navigation }) {
           </FormControl>
 
           <Button
-            colorScheme="indigo"
+            variant="myButtonYellowVariant"
             onPress={() => {
               // Pass and merge params back to home screen
               navigation.navigate({

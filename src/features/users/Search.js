@@ -32,13 +32,13 @@ function Search({ route }) {
   const [userList, setUserList] = useState(useSelector(selectUsers));
   const dispatch = useDispatch();
   const [inviteNotice, setInviteNotice] = useState("");
-  const { item } = route.params;
+  const { group } = route.params;
   const [formData, setData] = useState({});
   const [errors, setErrors] = useState({});
 
   // Members
   useEffect(() => {
-    dispatch(fetchUsersAsync(item.id));
+    dispatch(fetchUsersAsync(group.id));
   }, [dispatch]);
 
   useEffect(() => {
@@ -83,14 +83,14 @@ function Search({ route }) {
 
   function inviteUser(user) {
     let inviteDetails = {
-      group_id: item.id,
+      group_id: group.id,
       internal_user_id: userId,
       external_user_id: user.id,
       request: false,
     };
     setInviteNotice(`Invited ${user.email}!`);
     dispatch(createInviteAsync(inviteDetails));
-    dispatch(fetchUsersAsync(item.id));
+    dispatch(fetchUsersAsync(group.id));
   }
 
   useEffect(() => {
@@ -154,7 +154,7 @@ function Search({ route }) {
                 )}
               </VStack>
             </FormControl>
-            <Button onPress={onSubmit} mt="5" colorScheme="indigo">
+            <Button onPress={onSubmit} mt="5" variant="myButtonYellowVariant">
               Invite
             </Button>
           </VStack>

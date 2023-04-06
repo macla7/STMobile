@@ -105,7 +105,11 @@ function EmailForm({ navigation }) {
                 }}
               />
             </FormControl>
-            <Button mt="2" colorScheme="indigo" onPress={() => onSubmit()}>
+            <Button
+              mt="2"
+              variant="myButtonYellowVariant"
+              onPress={() => onSubmit()}
+            >
               Submit
             </Button>
           </VStack>
