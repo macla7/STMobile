@@ -105,14 +105,7 @@ function Profile() {
             {/* Profile Picture */}
             <HStack justifyContent="space-between" w="100%">
               <Center>
-                <Heading
-                  size="md"
-                  fontWeight="600"
-                  color="myDarkGrayText"
-                  _dark={{
-                    color: "warmGray.50",
-                  }}
-                >
+                <Heading size="md" fontWeight="600" color="myDarkGrayText">
                   Profile Picture
                 </Heading>
               </Center>
@@ -155,14 +148,7 @@ function Profile() {
             {/* Name */}
             <HStack justifyContent="space-between" w="100%">
               <Center>
-                <Heading
-                  size="md"
-                  fontWeight="600"
-                  color="myDarkGrayText"
-                  _dark={{
-                    color: "warmGray.50",
-                  }}
-                >
+                <Heading size="md" fontWeight="600" color="myDarkGrayText">
                   Name
                 </Heading>
               </Center>
@@ -211,14 +197,7 @@ function Profile() {
             {/* Email */}
             <HStack justifyContent="space-between" w="100%">
               <Center h="41">
-                <Heading
-                  size="md"
-                  fontWeight="600"
-                  color="myDarkGrayText"
-                  _dark={{
-                    color: "warmGray.50",
-                  }}
-                >
+                <Heading size="md" fontWeight="600" color="myDarkGrayText">
                   Email
                 </Heading>
               </Center>
