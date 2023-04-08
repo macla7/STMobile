@@ -18,7 +18,15 @@ const GroupsStack = createNativeStackNavigator();
 
 function GroupsStackScreen() {
   return (
-    <GroupsStack.Navigator>
+    <GroupsStack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: "#20716A",
+        },
+        headerTintColor: "#fff",
+        headerTitleStyle: {},
+      }}
+    >
       <GroupsStack.Screen name="My Groups" component={Groups} />
       <GroupsStack.Screen name="Discover" component={DiscoverGroups} />
       <GroupsStack.Screen
@@ -29,28 +37,29 @@ function GroupsStackScreen() {
           headerRight: () => (
             <Button
               onPress={() =>
-                navigation.navigate("Create Post", {
+                navigation.navigate("Create Post in Group", {
                   date: Date.now(),
                   groupId: 0,
                   groupName: "Group Not Selected..",
                   description: "",
                   reserve: 0,
-                  returnScreen: "Home Feed",
                 })
               }
               size="sm"
-              variant="outline"
-              _text={{
-                color: "myDarkGreen",
-                borderColor: "myDarkGreen",
-              }}
+              variant="myButtonYellowVariant"
             >
               Create Post
             </Button>
           ),
         })}
       />
-      <GroupsStack.Screen name="Create Post" component={PostForm} />
+      <GroupsStack.Screen
+        options={({}) => ({
+          title: "Create Post",
+        })}
+        name="Create Post in Group"
+        component={PostForm}
+      />
       <GroupsStack.Screen
         name="Time and Date"
         component={DateTimePicker}

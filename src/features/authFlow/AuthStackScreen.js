@@ -6,18 +6,35 @@ import Login from "../sessions/Login";
 import Register from "../sessions/Register";
 import ChangePassword from "../passwords/ChangePassword";
 import Token from "../passwords/Token";
-import LoggedInFlow from "./LoggedInFlow";
+import TabNavigator from "./TabNavigator";
 import EmailForm from "../passwords/EmailForm";
+import { Center, Text } from "native-base";
 const Stack = createNativeStackNavigator();
 
-function AuthFlow() {
+function AuthStackScreen() {
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   return (
     <>
       {!isLoggedIn ? (
         <>
-          <Stack.Navigator initialRouteName="Login">
+          <Stack.Navigator
+            initialRouteName="Login"
+            screenOptions={{
+              headerTitle: (props) => (
+                <Center bgColor="myPink" borderRadius="50%" p="1" mb="1">
+                  <Text fontSize="xl" color="myDarkGreen" fontWeight="500">
+                    SM
+                  </Text>
+                </Center>
+              ),
+              headerStyle: {
+                backgroundColor: "#20716A",
+                borderWidth: 10,
+              },
+              headerShadowVisible: false,
+            }}
+          >
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Register" component={Register} />
             <Stack.Screen name="Token" component={Token} />
@@ -26,10 +43,10 @@ function AuthFlow() {
           </Stack.Navigator>
         </>
       ) : (
-        <LoggedInFlow />
+        <TabNavigator />
       )}
     </>
   );
 }
 
-export default AuthFlow;
+export default AuthStackScreen;

@@ -77,7 +77,7 @@ function Post(props) {
   }
 
   return (
-    <Center my="1" bgColor="white">
+    <Center my="1" bgColor="white" borderColor="myBorderGray" borderWidth="1">
       <Center width="100%" px="2" py="1">
         <Text color="myDarkGrayText">{props.post.group_name}</Text>
       </Center>

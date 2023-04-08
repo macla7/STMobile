@@ -6,7 +6,7 @@ import { LinearGradient } from "expo-linear-gradient";
 export function CBackground({ children }) {
   return (
     <Center w="100%" h="100%">
-      <Box bgColor="myDarkGreen" width="100%" flex={1}>
+      <Box bgColor="myBackgroundGray" width="100%" flex={1}>
         <Box w="100%" h="100%">
           {children}
         </Box>
@@ -22,7 +22,7 @@ export function CScrollBackground({ children }) {
       minHeight="100%"
       w="100%"
     >
-      <Box bgColor="myDarkGreen" width="100%" flex={1}>
+      <Box bgColor="myBackgroundGray" width="100%" flex={1}>
         <Center w="100%" py="1" flex={1}>
           {children}
         </Center>
@@ -48,7 +48,7 @@ export function CScrollBackgroundRefresh({ children, refreshAction }) {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
     >
-      <Box bgColor="myDarkGreen" width="100%" minHeight="100%">
+      <Box bgColor="myBackgroundGray" width="100%" minHeight="100%">
         <Box p="0" w="100%" minHeight="100%">
           {children}
         </Box>

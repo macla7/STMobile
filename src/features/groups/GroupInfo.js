@@ -17,7 +17,7 @@ import Memberships from "./memberships/Memberships";
 
 function GroupInfo({ route, navigation }) {
   const dispatch = useDispatch();
-  const { item } = route.params;
+  const { group } = route.params;
   const userId = useSelector((state) => state.sessions.user.id);
   const isAdmin = useSelector(selectIsAdmin);
   const memberships = useSelector(selectMemberships);

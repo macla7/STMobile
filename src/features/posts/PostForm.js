@@ -220,7 +220,7 @@ function PostForm({ route, navigation }) {
                 })
               }
             >
-              <Money microDollars={reserve} />
+              <Money microDollars={reserve} color="black" />
             </Button>
 
             <FormControl.Label mb="-1">Description</FormControl.Label>

@@ -1,0 +1,51 @@
+import React from "react";
+import { useDispatch } from "react-redux";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Profile from "./Profile";
+import { Button } from "native-base";
+import { logoutUserAsync } from "../sessions/sessionSlice";
+
+const ProfileStack = createNativeStackNavigator();
+
+// Putting Notifications and Profile components into their own StackScreens
+// might seem like overkill, and it wasn't the original plan, alas... it was
+// the only way i could find to make the header heights VISUALlY, look the
+// same. I stress visually, as they were apparently all 103 high. The
+// difference was between the nested stack.screens and the un nested tab.screens.
+// Now... they are just all nested stack screens.. as can be seen by the below.
+function GroupsStackScreen() {
+  const dispatch = useDispatch();
+
+  function onLogout() {
+    dispatch(logoutUserAsync());
+  }
+  return (
+    <ProfileStack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: "#20716A",
+        },
+        headerTintColor: "#fff",
+        headerTitleStyle: {},
+      }}
+    >
+      <ProfileStack.Screen
+        name="Profile"
+        component={Profile}
+        options={({ route }) => ({
+          headerRight: () => (
+            <Button
+              onPress={() => onLogout()}
+              size="sm"
+              variant="myButtonYellowVariant"
+            >
+              Logout
+            </Button>
+          ),
+        })}
+      />
+    </ProfileStack.Navigator>
+  );
+}
+
+export default GroupsStackScreen;

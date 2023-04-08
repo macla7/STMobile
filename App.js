@@ -3,7 +3,7 @@ import React from "react";
 import { Provider } from "react-redux";
 import { store } from "./src/app/store";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
-import AuthFlow from "./src/features/authFlow/AuthFlow";
+import AuthStackScreen from "./src/features/authFlow/AuthStackScreen";
 import {
   useFonts,
   Inter_200ExtraLight,
@@ -48,9 +48,9 @@ export default function App() {
             behavior={Platform.OS === "ios" ? "padding" : "height"}
             height="100%"
           >
-            {/* <StatusBar animated={true} backgroundColor="#61dafb" style="dark" /> */}
+            <StatusBar style="light" />
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-              <AuthFlow />
+              <AuthStackScreen />
             </TouchableWithoutFeedback>
           </KeyboardAvoidingView>
         </NativeBaseProvider>

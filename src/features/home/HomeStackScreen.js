@@ -15,21 +15,21 @@ const HomeStack = createNativeStackNavigator();
 
 function GroupsStackScreen({ navigation }) {
   return (
-    <HomeStack.Navigator>
+    <HomeStack.Navigator
+      screenOptions={({}) => ({
+        headerStyle: {
+          backgroundColor: "#20716A",
+        },
+        headerTintColor: "#ffffff",
+      })}
+    >
       <HomeStack.Screen
         name="Home Feed"
         component={Home}
         options={({ route }) => ({
-          headerStyle: {
-            backgroundColor: "#fff",
-          },
-          headerTintColor: "myDarkGreen",
-          headerTitleStyle: {
-            fontSize: 28,
-          },
           headerTitle: (props) => (
             <HStack flex="1">
-              <Text fontSize="3xl" color="myDarkGreen" fontWeight="500">
+              <Text fontSize="3xl" color="white" fontWeight="500">
                 Shift Market
               </Text>
             </HStack>
@@ -47,11 +47,7 @@ function GroupsStackScreen({ navigation }) {
                 })
               }
               size="sm"
-              variant="outline"
-              _text={{
-                color: "myDarkGreen",
-                borderColor: "myDarkGreen",
-              }}
+              variant="myButtonYellowVariant"
             >
               Create Post
             </Button>

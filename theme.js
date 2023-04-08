@@ -11,6 +11,7 @@ export const theme = extendTheme({
     myBorderGray: "#e5e7eb",
     myDarkGrayText: "#1f2937",
     myMidGrayText: "#4b5563",
+    myBackgroundGray: "#f5f5f5",
 
     myButtonTextScheme: {
       600: "myDarkGreen",
@@ -26,7 +27,7 @@ export const theme = extendTheme({
             color: "myDarkGreen",
           },
           borderWidth: "1",
-          borderColor: "#e5e7eb",
+          borderColor: "myBorderGray",
         },
       },
     },
