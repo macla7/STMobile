@@ -38,6 +38,7 @@ function Profile() {
 
   useEffect(() => {
     setFormData({ name: user.name });
+    setName(user.name);
   }, [user]);
 
   // Method from expo docs https://docs.expo.dev/versions/latest/sdk/imagepicker/
