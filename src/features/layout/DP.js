@@ -2,7 +2,7 @@ import React from "react";
 import CachedImage from "expo-cached-image";
 import { Text, Center, Box } from "native-base";
 
-function DP({ uri }) {
+function DP({ uri, size }) {
   function getImageThumbnail(uri) {
     if (uri !== null) {
       let lastURIsegment = uri.split("/")[uri.split("/").length - 1];
@@ -22,8 +22,8 @@ function DP({ uri }) {
         placeholderContent={<Text>Hello</Text>}
         alt="avatar"
         style={{
-          width: 40,
-          height: 40,
+          width: size,
+          height: size,
           resizeMode: "contain",
           borderRadius: 50,
         }}

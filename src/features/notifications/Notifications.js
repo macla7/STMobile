@@ -5,14 +5,12 @@ import {
   updateNotificationAsync,
 } from "./notificationSlice";
 import { selectUserId } from "../sessions/sessionSlice";
-import { Box, VStack, Button, Flex, Text, FlatList } from "native-base";
+import { Box, Text, Button, FlatList, Flex } from "native-base";
 import { createMembershipAsync } from "../groups/memberships/membershipSlice";
 import { updateInviteAsync } from "../groups/invites/inviteSlice";
-import {
-  CBackground,
-  CWholeSpaceContentTile,
-} from "../layout/LayoutComponents";
+import { CBackground } from "../layout/LayoutComponents";
 import { formatDistanceToNow } from "date-fns";
+import DP from "../layout/DP";
 
 function Notifications({ navigation }) {
   const notifications = useSelector(selectNotifications);
@@ -21,65 +19,109 @@ function Notifications({ navigation }) {
 
   return (
     <CBackground>
-      <CWholeSpaceContentTile>
-        <Box>
-          <FlatList
-            data={notifications}
-            renderItem={({ item }) => (
-              <Box
-                borderBottomWidth="1"
-                borderColor="myBorderGray"
-                px="2"
-                py="2"
-              >
-                <Flex
-                  flexDirection="row"
-                  justifyContent="space-between"
-                  w="100%"
-                >
-                  <VStack width="50%">
-                    <Text color="myDarkGrayText" bold>
-                      {item.description}
-                    </Text>
-                    <Text color="myMidGrayText">
-                      {formatDistanceToNow(new Date(item.created_at))} ago
-                    </Text>
-                  </VStack>
-                  <Button
-                    variant="myButtonYellowVariant"
-                    mt="2"
-                    ml="2"
-                    onPress={() => {
-                      startAction(item);
-                    }}
-                    h="10"
-                    flexGrow={1}
-                    width="30"
-                    p="1"
-                  >
-                    {handleActionButtonText(item)}
-                  </Button>
-                  <Button
-                    variant="myButtonYellowVariant"
-                    mt="2"
-                    ml="2"
-                    onPress={() => {
-                      actionNotification(item, false);
-                    }}
-                    h="10"
-                    flexGrow={1}
-                    width="15"
-                    p="1"
-                  >
-                    Dismiss
-                  </Button>
-                </Flex>
+      <FlatList
+        data={notifications}
+        renderItem={({ item }) => (
+          <Flex
+            borderBottomWidth="1"
+            borderColor="myBorderGray"
+            p="2"
+            direction="row"
+            flex="1"
+          >
+            <Box>
+              <Box>
+                <DP uri={`${item.notifier_avatar_url}`} size={65} />
               </Box>
-            )}
-            keyExtractor={(item) => item.id}
-          />
-        </Box>
-      </CWholeSpaceContentTile>
+            </Box>
+            <Box ml="2" overflow="hidden" flex="1">
+              <Flex h="65" justifyContent="center">
+                <Text color="myDarkGrayText" bold numberOfLines={2}>
+                  {item.description}
+                </Text>
+                <Text color="myMidGrayText">
+                  {formatDistanceToNow(new Date(item.created_at))} ago
+                </Text>
+              </Flex>
+              <Flex direction="row">
+                <Button
+                  variant="myButtonYellowVariant"
+                  onPress={() => {
+                    startAction(item);
+                  }}
+                  h="8"
+                  p="1"
+                  mr="1"
+                  w="45%"
+                >
+                  {handleActionButtonText(item)}
+                </Button>
+                <Button
+                  variant="myButtonGrayVariant"
+                  onPress={() => {
+                    actionNotification(item, false);
+                  }}
+                  h="8"
+                  p="1"
+                  ml="1"
+                  w="45%"
+                >
+                  Delete
+                </Button>
+              </Flex>
+            </Box>
+          </Flex>
+          // <HStack
+          //   bgColor="red.200"
+          // borderBottomWidth="1"
+          // borderColor="myBorderGray"
+          // p="2"
+          //   position="relative"
+          //   w="100%"
+          // >
+          // <Box pt="2" pl="2" bgColor="blue.200">
+          //   <DP uri={`${item.notifier_avatar_url}`} />
+          // </Box>
+          //   <Flex borderWidth="1">
+          // <Text color="myDarkGrayText" bold>
+          //   and then some more {item.description}
+          // </Text>
+
+          // <Text color="myMidGrayText">
+          //   {formatDistanceToNow(new Date(item.created_at))} ago
+          // </Text>
+          // <HStack>
+          //   <Button
+          //     variant="myButtonYellowVariant"
+          //     mt="2"
+          //     onPress={() => {
+          //       startAction(item);
+          //     }}
+          //     h="10"
+          //     flexGrow={1}
+          //     p="1"
+          //   >
+          //     {handleActionButtonText(item)}
+          //   </Button>
+          //   <Button
+          //     variant="myButtonGrayVariant"
+          //     mt="2"
+          //     ml="2"
+          //     onPress={() => {
+          //       actionNotification(item, false);
+          //     }}
+          //     h="10"
+          //     flexGrow={1}
+          //     p="1"
+          //   >
+          //     Delete
+          //   </Button>
+          // </HStack>
+          //   </Flex>
+          // </HStack>
+        )}
+        keyExtractor={(item) => item.id}
+      />
     </CBackground>
   );
 

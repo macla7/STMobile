@@ -9,7 +9,7 @@ function Comment(props) {
       <HStack align-items="center">
         {props.comment.avatar_url ? (
           <Box py="1">
-            <DP uri={`${props.comment.avatar_url}`} />
+            <DP uri={`${props.comment.avatar_url}`} size={40} />
           </Box>
         ) : (
           ""

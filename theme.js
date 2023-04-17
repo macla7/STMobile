@@ -29,6 +29,14 @@ export const theme = extendTheme({
           borderWidth: "1",
           borderColor: "myBorderGray",
         },
+        myButtonGrayVariant: {
+          bgColor: "myBorderGray",
+          _text: {
+            color: "myMidGrayText",
+          },
+          borderWidth: "1",
+          borderColor: "myBorderGray",
+        },
       },
     },
   },

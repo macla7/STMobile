@@ -23,7 +23,11 @@ function Bid(props) {
     >
       <VStack flexGrow={1}>
         <HStack justifyContent="space-between" flexGrow={1}>
-          {props.bid.avatar_url ? <DP uri={`${props.bid.avatar_url}`} /> : ""}
+          {props.bid.avatar_url ? (
+            <DP uri={`${props.bid.avatar_url}`} size={40} />
+          ) : (
+            ""
+          )}
           <Box ml="2" flexGrow={1}>
             <VStack justifyContent="flex-start" flexGrow={1}>
               <HStack>

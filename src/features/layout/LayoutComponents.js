@@ -61,7 +61,7 @@ export function CContentTile({ children }) {
   return (
     <Center my="1" h="100%">
       <HStack>
-        <Center flex="1" p="4" bgColor="white" shadow="6">
+        <Center flex="1" p="4" bgColor="white">
           {children}
         </Center>
       </HStack>
@@ -71,7 +71,7 @@ export function CContentTile({ children }) {
 
 export function CWholeSpaceContentTile({ children }) {
   return (
-    <Center w="100%" h="100%" shadow="6">
+    <Center w="100%" h="100%">
       {children}
     </Center>
   );
@@ -87,7 +87,7 @@ export function CWholeSpaceRefreshTile({ children, refreshAction }) {
   }, []);
 
   return (
-    <Box w="100%" h="100%" bgColor="white" shadow="6">
+    <Box w="100%" h="100%" bgColor="white">
       <ScrollView
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />

@@ -174,7 +174,11 @@ function Search({ route }) {
                   py="2"
                 >
                   <HStack alignItems="center">
-                    {item.avatar_url ? <DP uri={`${item.avatar_url}`} /> : ""}
+                    {item.avatar_url ? (
+                      <DP uri={`${item.avatar_url}`} size={40} />
+                    ) : (
+                      ""
+                    )}
 
                     <Text ml="2" color="myDarkGrayText" bold>
                       {item.email}
