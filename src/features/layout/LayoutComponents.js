@@ -23,7 +23,7 @@ export function CScrollBackground({ children }) {
       w="100%"
     >
       <Box bgColor="myBackgroundGray" width="100%" flex={1}>
-        <Center w="100%" py="1" flex={1}>
+        <Center w="100%" flex={1}>
           {children}
         </Center>
       </Box>

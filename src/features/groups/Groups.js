@@ -10,6 +10,7 @@ import {
   CWholeSpaceContentTile,
 } from "../layout/LayoutComponents";
 import { useIsFocused } from "@react-navigation/native";
+import AtopTabNavGroup from "../buttons/AtopTabNavGroup";
 
 function Groups({ navigation }) {
   const myGroups = useSelector(selectMyGroups);
@@ -81,31 +82,16 @@ function Groups({ navigation }) {
           keyExtractor={(item) => item.id}
         />
 
-        <Box position="absolute" bottom="0" width="100%">
-          <HStack>
-            <Button
-              borderRadius="0"
-              flex="1"
-              variant="myButtonYellowVariant"
-              onPress={() => navigation.navigate("Discover")}
-            >
-              Discover
-            </Button>
-            <Button
-              borderLeftWidth="0"
-              borderRadius="0"
-              flex="1"
-              variant="myButtonYellowVariant"
-              onPress={() =>
-                navigation.navigate("Create Group", {
-                  returnScreen: "My Groups",
-                })
-              }
-            >
-              Create Group
-            </Button>
-          </HStack>
-        </Box>
+        <AtopTabNavGroup
+          left="Discover"
+          right="Greate Group"
+          leftFunction={() => navigation.navigate("Discover")}
+          rightFunction={() =>
+            navigation.navigate("Create Group", {
+              returnScreen: "My Groups",
+            })
+          }
+        />
       </CWholeSpaceContentTile>
     </CBackground>
   );

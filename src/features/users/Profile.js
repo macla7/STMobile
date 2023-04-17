@@ -18,10 +18,12 @@ import { Keyboard } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { selectUserId, selectUserAvatarUrl } from "../sessions/sessionSlice";
 import { fetchUserAsync, selectUser, updateUserAsync } from "./userSlice";
+import AtopTabNavGroup from "../buttons/AtopTabNavGroup";
 
 function Profile() {
   const user = useSelector(selectUser);
   const userId = useSelector(selectUserId);
+  const [name, setName] = useState(user.name);
   const [image, setImage] = useState(null);
   const [editingProfile, setEditingProfile] = useState(false);
   const [editingName, setEditingName] = useState(false);
@@ -57,7 +59,7 @@ function Profile() {
   function cancelEditing() {
     setEditingName(false);
     setEditingProfile(false);
-    setFormData({ ...formData, name: user.name });
+    setFormData({ ...formData, name: name });
     setImage(null);
   }
 
@@ -76,6 +78,8 @@ function Profile() {
         type: `image/${fileType}`,
       });
     }
+
+    setName(formData.name);
     dispatch(updateUserAsync(data));
   }
 
@@ -190,7 +194,7 @@ function Profile() {
                   )}
                 </FormControl>
               ) : (
-                <Text>{user.name}</Text>
+                <Text>{name}</Text>
               )}
             </HStack>
 
@@ -210,30 +214,12 @@ function Profile() {
 
           {/* Buttons */}
           {editingProfile ? (
-            <Box p="2" position="absolute" bottom="0" width="100%">
-              <HStack>
-                <Button
-                  mx="4"
-                  flex="1"
-                  variant="myButtonYellowVariant"
-                  onPress={() => {
-                    onSubmit();
-                  }}
-                >
-                  Save
-                </Button>
-                <Button
-                  mx="4"
-                  flex="1"
-                  variant="myButtonYellowVariant"
-                  onPress={() => {
-                    cancelEditing();
-                  }}
-                >
-                  Cancel
-                </Button>
-              </HStack>
-            </Box>
+            <AtopTabNavGroup
+              left="Save"
+              right="Cancel"
+              leftFunction={() => onSubmit()}
+              rightFunction={() => cancelEditing()}
+            />
           ) : (
             ""
           )}
