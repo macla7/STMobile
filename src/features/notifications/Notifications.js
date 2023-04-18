@@ -140,9 +140,12 @@ function Notifications({ navigation }) {
     } else if (notification.notification_blueprint.notification_type === 3) {
       handleAcceptRequest(notification);
     } else {
-      navigation.navigate("Post", {
-        returnScreen: "Notifications",
-        postId: notification.notification_blueprint.notificationable_id,
+      navigation.navigate("Home", {
+        screen: "Post",
+        params: {
+          returnScreen: "Notifications",
+          postId: notification.notification_blueprint.notificationable_id,
+        },
       });
     }
   }

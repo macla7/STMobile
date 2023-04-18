@@ -30,7 +30,7 @@ function PostForm({ route, navigation }) {
 
     // if above succeeds ..?
     let notification_blueprint = {
-      notificationable_type: "Group",
+      notificationable_type: "Post",
       notificationable_id: groupId,
       notification_type: 4,
     };
