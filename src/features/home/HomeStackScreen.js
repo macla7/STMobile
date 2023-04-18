@@ -22,6 +22,7 @@ function GroupsStackScreen({ navigation }) {
         },
         headerTintColor: "#ffffff",
       })}
+      initialRouteName="Home Feed"
     >
       <HomeStack.Screen
         name="Home Feed"

@@ -142,8 +142,9 @@ function Notifications({ navigation }) {
     } else {
       navigation.navigate("Home", {
         screen: "Post",
+        initial: false,
         params: {
-          returnScreen: "Notifications",
+          returnScreen: "Home Feed",
           postId: notification.notification_blueprint.notificationable_id,
         },
       });
