@@ -18,7 +18,7 @@
       "bundleIdentifier": "ios"
     },
     "android": {
-      "icon": "./src/assets/images/adaptive-icon2.png",
+      "icon": "./src/assets/images/adaptive-icon.png",
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/images/adaptive-icon.png",
         "backgroundColor": "#064e3b"

@@ -96,6 +96,7 @@ export const initialState = {
     },
   ],
   status: Statuses.Initial,
+  freshPost: { id: 0 },
 };
 
 export const fetchPostAsync = createAsyncThunk(
@@ -271,6 +272,7 @@ export const postSlice = createSlice({
         return produce(state, (draftState) => {
           draftState.posts.push(action.payload);
           draftState.status = Statuses.UpToDate;
+          draftState.freshPost = action.payload;
         });
       })
       // error
@@ -449,5 +451,7 @@ export const selectPosts = (state) => state.posts.posts;
 export const selectHomePosts = (state) => state.posts.homePosts;
 
 export const selectStatus = (state) => state.posts.status;
+
+export const selectFreshPost = (state) => state.posts.freshPost;
 
 export default postSlice.reducer;

@@ -39,7 +39,8 @@ function Profile() {
   useEffect(() => {
     setFormData({ name: user.name });
     setName(user.name);
-  }, [user]);
+    setImage(userAvatarUrl);
+  }, [user, userAvatarUrl]);
 
   // Method from expo docs https://docs.expo.dev/versions/latest/sdk/imagepicker/
   const pickImage = async () => {

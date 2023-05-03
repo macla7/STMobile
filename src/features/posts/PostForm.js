@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createPostAsync } from "./postSlice";
+import { createPostAsync, selectFreshPost } from "./postSlice";
 import { resetShifts, selectShifts } from "./shifts/shiftSlice";
 import { createNotificationBlueprint } from "../notifications/notificationBlueprintAPI";
 import { VStack, FormControl, Button, TextArea } from "native-base";
@@ -17,6 +17,7 @@ function PostForm({ route, navigation }) {
   const [description, setDescription] = useState("");
   const [errors, setErrors] = useState({});
   const [invalidShiftIds, setInvalidShiftIds] = useState([]);
+  const freshPost = useSelector(selectFreshPost);
 
   function submitPost() {
     let post = {
@@ -29,15 +30,28 @@ function PostForm({ route, navigation }) {
     dispatch(createPostAsync(post));
 
     // if above succeeds ..?
-    let notification_blueprint = {
-      notificationable_type: "Post",
-      notificationable_id: groupId,
-      notification_type: 4,
-    };
-
-    createNotificationBlueprint(notification_blueprint);
-    dispatch(resetShifts());
+    // we need the postId to then feed into here... this shouldn't be groupId
+    // so this needs to wait on the post to be created... I think O do something like
+    // this with invites.. waiting with useSelector for the state change.
   }
+
+  useEffect(() => {
+    if (freshPost.id != 0) {
+      let notification_blueprint = {
+        notificationable_type: "Post",
+        notificationable_id: freshPost.id,
+        notification_type: 4,
+      };
+
+      createNotificationBlueprint(notification_blueprint);
+
+      dispatch(resetShifts());
+      navigation.navigate({
+        name: returnScreen,
+        merge: true,
+      });
+    }
+  }, [freshPost.id]);
 
   useEffect(() => {
     dispatch(resetShifts());
@@ -79,12 +93,9 @@ function PostForm({ route, navigation }) {
     }
 
     setErrors({ ...errors, ...newErrors });
+
     if (valid) {
       submitPost();
-      navigation.navigate({
-        name: returnScreen,
-        merge: true,
-      });
     }
   };
 

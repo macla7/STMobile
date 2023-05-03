@@ -71,6 +71,7 @@ function MyDateTimePicker({ route, navigation }) {
         <VStack w="100%">
           {show && (
             <DateTimePicker
+              textColor="#1f2937"
               minimumDate={new Date(Date.now())}
               minuteInterval={5}
               testID="dateTimePicker"
