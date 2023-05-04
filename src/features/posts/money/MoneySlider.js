@@ -21,7 +21,7 @@ function MoneySlider(props) {
       );
     } else {
       if (onChangeValue <= 0) {
-        return "To take the shift, you are asking for: $" + -1 * onChangeValue;
+        return "To take the shift, you are seeking: $" + -1 * onChangeValue;
       }
       return "To take the shift, you are willing to offer: $" + onChangeValue;
     }

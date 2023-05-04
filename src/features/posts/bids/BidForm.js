@@ -22,7 +22,7 @@ function BidForm({ route, navigation }) {
     if (currentMicroDollars > 0) {
       return "Offering To Pay";
     }
-    return "Asking For";
+    return "Seeking";
   }
 
   // on init component sets state to reserve passed in route params

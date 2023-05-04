@@ -19,7 +19,7 @@ function Bid(props) {
       mb="1"
       mx="1"
       borderWidth="1"
-      borderColor={props.bidNum == 0 ? "amber.200" : "myBorderGray"}
+      borderColor="myBorderGray"
     >
       <VStack flexGrow={1}>
         <HStack justifyContent="space-between" flexGrow={1}>
@@ -32,29 +32,40 @@ function Bid(props) {
             <VStack justifyContent="flex-start" flexGrow={1}>
               <HStack>
                 <Text bold color={props.bid.price < 0 ? "white" : "white"}>
-                  {props.bid.price < 0 ? "Asking " : "Offering "}
+                  {props.reserve == true
+                    ? "Reserve "
+                    : props.bid.price < 0
+                    ? "Seeking "
+                    : "Offering "}
                 </Text>
                 <Money
                   microDollars={props.bid.price}
                   color={props.bid.price < 0 ? "white" : "white"}
                 />
-                <Text>{props.bidNum == 0 ? "🏆" : ""}</Text>
+                <Text>{props.bidNum == 0 ? "" : ""}</Text>
               </HStack>
               <Text
                 bold
                 fontSize="2xs"
                 color={props.bid.price < 0 ? "white" : "white"}
               >
-                {props.reserve == true ? "Reserve" : props.bid.biddor}
+                {props.bid.bidder}
               </Text>
             </VStack>
           </Box>
         </HStack>
-        <HStack flexGrow={1}>
+        <HStack flexGrow={1} justifyContent="space-between">
           <Text fontSize="2xs" color={props.bid.price < 0 ? "white" : "white"}>
-            {formatDistanceToNow(new Date(props.bid.created_at), {
-              addSuffix: true,
-            })}
+            {props.reserve == true
+              ? props.bid.price < 0
+                ? "Maximum " + props.bid.bidder + " will pay"
+                : "Minimum " + props.bid.bidder + " will accept"
+              : formatDistanceToNow(new Date(props.bid.created_at), {
+                  addSuffix: true,
+                })}
+          </Text>
+          <Text fontSize="2xs" color={props.bid.price < 0 ? "white" : "white"}>
+            {props.bidNum == 0 ? "⭐️" : ""}
           </Text>
         </HStack>
       </VStack>
