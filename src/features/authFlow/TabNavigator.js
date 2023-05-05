@@ -17,6 +17,8 @@ import {
 import { createConsumer } from "@rails/actioncable";
 import { selectUserId } from "../sessions/sessionSlice.js";
 import { domain } from "@env";
+import { AddIcon } from "native-base";
+import CreatePostStackScreen from "../posts/CreatePostStackScreen.js";
 
 const Tab = createBottomTabNavigator();
 
@@ -57,6 +59,8 @@ function TabNavigator() {
               return <HomeIcon width="25" height="25" fill="#20716A" />;
             } else if (route.name === "Groups") {
               return <GroupsIcon width="40" height="40" fill="#20716A" />;
+            } else if (route.name === "Create") {
+              return <AddIcon size="xl" color="#20716A" />;
             } else if (route.name === "NotificationsStackScreen") {
               return (
                 <NotificationsIcon width="25" height="25" fill="#20716A" />
@@ -78,6 +82,13 @@ function TabNavigator() {
         <Tab.Screen
           name="Groups"
           component={GroupsStackScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Tab.Screen
+          name="Create"
+          component={CreatePostStackScreen}
           options={{
             headerShown: false,
           }}

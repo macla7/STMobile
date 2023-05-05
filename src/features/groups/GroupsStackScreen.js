@@ -2,16 +2,10 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Groups from "./Groups";
 import DiscoverGroups from "./DiscoverGroups";
-import PostForm from "../posts/PostForm";
-import DateTimePicker from "../posts/DateTimePicker";
-import ReserveForm from "../posts/ReserveForm";
-import GroupSearch from "../groups/GroupSearch";
-import ShiftForm from "../posts/shifts/ShiftForm";
 import Group from "./Group";
 import GroupInfo from "./GroupInfo";
 import Search from "../users/Search";
 import GroupForm from "./GroupForm";
-import { Button, AspectRatio } from "native-base";
 import InfoIcon from "../../assets/noun-info-1126705-676767.svg";
 
 const GroupsStack = createNativeStackNavigator();
@@ -34,40 +28,8 @@ function GroupsStackScreen() {
         component={Group}
         options={({ route, navigation }) => ({
           title: route.params.group.name,
-          headerRight: () => (
-            <Button
-              onPress={() =>
-                navigation.navigate("Create Post in Group", {
-                  date: Date.now(),
-                  groupId: 0,
-                  groupName: "Group Not Selected..",
-                  description: "",
-                  reserve: 0,
-                })
-              }
-              size="sm"
-              variant="myButtonYellowVariant"
-            >
-              Create Post
-            </Button>
-          ),
         })}
       />
-      <GroupsStack.Screen
-        options={({}) => ({
-          title: "Create Post",
-        })}
-        name="Create Post in Group"
-        component={PostForm}
-      />
-      <GroupsStack.Screen
-        name="Time and Date"
-        component={DateTimePicker}
-        options={({ route }) => ({ title: route.params.mode })}
-      />
-      <GroupsStack.Screen name="Add Reserve" component={ReserveForm} />
-      <GroupsStack.Screen name="Your Groups" component={GroupSearch} />
-      <GroupsStack.Screen name="Add Shift" component={ShiftForm} />
       <GroupsStack.Screen
         name="GroupInfo"
         component={GroupInfo}
