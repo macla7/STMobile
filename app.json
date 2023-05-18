@@ -15,7 +15,7 @@
       }
     },
     "ios": {
-      "bundleIdentifier": "ios"
+      "bundleIdentifier": "au.com.shiftmarket"
     },
     "android": {
       "icon": "./src/assets/images/adaptive-icon.png",
