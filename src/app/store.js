@@ -9,6 +9,7 @@ import shiftsReducer from "../features/posts/shifts/shiftSlice";
 import moneyReducer from "../features/posts/money/moneySlice";
 import invitesReducer from "../features/groups/invites/inviteSlice";
 import passwordsReducer from "../features/passwords/passwordSlice";
+import pushTokensReducer from "../features/users/pushTokenSlice";
 
 export const store = configureStore({
   reducer: {
@@ -22,5 +23,6 @@ export const store = configureStore({
     money: moneyReducer,
     invites: invitesReducer,
     passwords: passwordsReducer,
+    pushTokens: pushTokensReducer,
   },
 });
