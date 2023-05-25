@@ -79,12 +79,12 @@ function Home({ navigation }) {
         user_id: userId,
       };
 
-      const pushTokenDB = returnKnownDevicePTObj(deviceId, pushTokens);
+      const pushTokenInDB = returnKnownDevicePTObj(deviceId, pushTokens);
 
-      if (pushTokenDB) {
-        if (isPushTokenSame(pushTokenDB, pushTokenObjNow)) {
-          pushTokenObjNow.id = pushTokenDB.id;
-          if (isPushTokenRefreshed(pushTokenDB)) {
+      if (pushTokenInDB) {
+        if (isPushTokenSame(pushTokenInDB, pushTokenObjNow)) {
+          pushTokenObjNow.id = pushTokenInDB.id;
+          if (isPushTokenRefreshed(pushTokenInDB)) {
             dispatch(setCurrentPushToken(pushTokenObjNow));
             console.log("Push token is already refreshed and updated today");
           } else {
@@ -92,7 +92,7 @@ function Home({ navigation }) {
             console.log("push token is now being refreshed for today");
           }
         } else {
-          pushTokenObjNow.id = pushTokenDB.id;
+          pushTokenObjNow.id = pushTokenInDB.id;
           dispatch(updatePushTokenAsync(pushTokenObjNow));
           console.log("push token in DB object needs to be updated");
         }
@@ -118,11 +118,11 @@ function Home({ navigation }) {
   const returnKnownDevicePTObj = (deviceId, pushTokens) =>
     pushTokens.find((obj) => obj.device_id === deviceId) || false;
 
-  const isPushTokenRefreshed = (pushTokenDB) =>
-    isToday(parseISO(pushTokenDB.updated_at));
+  const isPushTokenRefreshed = (pushTokenInDB) =>
+    isToday(parseISO(pushTokenInDB.updated_at));
 
-  const isPushTokenSame = (pushTokenDB, pushTokenObjNow) =>
-    pushTokenDB.push_token == pushTokenObjNow.push_token ? true : false;
+  const isPushTokenSame = (pushTokenInDB, pushTokenObjNow) =>
+    pushTokenInDB.push_token == pushTokenObjNow.push_token ? true : false;
 
   useEffect(() => {
     dispatch(fetchPushTokensAsync(userId));
