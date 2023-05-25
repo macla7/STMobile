@@ -1,9 +1,13 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import Reactå from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Profile from "./Profile";
 import { Button } from "native-base";
 import { logoutUserAsync } from "../sessions/sessionSlice";
+import {
+  selectCurrentPushToken,
+  destroyPushTokenAsync,
+} from "../users/pushTokenSlice";
 
 const ProfileStack = createNativeStackNavigator();
 
@@ -15,9 +19,11 @@ const ProfileStack = createNativeStackNavigator();
 // Now... they are just all nested stack screens.. as can be seen by the below.
 function GroupsStackScreen() {
   const dispatch = useDispatch();
+  const currentPushToken = useSelector(selectCurrentPushToken);
 
   function onLogout() {
     dispatch(logoutUserAsync());
+    dispatch(destroyPushTokenAsync(currentPushToken));
   }
   return (
     <ProfileStack.Navigator

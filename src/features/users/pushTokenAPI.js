@@ -61,14 +61,20 @@ export async function updatePushToken(pushToken) {
     });
 }
 
-export async function destroyPushToken(pushTokenId, userId) {
-  return fetch(`${API_URL}/users/${userId}/push_tokens/${pushTokenId}.json`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.auth_token}`,
-    },
-  })
+export async function destroyPushToken(pushToken) {
+  const auth_token = await getValueFor("auth_token");
+
+  return fetch(
+    `${API_URL}/users/${pushToken.user_id}/push_tokens/${pushToken.id}.json`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${auth_token}`,
+      },
+      body: JSON.stringify({ pushToken }),
+    }
+  )
     .then((response) => response.json())
     .catch((error) => {
       console.log("Error: ", error);

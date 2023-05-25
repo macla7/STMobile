@@ -14,7 +14,9 @@ import {
   fetchPushTokensAsync,
   selectPushTokens,
   updatePushTokenAsync,
+  setCurrentPushToken,
 } from "../users/pushTokenSlice";
+import { isToday, parseISO } from "date-fns";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -81,12 +83,18 @@ function Home({ navigation }) {
 
       if (pushTokenDB) {
         if (isPushTokenSame(pushTokenDB, pushTokenObjNow)) {
-          // perhaps sending an update request with updated updated_at params
-          // so that we can clean based off updated_at getting too stale.
-          console.log("push token is the same as DB Object");
+          pushTokenObjNow.id = pushTokenDB.id;
+          if (isPushTokenRefreshed(pushTokenDB)) {
+            dispatch(setCurrentPushToken(pushTokenObjNow));
+            console.log("Push token is already refreshed and updated today");
+          } else {
+            dispatch(updatePushTokenAsync(pushTokenObjNow));
+            console.log("push token is now being refreshed for today");
+          }
         } else {
-          console.log("push token in DB object needs to be updated");
+          pushTokenObjNow.id = pushTokenDB.id;
           dispatch(updatePushTokenAsync(pushTokenObjNow));
+          console.log("push token in DB object needs to be updated");
         }
       } else {
         console.log("Need to create a new push Token in DB");
@@ -110,8 +118,11 @@ function Home({ navigation }) {
   const returnKnownDevicePTObj = (deviceId, pushTokens) =>
     pushTokens.find((obj) => obj.device_id === deviceId) || false;
 
-  const isPushTokenSame = (pushTokenDB, pushTokenNow) =>
-    pushTokenDB.push_token == pushTokenNow.push_token ? true : false;
+  const isPushTokenRefreshed = (pushTokenDB) =>
+    isToday(parseISO(pushTokenDB.updated_at));
+
+  const isPushTokenSame = (pushTokenDB, pushTokenObjNow) =>
+    pushTokenDB.push_token == pushTokenObjNow.push_token ? true : false;
 
   useEffect(() => {
     dispatch(fetchPushTokensAsync(userId));
