@@ -25,7 +25,7 @@ function GroupsStackScreen({ navigation }) {
         options={({ route }) => ({
           headerTitle: (props) => (
             <Text fontSize="3xl" color="white" fontWeight="500">
-              Shift Market
+              ShiftSwaps
             </Text>
           ),
         })}
