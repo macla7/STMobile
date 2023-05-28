@@ -129,7 +129,7 @@ function Home({ navigation }) {
   }, []);
 
   useEffect(() => {
-    if (pushTokens.length == 0 || pushTokens[0].id != 0) {
+    if (setCurrentPushToken.id == 0) {
       generateUniqueId().then((deviceId) =>
         registerForPushNotificationsAsync(userId, pushTokens, deviceId)
       );
