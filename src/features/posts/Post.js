@@ -130,7 +130,7 @@ function Post(props) {
               price: props.post.reserve,
               avatar_url: props.post.avatar_url,
               created_at: props.post.created_at,
-              bidder: props.post.postor_name,
+              bidder_name: props.post.postor_name,
             }}
           />
         </Box>

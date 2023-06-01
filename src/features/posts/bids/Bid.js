@@ -49,7 +49,7 @@ function Bid(props) {
                 fontSize="2xs"
                 color={props.bid.price < 0 ? "white" : "white"}
               >
-                {props.bid.bidder}
+                {props.bid.bidder_name}
               </Text>
             </VStack>
           </Box>
@@ -58,8 +58,8 @@ function Bid(props) {
           <Text fontSize="2xs" color={props.bid.price < 0 ? "white" : "white"}>
             {props.reserve == true
               ? props.bid.price < 0
-                ? "Maximum " + props.bid.bidder + " will pay"
-                : "Minimum " + props.bid.bidder + " will accept"
+                ? "Maximum " + props.bid.bidder_name + " will pay"
+                : "Minimum " + props.bid.bidder_name + " will accept"
               : formatDistanceToNow(new Date(props.bid.created_at), {
                   addSuffix: true,
                 })}

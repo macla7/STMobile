@@ -17,7 +17,7 @@ function Comment(props) {
         <VStack ml="2">
           <Box bgColor="myBorderGray" borderRadius="15" px="2" py="1">
             <Text color="myDarkGrayText" bold>
-              {props.comment.commentor}
+              {props.comment.commentor_name}
             </Text>
             <Text>{props.comment.body}</Text>
           </Box>
