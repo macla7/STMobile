@@ -1,5 +1,7 @@
 import * as SecureStore from "expo-secure-store";
-import { REGULAR_URL } from "@env";
+import { URL, REGULAR_URL } from "@env";
+
+const API_URL = URL;
 
 export async function getValueFor(key) {
   let result = await SecureStore.getItemAsync(key);
@@ -7,7 +9,7 @@ export async function getValueFor(key) {
 }
 
 export async function getResetPasswordInstructions(payload) {
-  return fetch(`${REGULAR_URL}/users/password`, {
+  return fetch(`${API_URL}/users/password`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -23,15 +25,12 @@ export async function getResetPasswordInstructions(payload) {
 }
 
 export async function checkResetToken(token) {
-  return fetch(
-    `${REGULAR_URL}/users/password/edit?reset_password_token=${token}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  )
+  return fetch(`${API_URL}/users/password/edit?reset_password_token=${token}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
     .then(async (response) => response.json())
     .catch((error) => {
       console.log("Error: ", error);
@@ -41,7 +40,7 @@ export async function checkResetToken(token) {
 }
 
 export async function changePassword(payload) {
-  return fetch(`${REGULAR_URL}/users/password`, {
+  return fetch(`${API_URL}/users/password`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
