@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Text, ScrollView } from "native-base";
+import { Button, Text } from "native-base";
 import {
   fetchMembershipsAsync,
-  selectMemberships,
-  isUserAMember,
-  isUserAnAdmin,
-  selectIsAdmin,
-  selectIsMember,
   selectStatus,
   Statuses,
 } from "./memberships/membershipSlice";

@@ -5,7 +5,6 @@ import { selectUserId } from "../sessions/sessionSlice";
 import { createInviteAsync, selectFreshInvite } from "./invites/inviteSlice";
 import { createNotificationBlueprint } from "../notifications/notificationBlueprintAPI";
 import { Box, VStack, Button, HStack, Text, FlatList } from "native-base";
-import { selectAuthToken } from "../sessions/sessionSlice";
 import {
   CBackground,
   CWholeSpaceRefreshTile,
@@ -13,7 +12,6 @@ import {
 
 function DiscoverGroups() {
   const otherGroups = useSelector(selectOtherGroups);
-  const authToken = useSelector(selectAuthToken);
   const userId = useSelector(selectUserId);
   const dispatch = useDispatch();
   const freshInvite = useSelector(selectFreshInvite);

@@ -6,7 +6,6 @@ import Group from "./Group";
 import GroupInfo from "./GroupInfo";
 import Search from "../users/Search";
 import GroupForm from "./GroupForm";
-import InfoIcon from "../../assets/noun-info-1126705-676767.svg";
 
 const GroupsStack = createNativeStackNavigator();
 

@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect } from "react";
+import React, { useMemo, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import GroupsStackScreen from "../groups/GroupsStackScreen.js";
 import HomeStackScreen from "../home/HomeStackScreen.js";
@@ -19,14 +19,37 @@ import { selectUserId } from "../sessions/sessionSlice.js";
 import { domain } from "@env";
 import { AddIcon } from "native-base";
 import CreatePostStackScreen from "../posts/CreatePostStackScreen.js";
+import * as Device from "expo-device";
+import * as Notifications from "expo-notifications";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as Application from "expo-application";
+import * as Random from "expo-random";
+import {
+  createPushTokenAsync,
+  fetchPushTokensAsync,
+  selectPushTokens,
+  updatePushTokenAsync,
+  setCurrentPushToken,
+} from "../users/pushTokenSlice";
+import { isToday, parseISO } from "date-fns";
 
 const Tab = createBottomTabNavigator();
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: false,
+  }),
+});
 
 function TabNavigator() {
   const notifications = useSelector(selectNotifications);
   const dispatch = useDispatch();
   const consumer = createConsumer(`ws://${domain}/cable`);
   const userId = useSelector(selectUserId);
+  const notificationListener = useRef();
+  const pushTokens = useSelector(selectPushTokens);
 
   // For now, we will just sub to notification channel when in component
   const notificationsChannel = useMemo(() => {
@@ -49,6 +72,126 @@ function TabNavigator() {
       notificationsChannel.unsubscribe();
     };
   }, []);
+
+  useEffect(() => {
+    dispatch(fetchPushTokensAsync(userId));
+  }, []);
+
+  useEffect(() => {
+    if (setCurrentPushToken.id == 0) {
+      generateUniqueId().then((deviceId) =>
+        checkDevice(userId, pushTokens, deviceId)
+      );
+
+      return () => {
+        Notifications.removeNotificationSubscription(
+          notificationListener.current
+        );
+      };
+    }
+  }, [JSON.stringify(pushTokens[0])]);
+
+  function checkDevice(userId, pushTokens, deviceId) {
+    if (Device.checkDevice) {
+      registerForPushNotificationsAsync(userId, pushTokens, deviceId);
+    } else {
+      alert("Must use physical device for Push Notifications");
+    }
+
+    if (Platform.OS === "android") {
+      Notifications.setNotificationChannelAsync("default", {
+        name: "default",
+        importance: Notifications.AndroidImportance.MAX,
+        vibrationPattern: [0, 250, 250, 250],
+        lightColor: "#FF231F7C",
+      });
+    }
+  }
+
+  async function registerForPushNotificationsAsync(
+    userId,
+    pushTokens,
+    deviceId
+  ) {
+    let token = await getPermissionForPushAsync();
+
+    let pushTokenObjNow = getPushTokenObjNow(token, userId, deviceId);
+    const pushTokenInDB = returnDevicePushTokenDB(deviceId, pushTokens);
+
+    savePushToken(pushTokenObjNow, pushTokenInDB);
+  }
+
+  async function getPermissionForPushAsync() {
+    const { status: existingStatus } =
+      await Notifications.getPermissionsAsync();
+    let finalStatus = existingStatus;
+    if (existingStatus !== "granted") {
+      const { status } = await Notifications.requestPermissionsAsync();
+      finalStatus = status;
+    }
+    if (finalStatus !== "granted") {
+      alert("Failed to get push token for push notification!");
+      return;
+    }
+    return (await Notifications.getExpoPushTokenAsync()).data;
+  }
+
+  const getPushTokenObjNow = (token, userId, deviceId) => {
+    return { push_token: token, user_id: userId, device_id: deviceId };
+  };
+
+  // looks at array and returns a pushToken object if device's match
+  const returnDevicePushTokenDB = (deviceId, pushTokens) =>
+    pushTokens.find((obj) => obj.device_id === deviceId) || false;
+
+  const savePushToken = (pushTokenObjNow, pushTokenInDB) => {
+    if (pushTokenInDB) {
+      updatePushToken(pushTokenObjNow, pushTokenInDB);
+    } else {
+      console.log("Need to create a new push Token in DB");
+      dispatch(createPushTokenAsync(pushTokenObjNow));
+    }
+  };
+
+  const updatePushToken = (pushTokenObjNow, pushTokenInDB) => {
+    if (isPushTokenSame(pushTokenInDB, pushTokenObjNow)) {
+      pushTokenObjNow.id = pushTokenInDB.id;
+      if (isPushTokenRefreshed(pushTokenInDB)) {
+        dispatch(setCurrentPushToken(pushTokenObjNow));
+        console.log("Push token is already refreshed and updated today");
+      } else {
+        dispatch(updatePushTokenAsync(pushTokenObjNow));
+        console.log("push token is now being refreshed for today");
+      }
+    } else {
+      pushTokenObjNow.id = pushTokenInDB.id;
+      dispatch(updatePushTokenAsync(pushTokenObjNow));
+      console.log("push token in DB object needs to be updated");
+    }
+  };
+
+  const isPushTokenSame = (pushTokenInDB, pushTokenObjNow) =>
+    pushTokenInDB.push_token == pushTokenObjNow.push_token ? true : false;
+
+  const isPushTokenRefreshed = (pushTokenInDB) =>
+    isToday(parseISO(pushTokenInDB.updated_at));
+
+  const generateUniqueId = async () => {
+    let deviceId = await AsyncStorage.getItem("deviceId");
+
+    if (!deviceId) {
+      const randomBytes = await Random.getRandomBytesAsync(16);
+      deviceId =
+        Application.applicationName +
+        "-" +
+        Array.from(randomBytes)
+          .map((byte) => byte.toString(16))
+          .join("");
+      await AsyncStorage.setItem("deviceId", deviceId);
+    }
+
+    return deviceId;
+  };
 
   return (
     <>

@@ -1,7 +1,6 @@
 import React, { useState, useCallback } from "react";
-import { Center, Box, Text, HStack } from "native-base";
+import { Center, Box, HStack } from "native-base";
 import { RefreshControl, ScrollView } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 
 export function CBackground({ children }) {
   return (
@@ -111,20 +110,5 @@ export function CInternalBorderTile({ children, borderColor }) {
     >
       {children}
     </Box>
-  );
-}
-
-export function CInternalBorderHeaderTile({ children }) {
-  return (
-    <Center
-      borderWidth="1"
-      borderColor="myBorderGray"
-      my="2"
-      mx="1"
-      bgColor="white"
-      shadow="1"
-    >
-      {children}
-    </Center>
   );
 }

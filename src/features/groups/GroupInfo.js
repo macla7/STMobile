@@ -11,8 +11,6 @@ import {
   CBackground,
   CWholeSpaceContentTile,
 } from "../layout/LayoutComponents";
-import { parseISO, format } from "date-fns";
-
 import Memberships from "./memberships/Memberships";
 
 function GroupInfo({ route, navigation }) {

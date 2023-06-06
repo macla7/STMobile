@@ -1,5 +1,4 @@
 import React from "react";
-
 import { Text, FlatList, VStack, Box, HStack } from "native-base";
 import { parseISO, format } from "date-fns";
 import DP from "../../layout/DP";

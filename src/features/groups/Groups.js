@@ -18,33 +18,11 @@ function Groups({ navigation }) {
   const dispatch = useDispatch();
   const isFocused = useIsFocused();
 
-  function requestToJoinGroup(groupId) {
-    let inviteDetails = {
-      group_id: groupId,
-      internal_user_id: null,
-      external_user_id: userId,
-      request: true,
-    };
-
-    dispatch(createInviteAsync(inviteDetails));
-
-    // if above succeeds ..?
-    let notification_blueprint = {
-      notificationable_type: "Group",
-      notificationable_id: groupId,
-      notification_type: 3,
-    };
-
-    createNotificationBlueprint(notification_blueprint);
-  }
-
   // Called on initialise, because dispatch changes (on intialise)
   // and on myGroups.length change
   useEffect(() => {
     dispatch(fetchMyGroupsAsync());
   }, [dispatch, myGroups.length, isFocused]);
-
-  // useFocusEffect(useCallback(() => () => dispatch(fetchMyGroupsAsync())));
 
   return (
     <CBackground>
