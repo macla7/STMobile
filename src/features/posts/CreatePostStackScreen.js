@@ -23,7 +23,7 @@ function CreatePostStackScreen({ navigation }) {
         name="Create Post"
         component={PostForm}
         initialParams={{
-          date: Date.now(),
+          postEndsDate: Date.now(),
           groupId: 0,
           groupName: "Group Not Selected..",
           description: "",

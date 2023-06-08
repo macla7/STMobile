@@ -12,7 +12,7 @@ import { compareAsc, format, addMinutes } from "date-fns";
 function PostForm({ route, navigation }) {
   const dispatch = useDispatch();
   const shifts = useSelector(selectShifts);
-  const { date, groupId, groupName, reserve, returnScreen } = route.params;
+  const { postEndsDate, groupId, groupName, reserve } = route.params;
   const [formData, setData] = useState({});
   const [description, setDescription] = useState("");
   const [errors, setErrors] = useState({});
@@ -22,17 +22,13 @@ function PostForm({ route, navigation }) {
   function submitPost() {
     let post = {
       body: description,
-      ends_at: date,
+      ends_at: postEndsDate,
       group_id: groupId,
       reserve: reserve,
       shifts_attributes: shifts,
     };
     dispatch(createPostAsync(post));
-
-    // if above succeeds ..?
-    // we need the postId to then feed into here... this shouldn't be groupId
-    // so this needs to wait on the post to be created... I think O do something like
-    // this with invites.. waiting with useSelector for the state change.
+    return true;
   }
 
   useEffect(() => {
@@ -47,8 +43,7 @@ function PostForm({ route, navigation }) {
 
       dispatch(resetShifts());
       navigation.navigate({
-        name: returnScreen,
-        merge: true,
+        name: "Home",
       });
     }
   }, [freshPost.id]);
@@ -58,53 +53,75 @@ function PostForm({ route, navigation }) {
   }, []);
 
   useEffect(() => {
-    setData({ ...formData, endsAt: date });
+    setData({ ...formData, endsAt: postEndsDate });
   }, []);
-
-  const validate = () => {
-    let valid = true;
-    let newErrors = {};
-
-    if (shifts.length === 0) {
-      newErrors["shifts"] = "At least one Shift is requried";
-      valid = false;
-    }
-    if (description === "") {
-      newErrors["description"] = "Description required";
-      valid = false;
-    }
-    if (shifts.length > 0) {
-      let invalidShifts = shifts.filter((shift) =>
-        compareAsc(new Date(shift.start), new Date(date)) === -1 ? true : false
-      );
-      setInvalidShiftIds(invalidShifts.map((shift) => shift.tempId));
-      if (invalidShifts.length > 0) {
-        newErrors["shifts"] = "Some shifts start before the post ends";
-        valid = false;
-      }
-    }
-    if (!dateIsValid()) {
-      newErrors["date"] = "Post must be at least half an hour in the future";
-      valid = false;
-    }
-    if (groupId === 0) {
-      newErrors["group"] = "Need to pick a group";
-      valid = false;
-    }
-
-    setErrors({ ...errors, ...newErrors });
-
-    if (valid) {
-      submitPost();
-    }
-  };
 
   const onSubmit = () => {
     validate() ? console.log("Submitted") : console.log("Validation Failed");
   };
 
-  function dateIsValid() {
-    return compareAsc(new Date(date), addMinutes(Date.now(), 30)) === 1
+  const validate = () => {
+    let newErrors = {};
+
+    checkDescriptionForErrors(newErrors);
+    checkShiftsForErrors(newErrors);
+    checkPostEndsDateForErrors(newErrors);
+    checkGroupForErrors(newErrors);
+
+    setErrors({ ...errors, ...newErrors });
+
+    if (areAllValuesNull(errors)) {
+      return submitPost();
+    }
+  };
+
+  const checkDescriptionForErrors = (newErrors) => {
+    if (description === "") {
+      newErrors["description"] = "Description required";
+    }
+  };
+
+  const checkShiftsForErrors = (newErrors) => {
+    if (shifts.length === 0) {
+      newErrors["shifts"] = "At least one Shift is requried";
+    }
+    if (shifts.length > 0) {
+      let invalidShifts = shifts.filter((shift) =>
+        compareAsc(new Date(shift.start), new Date(postEndsDate)) === -1
+          ? true
+          : false
+      );
+      setInvalidShiftIds(invalidShifts.map((shift) => shift.tempId));
+      if (invalidShifts.length > 0) {
+        newErrors["shifts"] = "Some shifts start before the post ends";
+      }
+    }
+  };
+
+  const checkPostEndsDateForErrors = (newErrors) => {
+    if (!postEndsDateIsValid()) {
+      newErrors["postEndsDate"] =
+        "Post must be at least half an hour in the future";
+    }
+  };
+
+  const checkGroupForErrors = (newErrors) => {
+    if (groupId === 0) {
+      newErrors["group"] = "Need to pick a group";
+    }
+  };
+
+  function areAllValuesNull(obj) {
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key) && obj[key] !== null) {
+        return false; // At least one non-null value found
+      }
+    }
+    return true; // All values are null
+  }
+
+  function postEndsDateIsValid() {
+    return compareAsc(new Date(postEndsDate), addMinutes(Date.now(), 30)) === 1
       ? true
       : false;
   }
@@ -143,7 +160,9 @@ function PostForm({ route, navigation }) {
             </Button>
 
             <FormControl.Label mb="-1">Post Ends</FormControl.Label>
-            <FormControl.ErrorMessage>{errors.date}</FormControl.ErrorMessage>
+            <FormControl.ErrorMessage>
+              {errors.postEndsDate}
+            </FormControl.ErrorMessage>
             <Button
               fontSize="md"
               fontWeight="400"
@@ -151,24 +170,24 @@ function PostForm({ route, navigation }) {
               variant="Unstyled"
               display="flex"
               justifyContent="flex-start"
-              borderColor={errors["date"] ? "error.600" : "muted.300"}
+              borderColor={errors["postEndsDate"] ? "error.600" : "muted.300"}
               borderWidth="1"
               p="2"
               mt="2"
               mx="1"
               onPress={() => {
                 navigation.navigate("Time and Date", {
-                  initDate: date,
-                  returnType: "date",
+                  initDate: postEndsDate,
+                  returnType: "postEndsDate",
                   returnScreen: "Create Post",
                   text: "Post Ends",
                 });
-                setErrors({ ...errors, date: null });
+                setErrors({ ...errors, postEndsDate: null });
               }}
             >
-              {format(new Date(date), "EEE do LLL")}
+              {format(new Date(postEndsDate), "EEE do LLL")}
 
-              {format(new Date(date), "p")}
+              {format(new Date(postEndsDate), "p")}
             </Button>
 
             <FormControl.Label mb="-1">Shifts</FormControl.Label>
@@ -193,9 +212,9 @@ function PostForm({ route, navigation }) {
               variant="myButtonYellowVariant"
               onPress={() => {
                 navigation.navigate("Add Shift", {
-                  start: new Date(date).toString(),
-                  end: new Date(date).toString(),
-                  endsAt: new Date(date).toString(),
+                  start: new Date(postEndsDate).toString(),
+                  end: new Date(postEndsDate).toString(),
+                  endsAt: new Date(postEndsDate).toString(),
                   initPosition: "",
                   editingMode: false,
                   returnScreen: "Create Post",

@@ -1,7 +1,5 @@
 import React from "react";
-import { VStack, HStack, Text, View, Box } from "native-base";
-import { LinearGradient } from "expo-linear-gradient";
-import { StyleSheet } from "react-native";
+import { VStack, HStack, Text, Box } from "native-base";
 import Money from "../money/Money";
 import { formatDistanceToNow } from "date-fns";
 import DP from "../../layout/DP";
@@ -72,16 +70,5 @@ function Bid(props) {
     </Box>
   );
 }
-
-const styles = StyleSheet.create({
-  bid: {
-    paddingHorizontal: 10,
-    height: 25,
-    borderRadius: 0,
-    justifyContent: "center",
-    alignItems: "center",
-    flexGrow: 1,
-  },
-});
 
 export default Bid;

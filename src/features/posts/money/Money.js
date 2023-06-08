@@ -15,21 +15,22 @@ function Money(props) {
     let cents = dollarsAndCents.slice(-2);
     return parseInt(cents);
   }
+
   function handleMoneyText(type, money) {
     if (type == "cents") {
-      return handleSmallCents(money);
+      return createCentsText(money);
     }
-    return handleDollarsNegative(money);
+    return createDollarsText(money);
   }
 
-  function handleDollarsNegative(dollars) {
+  function createDollarsText(dollars) {
     if (dollars < 0) {
       return "$" + dollars * -1;
     }
     return "$" + dollars;
   }
 
-  function handleSmallCents(cents) {
+  function createCentsText(cents) {
     if (cents == 0) {
       return "00";
     } else if (cents == 5) {

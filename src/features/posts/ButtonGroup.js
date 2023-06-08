@@ -14,15 +14,6 @@ function ButtonGroup({
   commentRef,
   singularView,
 }) {
-  function handleClick(e) {
-    const payload = {
-      post: {
-        post_id: props.post_id,
-      },
-    };
-    props.dispatch(destroyPostAsync(payload));
-  }
-
   useEffect(() => {
     if (singularView) {
       commentRef.current.focus();
@@ -77,7 +68,6 @@ function ButtonGroup({
               <BidIcon width="100%" height="100%" fill="#047857" />
             </AspectRatio>
           </Box>
-          {/* <FontAwesomeIcon icon={faSackDollar} color="#047857" /> */}
           <Text ml="-2" mr="3">
             Bid
           </Text>

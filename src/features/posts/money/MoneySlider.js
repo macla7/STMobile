@@ -20,6 +20,7 @@ function MoneySlider(props) {
         onChangeValue
       );
     } else {
+      // when the monetary amount is for a Bid
       if (onChangeValue <= 0) {
         return "To take the shift, you are seeking: $" + -1 * onChangeValue;
       }

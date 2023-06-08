@@ -10,9 +10,6 @@ function Bids(props) {
   return (
     <VStack justifyContent="space-between">
       {sortedBids.length == 0 ? (
-        // <AspectRatio ratio={{ base: 1 / 1, md: 1 / 1 }}>
-        //   <BidIcon width="100%" height="100%" />
-        // </AspectRatio>
         <Bid
           bid={props.reserveBid}
           reserve={true}

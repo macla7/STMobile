@@ -14,6 +14,45 @@ function ShiftForm({ navigation, route }) {
   const [formData, setData] = useState({});
   const [errors, setErrors] = useState({});
 
+  useEffect(() => {
+    setData({ ...formData, start: start, end: end, position: initPosition });
+  }, []);
+
+  const onSubmit = () => {
+    validate() ? console.log("Submitted") : console.log("Validation Failed");
+  };
+
+  const validate = () => {
+    let newErrors = {};
+
+    checkPositionForErrors(newErrors);
+    checkStartTimeForErrors(newErrors);
+    checkEndTimeForErrors(newErrors);
+
+    setErrors({ ...errors, ...newErrors });
+    if (areAllValuesNull(errors)) {
+      return submitForm();
+    }
+  };
+
+  const checkPositionForErrors = (newErrors) => {
+    if (formData.position === "") {
+      newErrors["position"] = "Position is required";
+    }
+  };
+
+  const checkStartTimeForErrors = (newErrors) => {
+    if (new Date(start).getTime() < new Date(endsAt).getTime()) {
+      newErrors["start"] = "Start time cannot be before when the Post ends";
+    }
+  };
+
+  const checkEndTimeForErrors = (newErrors) => {
+    if (compareAsc(new Date(end), new Date(start)) !== 1) {
+      newErrors["end"] = "End time must be after the Shift starts";
+    }
+  };
+
   function submitForm() {
     if (editingMode) {
       const shift = {
@@ -31,43 +70,13 @@ function ShiftForm({ navigation, route }) {
       };
       dispatch(createShift(shift));
     }
+
+    navigation.navigate({
+      name: returnScreen,
+      merge: true,
+    });
+    return true;
   }
-
-  const validate = () => {
-    let valid = true;
-    let newErrors = {};
-
-    if (formData.position === "") {
-      newErrors["position"] = "Position is required";
-      valid = false;
-    }
-    if (new Date(start).getTime() < new Date(endsAt).getTime()) {
-      newErrors["start"] = "Start time cannot be before when the Post ends";
-      valid = false;
-    }
-    if (compareAsc(new Date(end), new Date(start)) !== 1) {
-      newErrors["end"] = "End time must be after the Shift starts";
-      valid = false;
-    }
-
-    setErrors({ ...errors, ...newErrors });
-    if (valid) {
-      submitForm();
-      navigation.navigate({
-        name: returnScreen,
-        merge: true,
-      });
-    }
-    return valid;
-  };
-
-  const onSubmit = () => {
-    validate() ? console.log("Submitted") : console.log("Validation Failed");
-  };
-
-  useEffect(() => {
-    setData({ ...formData, start: start, end: end, position: initPosition });
-  }, []);
 
   return (
     <CScrollBackground>

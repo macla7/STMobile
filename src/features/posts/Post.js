@@ -51,9 +51,6 @@ function Post(props) {
     );
   });
 
-  // setLike and setBids needed here as this is as the component is first rendered
-  // with the props.post.. but then on re-render (due to the things in the
-  // useEffect array), it needs to set bids and likes again.
   useEffect(() => {
     setBids(props.post.bids);
     setLikes(props.post.likes);

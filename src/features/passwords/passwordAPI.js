@@ -1,12 +1,6 @@
-import * as SecureStore from "expo-secure-store";
-import { URL, REGULAR_URL } from "@env";
+import { URL } from "@env";
 
 const API_URL = URL;
-
-export async function getValueFor(key) {
-  let result = await SecureStore.getItemAsync(key);
-  return result;
-}
 
 export async function getResetPasswordInstructions(payload) {
   return fetch(`${API_URL}/users/password`, {

@@ -46,9 +46,9 @@ function MyDateTimePicker({ route, navigation }) {
 
   function returnParams() {
     switch (returnType) {
-      case "date":
+      case "postEndsDate":
         return {
-          date: date.toString(),
+          postEndsDate: date.toString(),
         };
       case "start":
         return {

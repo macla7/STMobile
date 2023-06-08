@@ -37,7 +37,7 @@ function BidConfirmation({ route, navigation }) {
     createNotificationBlueprint(second_notification_blueprint);
   }
 
-  function handleDollarsNegative(dollars) {
+  function createDollarsText(dollars) {
     if (dollars < 0) {
       return "$" + (dollars * -1) / 1000000;
     }
@@ -54,7 +54,7 @@ function BidConfirmation({ route, navigation }) {
             </Heading>
             <Text>
               You are {description.toLowerCase() + " "}
-              {handleDollarsNegative(currentMicroDollars)}
+              {createDollarsText(currentMicroDollars)}
             </Text>
             <Button
               mt="2"
