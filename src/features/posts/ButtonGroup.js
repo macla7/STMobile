@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { destroyPostAsync } from "./postSlice";
 import { Text, Flex, HStack, Button, AspectRatio, Box } from "native-base";
 import Likes from "./likes/Likes";
 import BidIcon from "../../assets/noun-auction-4831153.svg";

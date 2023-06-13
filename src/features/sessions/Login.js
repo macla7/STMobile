@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { loginUserAsync } from "./sessionSlice";
 import {
@@ -11,9 +11,12 @@ import {
   Button,
   HStack,
   Text,
-  Pressable,
 } from "native-base";
-import { Keyboard } from "react-native";
+import {
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 
 function Login({ navigation }) {
   const dispatch = useDispatch();
@@ -30,8 +33,8 @@ function Login({ navigation }) {
   }
 
   return (
-    <Pressable onPress={Keyboard.dismiss}>
-      <Box bgColor="myBackgroundGray" h="100%">
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
         <Center>
           <Box safeArea p="2" py="8" w="90%" maxW="290">
             <Heading size="xl" fontWeight="600" color="myDarkGreen">
@@ -110,8 +113,8 @@ function Login({ navigation }) {
             </VStack>
           </Box>
         </Center>
-      </Box>
-    </Pressable>
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 }
 

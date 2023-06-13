@@ -41,9 +41,16 @@ function GroupsStackScreen() {
         component={Search}
         options={({ route }) => ({
           title: "Invite People",
+          headerTransparent: true,
         })}
       />
-      <GroupsStack.Screen name="Create Group" component={GroupForm} />
+      <GroupsStack.Screen
+        name="Create Group"
+        component={GroupForm}
+        options={({ route }) => ({
+          headerTransparent: true,
+        })}
+      />
     </GroupsStack.Navigator>
   );
 }

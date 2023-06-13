@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createGroupAsync, fetchGroupsAsync, selectGroups } from "./groupSlice";
 import { CBackground, CContentTile } from "../layout/LayoutComponents";
-import { Input, Button, Pressable, VStack, FormControl } from "native-base";
-import { Keyboard } from "react-native";
+import { Input, Button, VStack, FormControl } from "native-base";
+import KeyboardWrapper from "../layout/KeyboardWrapper";
 
 function GroupForm({ route, navigation }) {
   const dispatch = useDispatch();
@@ -54,7 +54,7 @@ function GroupForm({ route, navigation }) {
   };
 
   return (
-    <Pressable onPress={Keyboard.dismiss}>
+    <KeyboardWrapper>
       <CBackground>
         <CContentTile>
           <VStack width="90%" mx="3" maxW="300px">
@@ -86,7 +86,7 @@ function GroupForm({ route, navigation }) {
           </VStack>
         </CContentTile>
       </CBackground>
-    </Pressable>
+    </KeyboardWrapper>
   );
 }
 

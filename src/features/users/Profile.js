@@ -14,11 +14,11 @@ import {
   Input,
   Text,
 } from "native-base";
-import { Keyboard } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { selectUserId, selectUserAvatarUrl } from "../sessions/sessionSlice";
 import { fetchUserAsync, selectUser, updateUserAsync } from "./userSlice";
 import AtopTabNavGroup from "../buttons/AtopTabNavGroup";
+import KeyboardWrapper from "../layout/KeyboardWrapper";
 
 function Profile() {
   const user = useSelector(selectUser);
@@ -103,7 +103,7 @@ function Profile() {
   };
 
   return (
-    <Pressable onPress={Keyboard.dismiss}>
+    <KeyboardWrapper>
       <CScrollBackground>
         <VStack h="100%" w="100%">
           <CContentTile>
@@ -226,7 +226,7 @@ function Profile() {
           )}
         </VStack>
       </CScrollBackground>
-    </Pressable>
+    </KeyboardWrapper>
   );
 }
 

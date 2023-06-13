@@ -8,14 +8,14 @@ import { Text } from "native-base";
 
 const HomeStack = createNativeStackNavigator();
 
-function GroupsStackScreen({ navigation }) {
+function HomeStackScreen({ navigation }) {
   return (
     <HomeStack.Navigator
       screenOptions={({}) => ({
         headerStyle: {
           backgroundColor: "#20716A",
         },
-        headerTintColor: "#ffffff",
+        headerTintColor: "#fff",
       })}
       initialRouteName="Home Feed"
     >
@@ -32,9 +32,15 @@ function GroupsStackScreen({ navigation }) {
       />
       <HomeStack.Screen name="Bid" component={BidForm} />
       <HomeStack.Screen name="Bid Confirmation" component={BidConfirmation} />
-      <HomeStack.Screen name="Post" component={PostScreen} />
+      <HomeStack.Screen
+        name="Post"
+        component={PostScreen}
+        options={{
+          headerTransparent: true,
+        }}
+      />
     </HomeStack.Navigator>
   );
 }
 
-export default GroupsStackScreen;
+export default HomeStackScreen;

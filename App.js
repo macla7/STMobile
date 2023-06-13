@@ -18,10 +18,9 @@ import {
 import { NativeBaseProvider } from "native-base";
 import { theme } from "./theme";
 import {
-  KeyboardAvoidingView,
-  Platform,
-  TouchableWithoutFeedback,
   Keyboard,
+  TouchableWithoutFeedback,
+  KeyboardAvoidingView,
 } from "react-native";
 
 export default function App() {
@@ -44,15 +43,8 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <NativeBaseProvider theme={theme}>
-          <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : "height"}
-            height="100%"
-          >
-            <StatusBar style="light" />
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-              <AuthStackScreen />
-            </TouchableWithoutFeedback>
-          </KeyboardAvoidingView>
+          <StatusBar style="light" />
+          <AuthStackScreen />
         </NativeBaseProvider>
       </NavigationContainer>
     </Provider>

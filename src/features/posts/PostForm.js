@@ -8,6 +8,7 @@ import Money from "../posts/money/Money";
 import Shift from "./shifts/Shift";
 import { CScrollBackground, CContentTile } from "../layout/LayoutComponents";
 import { compareAsc, format, addMinutes } from "date-fns";
+import KeyboardWrapper from "../layout/KeyboardWrapper";
 
 function PostForm({ route, navigation }) {
   const dispatch = useDispatch();
@@ -127,154 +128,160 @@ function PostForm({ route, navigation }) {
   }
 
   return (
-    <CScrollBackground>
-      <CContentTile>
-        <VStack w="100%">
-          <FormControl
-            isInvalid={["shifts"].some((error) =>
-              Object.keys(errors).includes(error)
-            )}
-          >
-            <FormControl.Label mb="-1">Group</FormControl.Label>
-            <FormControl.ErrorMessage>{errors.group}</FormControl.ErrorMessage>
-            <Button
-              fontSize="md"
-              fontWeight="400"
-              color="myDarkGrayText"
-              variant="Unstyled"
-              display="flex"
-              justifyContent="flex-start"
-              borderColor={errors["group"] ? "error.600" : "muted.300"}
-              borderWidth="1"
-              p="2"
-              mt="2"
-              mx="1"
-              onPress={() => {
-                navigation.navigate("Your Groups", {
-                  initGroupId: groupId,
-                });
-                setErrors({ ...errors, group: null });
-              }}
+    <KeyboardWrapper>
+      <CScrollBackground>
+        <CContentTile>
+          <VStack w="100%">
+            <FormControl
+              isInvalid={["shifts"].some((error) =>
+                Object.keys(errors).includes(error)
+              )}
             >
-              {groupName}
-            </Button>
-
-            <FormControl.Label mb="-1">Post Ends</FormControl.Label>
-            <FormControl.ErrorMessage>
-              {errors.postEndsDate}
-            </FormControl.ErrorMessage>
-            <Button
-              fontSize="md"
-              fontWeight="400"
-              color="myDarkGrayText"
-              variant="Unstyled"
-              display="flex"
-              justifyContent="flex-start"
-              borderColor={errors["postEndsDate"] ? "error.600" : "muted.300"}
-              borderWidth="1"
-              p="2"
-              mt="2"
-              mx="1"
-              onPress={() => {
-                navigation.navigate("Time and Date", {
-                  initDate: postEndsDate,
-                  returnType: "postEndsDate",
-                  returnScreen: "Create Post",
-                  text: "Post Ends",
-                });
-                setErrors({ ...errors, postEndsDate: null });
-              }}
-            >
-              {format(new Date(postEndsDate), "EEE do LLL")}
-
-              {format(new Date(postEndsDate), "p")}
-            </Button>
-
-            <FormControl.Label mb="-1">Shifts</FormControl.Label>
-            {errors["shifts"] ? (
+              <FormControl.Label mb="-1">Group</FormControl.Label>
               <FormControl.ErrorMessage>
-                {errors.shifts}
+                {errors.group}
               </FormControl.ErrorMessage>
-            ) : (
-              <FormControl.HelperText>Time and Position</FormControl.HelperText>
-            )}
-            <Shift
-              shifts={shifts ? shifts : []}
-              navigation={navigation}
-              editable={true}
-              invalidShiftIds={invalidShiftIds}
-            />
+              <Button
+                fontSize="md"
+                fontWeight="400"
+                color="myDarkGrayText"
+                variant="Unstyled"
+                display="flex"
+                justifyContent="flex-start"
+                borderColor={errors["group"] ? "error.600" : "muted.300"}
+                borderWidth="1"
+                p="2"
+                mt="2"
+                mx="1"
+                onPress={() => {
+                  navigation.navigate("Your Groups", {
+                    initGroupId: groupId,
+                  });
+                  setErrors({ ...errors, group: null });
+                }}
+              >
+                {groupName}
+              </Button>
 
-            <Button
-              fontSize="md"
-              fontWeight="400"
-              color="myDarkGrayText"
-              variant="myButtonYellowVariant"
-              onPress={() => {
-                navigation.navigate("Add Shift", {
-                  start: new Date(postEndsDate).toString(),
-                  end: new Date(postEndsDate).toString(),
-                  endsAt: new Date(postEndsDate).toString(),
-                  initPosition: "",
-                  editingMode: false,
-                  returnScreen: "Create Post",
-                });
-                setErrors({ ...errors, shifts: null });
-              }}
-            >
-              Add Shift
+              <FormControl.Label mb="-1">Post Ends</FormControl.Label>
+              <FormControl.ErrorMessage>
+                {errors.postEndsDate}
+              </FormControl.ErrorMessage>
+              <Button
+                fontSize="md"
+                fontWeight="400"
+                color="myDarkGrayText"
+                variant="Unstyled"
+                display="flex"
+                justifyContent="flex-start"
+                borderColor={errors["postEndsDate"] ? "error.600" : "muted.300"}
+                borderWidth="1"
+                p="2"
+                mt="2"
+                mx="1"
+                onPress={() => {
+                  navigation.navigate("Time and Date", {
+                    initDate: postEndsDate,
+                    returnType: "postEndsDate",
+                    returnScreen: "Create Post",
+                    text: "Post Ends",
+                  });
+                  setErrors({ ...errors, postEndsDate: null });
+                }}
+              >
+                {format(new Date(postEndsDate), "EEE do LLL")}
+
+                {format(new Date(postEndsDate), "p")}
+              </Button>
+
+              <FormControl.Label mb="-1">Shifts</FormControl.Label>
+              {errors["shifts"] ? (
+                <FormControl.ErrorMessage>
+                  {errors.shifts}
+                </FormControl.ErrorMessage>
+              ) : (
+                <FormControl.HelperText>
+                  Time and Position
+                </FormControl.HelperText>
+              )}
+              <Shift
+                shifts={shifts ? shifts : []}
+                navigation={navigation}
+                editable={true}
+                invalidShiftIds={invalidShiftIds}
+              />
+
+              <Button
+                fontSize="md"
+                fontWeight="400"
+                color="myDarkGrayText"
+                variant="myButtonYellowVariant"
+                onPress={() => {
+                  navigation.navigate("Add Shift", {
+                    start: new Date(postEndsDate).toString(),
+                    end: new Date(postEndsDate).toString(),
+                    endsAt: new Date(postEndsDate).toString(),
+                    initPosition: "",
+                    editingMode: false,
+                    returnScreen: "Create Post",
+                  });
+                  setErrors({ ...errors, shifts: null });
+                }}
+              >
+                Add Shift
+              </Button>
+
+              <FormControl.Label mb="-1">Reserve</FormControl.Label>
+              <FormControl.HelperText>
+                {reserve < 0
+                  ? "Maximum you are willing to pay"
+                  : "Minimum you will accept"}
+              </FormControl.HelperText>
+              <Button
+                fontSize="md"
+                fontWeight="400"
+                color="myDarkGrayText"
+                variant="Unstyled"
+                display="flex"
+                justifyContent="flex-start"
+                borderColor="muted.300"
+                borderWidth="1"
+                p="2"
+                mt="2"
+                mx="1"
+                onPress={() =>
+                  navigation.navigate("Add Reserve", {
+                    reserve: reserve,
+                    returnScreen: "Create Post",
+                  })
+                }
+              >
+                <Money microDollars={reserve} color="black" />
+              </Button>
+
+              <FormControl.Label mb="-1">Description</FormControl.Label>
+              <FormControl.ErrorMessage>
+                {errors.description}
+              </FormControl.ErrorMessage>
+              <TextArea
+                mt="2"
+                h={20}
+                placeholder="Add Description here.."
+                value={description}
+                onChange={(e) => {
+                  setDescription(e.nativeEvent.text);
+                  setErrors({ ...errors, description: null });
+                }}
+                isInvalid={errors["description"]}
+              />
+            </FormControl>
+            <Button mt="2" variant="myButtonYellowVariant" onPress={onSubmit}>
+              Make Post
             </Button>
-
-            <FormControl.Label mb="-1">Reserve</FormControl.Label>
-            <FormControl.HelperText>
-              {reserve < 0
-                ? "Maximum you are willing to pay"
-                : "Minimum you will accept"}
-            </FormControl.HelperText>
-            <Button
-              fontSize="md"
-              fontWeight="400"
-              color="myDarkGrayText"
-              variant="Unstyled"
-              display="flex"
-              justifyContent="flex-start"
-              borderColor="muted.300"
-              borderWidth="1"
-              p="2"
-              mt="2"
-              mx="1"
-              onPress={() =>
-                navigation.navigate("Add Reserve", {
-                  reserve: reserve,
-                  returnScreen: "Create Post",
-                })
-              }
-            >
-              <Money microDollars={reserve} color="black" />
-            </Button>
-
-            <FormControl.Label mb="-1">Description</FormControl.Label>
-            <FormControl.ErrorMessage>
-              {errors.description}
-            </FormControl.ErrorMessage>
-            <TextArea
-              mt="2"
-              h={20}
-              placeholder="Add Description here.."
-              value={description}
-              onChange={(e) => {
-                setDescription(e.nativeEvent.text);
-                setErrors({ ...errors, description: null });
-              }}
-              isInvalid={errors["description"]}
-            />
-          </FormControl>
-          <Button mt="2" variant="myButtonYellowVariant" onPress={onSubmit}>
-            Make Post
-          </Button>
-        </VStack>
-      </CContentTile>
-    </CScrollBackground>
+          </VStack>
+        </CContentTile>
+      </CScrollBackground>
+    </KeyboardWrapper>
   );
 }
 

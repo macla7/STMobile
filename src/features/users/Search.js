@@ -22,7 +22,7 @@ import {
   CWholeSpaceContentTile,
 } from "../layout/LayoutComponents";
 import DP from "../layout/DP";
-import { Keyboard } from "react-native";
+import KeyboardWrapper from "../layout/KeyboardWrapper";
 
 // Definitely coupled a bit too much with invite and group logic I think
 function Search({ route }) {
@@ -107,7 +107,7 @@ function Search({ route }) {
   }, [freshInvite.id]);
 
   return (
-    <Pressable onPress={Keyboard.dismiss}>
+    <KeyboardWrapper>
       <CBackground>
         <CWholeSpaceContentTile>
           <VStack
@@ -191,7 +191,7 @@ function Search({ route }) {
           />
         </CWholeSpaceContentTile>
       </CBackground>
-    </Pressable>
+    </KeyboardWrapper>
   );
 }
 

@@ -1,18 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Center,
-  Box,
-  Heading,
-  VStack,
-  FormControl,
-  Input,
-  Button,
-  HStack,
-  Text,
-  Pressable,
-} from "native-base";
-import { Keyboard } from "react-native";
+import { Box, FormControl, Input, Button, HStack } from "native-base";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-regular-svg-icons/faPaperPlane";
 import { createCommentAsync } from "../postSlice";
@@ -50,7 +38,7 @@ function CommentForm({ postId, commentRef }) {
   }
 
   return (
-    <Box p="2" position="absolute" bottom="0" width="100%" bgColor="white">
+    <Box p="2" width="100%" bgColor="white">
       <FormControl>
         <HStack alignItems="stretch" justifyContent="center">
           <Input

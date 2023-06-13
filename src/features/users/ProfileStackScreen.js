@@ -1,4 +1,4 @@
-import Reactå from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Profile from "./Profile";
@@ -48,6 +48,7 @@ function GroupsStackScreen() {
               Logout
             </Button>
           ),
+          headerTransparent: true,
         })}
       />
     </ProfileStack.Navigator>

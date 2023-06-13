@@ -194,64 +194,61 @@ function TabNavigator() {
   };
 
   return (
-    <>
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            if (route.name === "Home") {
-              return <HomeIcon width="25" height="25" fill="#20716A" />;
-            } else if (route.name === "Groups") {
-              return <GroupsIcon width="40" height="40" fill="#20716A" />;
-            } else if (route.name === "Create") {
-              return <AddIcon size="xl" color="#20716A" />;
-            } else if (route.name === "NotificationsStackScreen") {
-              return (
-                <NotificationsIcon width="25" height="25" fill="#20716A" />
-              );
-            } else if (route.name === "ProfileStackScreen") {
-              return <ProfileIcon width="25" height="25" fill="#20716A" />;
-            }
-          },
-          tabBarActiveTintColor: "tomato",
-          tabBarInactiveTintColor: "gray",
-          tabBarHideOnKeyboard: true,
-        })}
-      >
-        <Tab.Screen
-          name="Home"
-          component={HomeStackScreen}
-          options={{ headerShown: false }}
-        />
-        <Tab.Screen
-          name="Groups"
-          component={GroupsStackScreen}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Tab.Screen
-          name="Create"
-          component={CreatePostStackScreen}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Tab.Screen
-          name="NotificationsStackScreen"
-          component={NotificationsStackScreen}
-          options={{
-            title: "Notifications",
-            headerShown: false,
-            tabBarBadge: notifications.length,
-          }}
-        />
-        <Tab.Screen
-          name="ProfileStackScreen"
-          component={ProfileStackScreen}
-          options={{ title: "Profile", headerShown: false }}
-        />
-      </Tab.Navigator>
-    </>
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          if (route.name === "Home") {
+            return <HomeIcon width="25" height="25" fill="#20716A" />;
+          } else if (route.name === "Groups") {
+            return <GroupsIcon width="40" height="40" fill="#20716A" />;
+          } else if (route.name === "Create") {
+            return <AddIcon size="xl" color="#20716A" />;
+          } else if (route.name === "NotificationsStackScreen") {
+            return <NotificationsIcon width="25" height="25" fill="#20716A" />;
+          } else if (route.name === "ProfileStackScreen") {
+            return <ProfileIcon width="25" height="25" fill="#20716A" />;
+          }
+        },
+        tabBarActiveTintColor: "tomato",
+        tabBarInactiveTintColor: "gray",
+        tabBarHideOnKeyboard: true,
+      })}
+    >
+      <Tab.Screen
+        name="Home"
+        component={HomeStackScreen}
+        options={{ headerShown: false }}
+      />
+
+      <Tab.Screen
+        name="Groups"
+        component={GroupsStackScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Tab.Screen
+        name="Create"
+        component={CreatePostStackScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Tab.Screen
+        name="NotificationsStackScreen"
+        component={NotificationsStackScreen}
+        options={{
+          title: "Notifications",
+          headerShown: false,
+          tabBarBadge: notifications.length,
+        }}
+      />
+      <Tab.Screen
+        name="ProfileStackScreen"
+        component={ProfileStackScreen}
+        options={{ title: "Profile", headerShown: false }}
+      />
+    </Tab.Navigator>
   );
 }
 

@@ -9,10 +9,13 @@ import {
   FormControl,
   Input,
   Button,
-  Pressable,
 } from "native-base";
-import { Keyboard } from "react-native";
 import { client_id } from "@env";
+import {
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -35,58 +38,60 @@ export default function App() {
   }
 
   return (
-    <Pressable onPress={Keyboard.dismiss}>
-      <Center w="100%">
-        <Box safeArea p="2" w="90%" maxW="290" py="8">
-          <Heading size="lg" color="myDarkGrayText" fontWeight="semibold">
-            Welcome
-          </Heading>
-          <Heading mt="1" color="myMidGrayText" fontWeight="medium" size="xs">
-            Sign up to continue!
-          </Heading>
-          <VStack space={3} mt="5">
-            <FormControl>
-              <FormControl.Label>Name</FormControl.Label>
-              <Input
-                type="name"
-                value={name}
-                onChange={(e) => setName(e.nativeEvent.text)}
-              />
-            </FormControl>
-            <FormControl>
-              <FormControl.Label>Email</FormControl.Label>
-              <Input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.nativeEvent.text)}
-              />
-            </FormControl>
-            <FormControl>
-              <FormControl.Label>Password</FormControl.Label>
-              <Input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.nativeEvent.text)}
-              />
-            </FormControl>
-            <FormControl>
-              <FormControl.Label>Confirm Password</FormControl.Label>
-              <Input
-                type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.nativeEvent.text)}
-              />
-            </FormControl>
-            <Button
-              mt="2"
-              variant="myButtonYellowVariant"
-              onPress={() => onSubmit()}
-            >
-              Sign up
-            </Button>
-          </VStack>
-        </Box>
-      </Center>
-    </Pressable>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
+        <Center w="100%">
+          <Box safeArea p="2" w="90%" maxW="290" py="8">
+            <Heading size="lg" color="myDarkGrayText" fontWeight="semibold">
+              Welcome
+            </Heading>
+            <Heading mt="1" color="myMidGrayText" fontWeight="medium" size="xs">
+              Sign up to continue!
+            </Heading>
+            <VStack space={3} mt="5">
+              <FormControl>
+                <FormControl.Label>Name</FormControl.Label>
+                <Input
+                  type="name"
+                  value={name}
+                  onChange={(e) => setName(e.nativeEvent.text)}
+                />
+              </FormControl>
+              <FormControl>
+                <FormControl.Label>Email</FormControl.Label>
+                <Input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.nativeEvent.text)}
+                />
+              </FormControl>
+              <FormControl>
+                <FormControl.Label>Password</FormControl.Label>
+                <Input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.nativeEvent.text)}
+                />
+              </FormControl>
+              <FormControl>
+                <FormControl.Label>Confirm Password</FormControl.Label>
+                <Input
+                  type="password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.nativeEvent.text)}
+                />
+              </FormControl>
+              <Button
+                mt="2"
+                variant="myButtonYellowVariant"
+                onPress={() => onSubmit()}
+              >
+                Sign up
+              </Button>
+            </VStack>
+          </Box>
+        </Center>
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 }

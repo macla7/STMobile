@@ -15,7 +15,7 @@ function CreatePostStackScreen({ navigation }) {
         headerStyle: {
           backgroundColor: "#20716A",
         },
-        headerTintColor: "#ffffff",
+        headerTintColor: "#fff",
       })}
       initialRouteName="Create Post"
     >
@@ -29,14 +29,25 @@ function CreatePostStackScreen({ navigation }) {
           description: "",
           reserve: 0,
         }}
+        options={{
+          headerTransparent: true,
+        }}
       />
       <HomeStack.Screen
         name="Time and Date"
         component={DateTimePicker}
-        options={({ route }) => ({ title: route.params.mode })}
+        options={({ route }) => ({
+          title: route.params.mode,
+        })}
       />
       <HomeStack.Screen name="Your Groups" component={GroupSearch} />
-      <HomeStack.Screen name="Add Shift" component={ShiftForm} />
+      <HomeStack.Screen
+        name="Add Shift"
+        component={ShiftForm}
+        options={{
+          headerTransparent: true,
+        }}
+      />
       <HomeStack.Screen name="Add Reserve" component={ReserveForm} />
     </HomeStack.Navigator>
   );

@@ -4,9 +4,9 @@ import { RefreshControl, ScrollView } from "react-native";
 
 export function CBackground({ children }) {
   return (
-    <Center w="100%" h="100%">
+    <Center w="100%" flex={1}>
       <Box bgColor="myBackgroundGray" width="100%" flex={1}>
-        <Box w="100%" h="100%">
+        <Box w="100%" flex={1}>
           {children}
         </Box>
       </Box>
