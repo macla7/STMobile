@@ -21,24 +21,30 @@ function Memberships({ memberships }) {
           py="2"
         >
           <HStack justifyContent="space-between">
-            <HStack>
+            <HStack flex="1">
               {item.user.avatar_url ? (
                 <DP uri={`${item.user.avatar_url}`} size={40} />
               ) : (
                 ""
               )}
-              <VStack ml="2">
-                <Text color="myDarkGrayText" bold>
-                  {item.user.name}
-                </Text>
-                <Text color="myMidGrayText">
-                  {item.role == "admin" ? "Admin" : "member"}
-                </Text>
+              <VStack ml="2" flex="1">
+                <HStack justifyContent="space-between">
+                  <VStack>
+                    <Text color="myDarkGrayText" bold>
+                      {item.user.name}
+                    </Text>
+                    <Text color="myMidGrayText">
+                      {item.role == "admin" ? "Admin" : "member"}
+                    </Text>
+                  </VStack>
+                  <Text fontSize="xs" color="myDarkGrayText">
+                    Since {since(item)}
+                  </Text>
+                </HStack>
+
+                <Text color="myMidGrayText">{item.user.email}</Text>
               </VStack>
             </HStack>
-            <Text fontSize="xs" color="myDarkGrayText">
-              Since {since(item)}
-            </Text>
           </HStack>
         </Box>
       )}

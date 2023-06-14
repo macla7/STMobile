@@ -33,13 +33,13 @@ function GroupInfo({ route, navigation }) {
         <VStack w="100%">
           <Button
             variant="myButtonYellowVariant"
-            mx="4"
-            my="2"
             onPress={() =>
               navigation.navigate("Invite", {
                 group: group,
               })
             }
+            w="100%"
+            borderRadius="0"
           >
             Invite
           </Button>
