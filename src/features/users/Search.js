@@ -16,6 +16,10 @@ import {
   Pressable,
   FlatList,
   Box,
+  AddIcon,
+  Center,
+  CheckCircleIcon,
+  Checkbox,
 } from "native-base";
 import {
   CBackground,
@@ -35,6 +39,7 @@ function Search({ route }) {
   const { group } = route.params;
   const [formData, setData] = useState({});
   const [errors, setErrors] = useState({});
+  const [toBeInvited, setToBeInvited] = useState([]);
 
   // Members
   useEffect(() => {
@@ -45,16 +50,44 @@ function Search({ route }) {
     setUserList(filterUsers(users, formData.name));
   }, [formData.name, users.length]);
 
-  function filterUsers(users, name = null) {
-    if (!name) {
+  function adjustInvitationList(user) {
+    if (checkUserInvitation(user)) {
+      removeUserFromToBeInvited(user);
+    } else {
+      addUserToBeInvited(user);
+    }
+  }
+
+  function addUserToBeInvited(user) {
+    setToBeInvited((prevArray) => [...prevArray, user.id]);
+  }
+
+  function removeUserFromToBeInvited(user) {
+    setToBeInvited(toBeInvited.filter((num) => num !== user.id));
+  }
+
+  function checkUserInvitation(user) {
+    return toBeInvited.includes(user.id);
+  }
+
+  function filterUsers(users, name = null, email = null) {
+    if (!name && !email) {
       return users;
     }
-    name = name.toLowerCase();
 
-    return users.filter((user) => {
-      let userEmail = user.email.toLowerCase();
-      return userEmail.includes(name);
+    const searchValue = (name || email).toLowerCase();
+
+    const filteredUsers = users.filter((user) => {
+      const userName = user.name.toLowerCase();
+      const userEmail = user.email.toLowerCase();
+      return userName.includes(searchValue) || userEmail.includes(searchValue);
     });
+
+    const uniqueUsers = Array.from(
+      new Map(filteredUsers.map((user) => [user.id, user])).values()
+    );
+
+    return uniqueUsers;
   }
 
   const onSubmit = () => {
@@ -63,7 +96,7 @@ function Search({ route }) {
 
   const validate = () => {
     if (formData.name === undefined || formData.name === "") {
-      setErrors({ ...errors, name: "Name is required" });
+      setErrors({ ...errors, name: "Email is required" });
       return false;
     } else if (!validateEmail(formData.name)) {
       setErrors({ ...errors, name: "Can't find User by that email" });
@@ -128,11 +161,10 @@ function Search({ route }) {
                     bold: true,
                   }}
                 >
-                  Email:
+                  Email or Name:
                 </FormControl.Label>
                 <Input
-                  placeholder="@example.com"
-                  type="email"
+                  placeholder="coworker@example.com"
                   value={formData.name}
                   onChangeText={(value) => {
                     setData({ ...formData, name: value });
@@ -146,25 +178,23 @@ function Search({ route }) {
                   </FormControl.ErrorMessage>
                 ) : (
                   <FormControl.HelperText>
-                    {inviteNotice ? inviteNotice : "Pick email from list."}
+                    {inviteNotice ? inviteNotice : "Pick user from list."}
                   </FormControl.HelperText>
                 )}
               </VStack>
             </FormControl>
-            <Button onPress={onSubmit} mt="5" variant="myButtonYellowVariant">
-              Invite
-            </Button>
           </VStack>
           <FlatList
             w="100%"
             data={userList}
             renderItem={({ item }) => (
               <Pressable
-                onPress={() => {
-                  setData({ ...formData, name: item.email });
-                  setErrors({});
-                  setInviteNotice(null);
-                }}
+                onPress={() => adjustInvitationList(item)}
+                // onPress={() => {
+                //   setData({ ...formData, name: item.email });
+                //   setErrors({});
+                //   setInviteNotice(null);
+                // }}
               >
                 <Box
                   borderBottomWidth="1"
@@ -173,22 +203,47 @@ function Search({ route }) {
                   pr="5"
                   py="2"
                 >
-                  <HStack alignItems="center">
-                    {item.avatar_url ? (
-                      <DP uri={`${item.avatar_url}`} size={40} />
-                    ) : (
-                      ""
-                    )}
-
-                    <Text ml="2" color="myDarkGrayText" bold>
-                      {item.email}
-                    </Text>
+                  <HStack
+                    justifyContent="space-between"
+                    bgColor="red.200"
+                    overflow="hidden"
+                  >
+                    <HStack flexShrink="1" flexGrow="0">
+                      {item.avatar_url ? (
+                        <DP uri={`${item.avatar_url}`} size={40} />
+                      ) : (
+                        ""
+                      )}
+                      <VStack>
+                        <Text ml="2" color="myDarkGrayText" bold>
+                          {item.name}
+                        </Text>
+                        <Text ml="2" color="myMidGrayText" overflow="hidden">
+                          {item.email}
+                        </Text>
+                      </VStack>
+                    </HStack>
+                    <Center flexShrink="0" bgColor="myBackgroundGray">
+                      {checkUserInvitation(item) ? (
+                        <CheckCircleIcon size="xl" color="#20716A" />
+                      ) : (
+                        <AddIcon size="xl" color="#20716A" />
+                      )}
+                    </Center>
                   </HStack>
                 </Box>
               </Pressable>
             )}
             keyExtractor={(item) => item.id}
           />
+          <Button
+            variant="myButtonYellowVariant"
+            onPress={onSubmit}
+            w="100%"
+            borderRadius="0"
+          >
+            Invite
+          </Button>
         </CWholeSpaceContentTile>
       </CBackground>
     </KeyboardWrapper>
