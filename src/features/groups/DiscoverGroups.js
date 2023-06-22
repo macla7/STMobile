@@ -1,88 +1,102 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchOtherGroupsAsync, selectOtherGroups } from "./groupSlice";
-import { selectUserId } from "../sessions/sessionSlice";
-import { createInviteAsync, selectFreshInvite } from "./invites/inviteSlice";
-import { createNotificationBlueprint } from "../notifications/notificationBlueprintAPI";
-import { Box, VStack, Button, HStack, Text, FlatList } from "native-base";
+import { selectNotice, setNotice } from "./invites/inviteSlice";
+import { setToBeConfirmed } from "./invites/inviteSlice";
+import { VStack, Button, FormControl, Input } from "native-base";
 import {
   CBackground,
-  CWholeSpaceRefreshTile,
+  CWholeSpaceContentTile,
 } from "../layout/LayoutComponents";
+import CheckboxListing from "../layout/CheckboxListing";
 
-function DiscoverGroups() {
+function DiscoverGroups({ navigation }) {
   const otherGroups = useSelector(selectOtherGroups);
-  const userId = useSelector(selectUserId);
   const dispatch = useDispatch();
-  const freshInvite = useSelector(selectFreshInvite);
+  const notice = useSelector(selectNotice);
+  const [formData, setData] = useState({});
+  const [groupList, setGroupList] = useState(otherGroups);
 
   // Called on initialise, because dispatch changes (on intialise)
   // and on myGroups.length change
   useEffect(() => {
+    dispatch(setNotice("Look for Groups to join."));
     dispatch(fetchOtherGroupsAsync());
   }, [dispatch, otherGroups.length]);
 
-  function requestToJoinGroup(groupId) {
-    let inviteDetails = {
-      group_id: groupId,
-      internal_user_id: null,
-      external_user_id: userId,
-      request: true,
-    };
-    dispatch(createInviteAsync(inviteDetails));
-  }
-
   useEffect(() => {
-    if (freshInvite.id != 0) {
-      let notification_blueprint = {
-        notificationable_type: "Invite",
-        notificationable_id: freshInvite.id,
-        notification_type: 3,
-      };
+    setGroupList(filterGroups(otherGroups, formData.name));
+  }, [formData.name, otherGroups.length]);
 
-      createNotificationBlueprint(notification_blueprint);
+  function filterGroups(groups, name = null) {
+    if (!name) {
+      return [];
     }
-  }, [freshInvite.id]);
 
-  function refresh() {
-    dispatch(fetchOtherGroupsAsync());
+    const searchValue = name.toLowerCase();
+
+    const filteredGroups = groups.filter((group) => {
+      const groupName = group.name.toLowerCase();
+      return groupName.includes(searchValue);
+    });
+
+    const uniqueGroups = Array.from(
+      new Map(filteredGroups.map((group) => [group.id, group])).values()
+    );
+
+    return uniqueGroups.slice(0, 10);
   }
 
   return (
     <CBackground>
-      <CWholeSpaceRefreshTile refreshAction={() => refresh()}>
-        <Box>
-          {otherGroups.map((item, index) => (
-            <Box
-              borderBottomWidth="1"
-              borderColor="myBorderGray"
-              pl="4"
-              pr="5"
-              py="2"
-              key={index}
-            >
-              <HStack space={3} justifyContent="space-between">
-                <VStack w="80%">
-                  <Text color="myDarkGrayText" bold>
-                    {item.name}
-                  </Text>
-                  <Text color="myMidGrayText">
-                    {item.number_of_memberships} members
-                  </Text>
-                </VStack>
-                <Button
-                  variant="myButtonYellowVariant"
-                  onPress={() => requestToJoinGroup(item.id)}
-                  w="20%"
-                  h="100%"
-                >
-                  Join
-                </Button>
-              </HStack>
-            </Box>
-          ))}
-        </Box>
-      </CWholeSpaceRefreshTile>
+      <CWholeSpaceContentTile>
+        <VStack
+          pl="4"
+          pr="5"
+          py="4"
+          borderBottomWidth="1"
+          borderColor="myBorderGray"
+          width="100%"
+        >
+          <FormControl justifyContent="space-between">
+            <VStack display="flex" w="100%">
+              <FormControl.Label
+                _text={{
+                  bold: true,
+                }}
+              >
+                Name of Group:
+              </FormControl.Label>
+              <Input
+                placeholder="coworker@example.com"
+                value={formData.name}
+                onChangeText={(value) => {
+                  setData({ ...formData, name: value });
+                  dispatch(setNotice("Look for Groups to join."));
+                }}
+              />
+              <FormControl.HelperText>{notice}</FormControl.HelperText>
+            </VStack>
+          </FormControl>
+        </VStack>
+
+        <CheckboxListing
+          items={groupList}
+          confirming={false}
+          setState={setToBeConfirmed}
+        />
+
+        <Button
+          variant="myButtonYellowVariant"
+          onPress={() => {
+            navigation.navigate("Ask to Join");
+          }}
+          w="100%"
+          borderRadius="0"
+        >
+          Ask to Join
+        </Button>
+      </CWholeSpaceContentTile>
     </CBackground>
   );
 }

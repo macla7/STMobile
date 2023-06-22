@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Text, FlatList, VStack, Box, HStack } from "native-base";
+import { Button } from "native-base";
 import {
   selectMemberships,
   isUserAMember,
@@ -12,12 +12,12 @@ import {
   CWholeSpaceContentTile,
 } from "../layout/LayoutComponents";
 import Memberships from "./memberships/Memberships";
+import { useHeaderHeight } from "@react-navigation/elements";
 
 function GroupInfo({ route, navigation }) {
   const dispatch = useDispatch();
   const { group } = route.params;
   const userId = useSelector((state) => state.sessions.user.id);
-  const isAdmin = useSelector(selectIsAdmin);
   const memberships = useSelector(selectMemberships);
 
   useEffect(() => {
@@ -28,22 +28,19 @@ function GroupInfo({ route, navigation }) {
   return (
     <CBackground>
       <CWholeSpaceContentTile>
-        <Text>You are {isAdmin ? "an Admin" : "a Member"}</Text>
         <Memberships memberships={memberships} />
-        <VStack w="100%">
-          <Button
-            variant="myButtonYellowVariant"
-            onPress={() =>
-              navigation.navigate("Invite", {
-                group: group,
-              })
-            }
-            w="100%"
-            borderRadius="0"
-          >
-            Invite
-          </Button>
-        </VStack>
+        <Button
+          variant="myButtonYellowVariant"
+          onPress={() =>
+            navigation.navigate("Invite", {
+              group: group,
+            })
+          }
+          w="100%"
+          borderRadius="0"
+        >
+          Invite
+        </Button>
       </CWholeSpaceContentTile>
     </CBackground>
   );

@@ -11,6 +11,8 @@ import { useHeaderHeight } from "@react-navigation/elements";
 // app, those being react navigation and react native. The keyboardAvoidingView was not taking into account
 // height of the header in my nested screens (in stack nav, nested in tab nav). Solution borrowed from in here
 // https://github.com/react-navigation/react-navigation/issues/3971
+// tabBarHideOnKeyboard: false! on the tab navigator too!! For some reason I changed it to true.. this cost
+// me a lot of time....
 function KeyboardWrapper({ children }) {
   const headerHeight = useHeaderHeight();
 

@@ -6,6 +6,8 @@ import Group from "./Group";
 import GroupInfo from "./GroupInfo";
 import Search from "../users/Search";
 import GroupForm from "./GroupForm";
+import ConfirmInvites from "../users/ConfirmInvites";
+import ConfirmAsking from "./ConfirmAsking";
 
 const GroupsStack = createNativeStackNavigator();
 
@@ -41,8 +43,21 @@ function GroupsStackScreen() {
         component={Search}
         options={({ route }) => ({
           title: "Invite People",
-          headerTransparent: true,
         })}
+      />
+      <GroupsStack.Screen
+        name="Confirm Invites"
+        component={ConfirmInvites}
+        options={{
+          presentation: "modal",
+        }}
+      />
+      <GroupsStack.Screen
+        name="Ask to Join"
+        component={ConfirmAsking}
+        options={{
+          presentation: "modal",
+        }}
       />
       <GroupsStack.Screen
         name="Create Group"
