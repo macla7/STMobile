@@ -5,6 +5,7 @@ import {
   selectToBeConfirmed,
   setConfirmed,
   selectConfirmed,
+  setNotice,
 } from "./invites/inviteSlice";
 
 import { Button } from "native-base";
@@ -45,6 +46,7 @@ function ConfirmAsking({ navigation }) {
           variant="myButtonYellowVariant"
           onPress={() => {
             requestToJoinGroups(confirmed);
+            dispatch(setNotice("Invites sent."));
             navigation.goBack();
           }}
           w="90%"
