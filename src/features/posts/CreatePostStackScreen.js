@@ -6,11 +6,11 @@ import GroupSearch from "../groups/GroupSearch";
 import ShiftForm from "./shifts/ShiftForm";
 import ReserveForm from "./ReserveForm";
 
-const HomeStack = createNativeStackNavigator();
+const CreatePostStack = createNativeStackNavigator();
 
 function CreatePostStackScreen({ navigation }) {
   return (
-    <HomeStack.Navigator
+    <CreatePostStack.Navigator
       screenOptions={({}) => ({
         headerStyle: {
           backgroundColor: "#20716A",
@@ -19,7 +19,7 @@ function CreatePostStackScreen({ navigation }) {
       })}
       initialRouteName="Create Post"
     >
-      <HomeStack.Screen
+      <CreatePostStack.Screen
         name="Create Post"
         component={PostForm}
         initialParams={{
@@ -33,23 +33,23 @@ function CreatePostStackScreen({ navigation }) {
           headerTransparent: true,
         }}
       />
-      <HomeStack.Screen
+      <CreatePostStack.Screen
         name="Time and Date"
         component={DateTimePicker}
         options={({ route }) => ({
           title: route.params.mode,
         })}
       />
-      <HomeStack.Screen name="Your Groups" component={GroupSearch} />
-      <HomeStack.Screen
+      <CreatePostStack.Screen name="Your Groups" component={GroupSearch} />
+      <CreatePostStack.Screen
         name="Add Shift"
         component={ShiftForm}
         options={{
           headerTransparent: true,
         }}
       />
-      <HomeStack.Screen name="Add Reserve" component={ReserveForm} />
-    </HomeStack.Navigator>
+      <CreatePostStack.Screen name="Add Reserve" component={ReserveForm} />
+    </CreatePostStack.Navigator>
   );
 }
 

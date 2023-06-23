@@ -54,6 +54,15 @@ function ShiftForm({ navigation, route }) {
     }
   };
 
+  function areAllValuesNull(obj) {
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key) && obj[key] !== null) {
+        return false; // At least one non-null value found
+      }
+    }
+    return true; // All values are null
+  }
+
   function submitForm() {
     if (editingMode) {
       const shift = {
