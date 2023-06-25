@@ -13,9 +13,9 @@ function HomeStackScreen({ navigation }) {
     <HomeStack.Navigator
       screenOptions={({}) => ({
         headerStyle: {
-          backgroundColor: "#20716A",
+          backgroundColor: "#3433E2",
         },
-        headerTintColor: "#fff",
+        headerTintColor: "#CDFF00",
       })}
       initialRouteName="Home Feed"
     >
@@ -24,8 +24,8 @@ function HomeStackScreen({ navigation }) {
         component={Home}
         options={({ route }) => ({
           headerTitle: (props) => (
-            <Text fontSize="3xl" color="white" fontWeight="500">
-              ShiftSwaps
+            <Text fontSize="3xl" color="myLightGreen" fontWeight="500">
+              Shift it.
             </Text>
           ),
         })}

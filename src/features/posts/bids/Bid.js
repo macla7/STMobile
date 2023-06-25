@@ -17,7 +17,7 @@ function Bid(props) {
       mb="1"
       mx="1"
       borderWidth="1"
-      borderColor="myBorderGray"
+      borderColor="black"
     >
       <VStack flexGrow={1}>
         <HStack justifyContent="space-between" flexGrow={1}>
@@ -28,42 +28,48 @@ function Bid(props) {
           )}
           <Box ml="2" flexGrow={1}>
             <VStack justifyContent="flex-start" flexGrow={1}>
-              <HStack>
-                <Text bold color={props.bid.price < 0 ? "white" : "white"}>
-                  {props.reserve == true
-                    ? "Reserve "
-                    : props.bid.price < 0
-                    ? "Seeking "
-                    : "Offering "}
-                </Text>
-                <Money
-                  microDollars={props.bid.price}
-                  color={props.bid.price < 0 ? "white" : "white"}
-                />
-                <Text>{props.bidNum == 0 ? "" : ""}</Text>
-              </HStack>
               <Text
                 bold
                 fontSize="2xs"
-                color={props.bid.price < 0 ? "white" : "white"}
+                color={props.bid.price < 0 ? "myLightGreen" : "myDarkGreen"}
               >
                 {props.bid.bidder_name}
               </Text>
+              <HStack>
+                <Text
+                  bold
+                  color={props.bid.price < 0 ? "myLightGreen" : "myDarkGreen"}
+                >
+                  {props.reserve == true
+                    ? props.bid.price < 0
+                      ? "Will Pay "
+                      : "Asks for  "
+                    : props.bid.price < 0
+                    ? "Wants "
+                    : "Offers "}
+                </Text>
+                <Money
+                  microDollars={props.bid.price}
+                  color={props.bid.price < 0 ? "myLightGreen" : "myDarkGreen"}
+                />
+              </HStack>
             </VStack>
           </Box>
         </HStack>
-        <HStack flexGrow={1} justifyContent="space-between">
-          <Text fontSize="2xs" color={props.bid.price < 0 ? "white" : "white"}>
+        <HStack flexGrow={1} justifyContent="space-between" alignItems="center">
+          <Text
+            bold
+            fontSize="2xs"
+            color={props.bid.price < 0 ? "myLightGreen" : "myDarkGreen"}
+          >
             {props.reserve == true
-              ? props.bid.price < 0
-                ? "Maximum " + props.bid.bidder_name + " will pay"
-                : "Minimum " + props.bid.bidder_name + " will accept"
+              ? ""
               : formatDistanceToNow(new Date(props.bid.created_at), {
                   addSuffix: true,
                 })}
           </Text>
-          <Text fontSize="2xs" color={props.bid.price < 0 ? "white" : "white"}>
-            {props.bidNum == 0 ? "⭐️" : ""}
+          <Text fontSize="sm" color={props.bid.price < 0 ? "white" : "white"}>
+            {props.bidNum == 0 ? "🏆" : ""}
           </Text>
         </HStack>
       </VStack>

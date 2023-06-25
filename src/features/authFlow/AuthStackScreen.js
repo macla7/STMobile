@@ -22,21 +22,12 @@ function AuthStackScreen() {
           initialRouteName="Login"
           screenOptions={{
             headerTitle: (props) => (
-              <Center
-                bgColor="myPink"
-                borderRadius="50%"
-                p="1"
-                mb="1"
-                w="38"
-                h="38"
-              >
-                <Text fontSize="xl" color="myDarkGreen" fontWeight="500">
-                  S
-                </Text>
-              </Center>
+              <Text fontSize="3xl" color="myLightGreen" fontWeight="500">
+                Shift it.
+              </Text>
             ),
             headerStyle: {
-              backgroundColor: "#20716A",
+              backgroundColor: "#3433E2",
               borderWidth: 10,
             },
             headerTintColor: "#fff",

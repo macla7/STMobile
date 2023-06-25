@@ -64,7 +64,7 @@ function ButtonGroup({
         <HStack h="100%" alignItems="center">
           <Box>
             <AspectRatio ratio={{ base: 1 / 1, md: 1 / 1 }} h="100%">
-              <BidIcon width="100%" height="100%" fill="#047857" />
+              <BidIcon width="100%" height="100%" fill="#3433E2" />
             </AspectRatio>
           </Box>
           <Text ml="-2" mr="3">

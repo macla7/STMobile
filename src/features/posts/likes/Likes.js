@@ -69,7 +69,7 @@ function Likes(props) {
     >
       <HStack h="100%" alignItems="center">
         {currentUserLiked ? (
-          <FontAwesomeIcon icon={faHeartSolid} color="red" />
+          <FontAwesomeIcon icon={faHeartSolid} color="#EC3186" />
         ) : (
           <FontAwesomeIcon icon={faHeartRegular} color="#171717" />
         )}

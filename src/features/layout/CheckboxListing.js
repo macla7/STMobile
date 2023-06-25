@@ -82,7 +82,7 @@ function CheckboxListing({ items, confirming, setState }) {
                   size={30}
                   onPress={() => adjustActionList(item)}
                   isChecked={isChecked(item)}
-                  fillColor="#20716A"
+                  fillColor="#3433E2"
                   iconStyle={{ margin: 0 }}
                 />
               </Box>

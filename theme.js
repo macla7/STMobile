@@ -4,10 +4,10 @@ export const theme = extendTheme({
   colors: {
     // Add new color
     // note that the tab navidatior icons need to be changed independently
-    myDarkGreen: "#20716A",
-    myLightGreen: "#23A393",
-    myPink: "#F4A9C7",
-    myYellow: "#FFF78C",
+    myDarkGreen: "#3433E2",
+    myLightGreen: "#CDFF00",
+    myPink: "#EC3186",
+    myYellow: "#FCDD27",
     myBorderGray: "#e5e7eb",
     myDarkGrayText: "#1f2937",
     myMidGrayText: "#4b5563",

@@ -4,7 +4,10 @@ import Posts from "../posts/Posts";
 import { selectHomePosts, fetchPostsHomeAsync } from "../posts/postSlice";
 import { CScrollBackgroundRefresh } from "../layout/LayoutComponents";
 import { Button, Center } from "native-base";
+import { useHeaderHeight } from "@react-navigation/elements";
+
 function Home({ navigation }) {
+  const headerHeight = useHeaderHeight();
   const homePosts = useSelector(selectHomePosts);
   const dispatch = useDispatch();
 
@@ -19,7 +22,7 @@ function Home({ navigation }) {
   return (
     <CScrollBackgroundRefresh refreshAction={() => refresh()}>
       {homePosts.length == 0 ? (
-        <Center w="100%" h="100%">
+        <Center w="100%" h="100%" paddingTop={headerHeight}>
           <Button
             width="80%"
             m="4"

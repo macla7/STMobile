@@ -198,18 +198,18 @@ function TabNavigator() {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           if (route.name === "Home") {
-            return <HomeIcon width="25" height="25" fill="#20716A" />;
+            return <HomeIcon width="25" height="25" fill="#3433E2" />;
           } else if (route.name === "Groups") {
-            return <GroupsIcon width="40" height="40" fill="#20716A" />;
+            return <GroupsIcon width="40" height="40" fill="#3433E2" />;
           } else if (route.name === "Create") {
-            return <AddIcon size="xl" color="#20716A" />;
+            return <AddIcon size="xl" color="#3433E2" />;
           } else if (route.name === "NotificationsStackScreen") {
-            return <NotificationsIcon width="25" height="25" fill="#20716A" />;
+            return <NotificationsIcon width="25" height="25" fill="#3433E2" />;
           } else if (route.name === "ProfileStackScreen") {
-            return <ProfileIcon width="25" height="25" fill="#20716A" />;
+            return <ProfileIcon width="25" height="25" fill="#3433E2" />;
           }
         },
-        tabBarActiveTintColor: "tomato",
+        tabBarActiveTintColor: "#EC3186",
         tabBarInactiveTintColor: "gray",
         tabBarHideOnKeyboard: false,
       })}
@@ -241,6 +241,9 @@ function TabNavigator() {
           title: "Notifications",
           headerShown: false,
           tabBarBadge: notifications.length,
+          tabBarBadgeStyle: {
+            backgroundColor: "#EC3186",
+          },
         }}
       />
       <Tab.Screen

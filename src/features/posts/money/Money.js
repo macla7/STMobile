@@ -40,7 +40,7 @@ function Money(props) {
   }
 
   return (
-    <Text color={props.color ? props.color : ""}>
+    <Text bold color={props.color ? props.color : ""}>
       {handleMoneyText("dollars", dollarsFromMicro(props.microDollars))}.
       {handleMoneyText("cents", centsFromMicro(props.microDollars))}
     </Text>

@@ -29,10 +29,9 @@ function GroupsStackScreen() {
     <ProfileStack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: "#20716A",
+          backgroundColor: "#3433E2",
         },
-        headerTintColor: "#fff",
-        headerTitleStyle: {},
+        headerTintColor: "#CDFF00",
       }}
     >
       <ProfileStack.Screen

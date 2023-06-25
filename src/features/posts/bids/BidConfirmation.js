@@ -1,7 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { CBackground, CContentTile } from "../../layout/LayoutComponents";
-import { Heading, Button, Text, Pressable, Center } from "native-base";
+import {
+  CWholeSpaceContentTile,
+  CContentTile,
+  CBackground,
+} from "../../layout/LayoutComponents";
+import { Heading, Button, Text, Pressable } from "native-base";
 import { Keyboard } from "react-native";
 import { createBidAsync } from "../postSlice";
 import { createNotificationBlueprint } from "../../notifications/notificationBlueprintAPI";
@@ -45,30 +49,28 @@ function BidConfirmation({ route, navigation }) {
   }
 
   return (
-    <Pressable onPress={Keyboard.dismiss}>
+    <Pressable onPress={Keyboard.dismiss} h="100%">
       <CBackground>
-        <Center h="100%">
-          <CContentTile>
-            <Heading size="lg" fontWeight="600" color="myDarkGrayText">
-              Bid Details
-            </Heading>
-            <Text>
-              You are {description.toLowerCase() + " "}
-              {createDollarsText(currentMicroDollars)}
-            </Text>
-            <Button
-              mt="2"
-              variant="myButtonYellowVariant"
-              onPress={() => {
-                // Pass and merge params back to home screen
-                bidPost(currentMicroDollars);
-                navigation.navigate(returnScreen);
-              }}
-            >
-              Confirm
-            </Button>
-          </CContentTile>
-        </Center>
+        <CWholeSpaceContentTile>
+          <Heading size="lg" fontWeight="600" color="myDarkGrayText">
+            Bid Details
+          </Heading>
+          <Text>
+            You are {description.toLowerCase() + " "}
+            {createDollarsText(currentMicroDollars)}
+          </Text>
+          <Button
+            mt="2"
+            variant="myButtonYellowVariant"
+            onPress={() => {
+              // Pass and merge params back to home screen
+              bidPost(currentMicroDollars);
+              navigation.navigate(returnScreen);
+            }}
+          >
+            Confirm
+          </Button>
+        </CWholeSpaceContentTile>
       </CBackground>
     </Pressable>
   );

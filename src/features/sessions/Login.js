@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginUserAsync } from "./sessionSlice";
 import {
@@ -91,7 +91,8 @@ function Login({ navigation }) {
                     <Text
                       fontSize="xs"
                       fontWeight="500"
-                      color="myLightGreen"
+                      color="myDarkGreen"
+                      underline
                       onPress={() => navigation.navigate("Register")}
                     >
                       Sign up
@@ -103,7 +104,8 @@ function Login({ navigation }) {
                   <Text
                     fontSize="xs"
                     fontWeight="500"
-                    color="myLightGreen"
+                    color="myDarkGreen"
+                    underline
                     onPress={() => navigation.navigate("EmailForm")}
                   >
                     Forgot password

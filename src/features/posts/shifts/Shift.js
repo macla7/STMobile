@@ -23,7 +23,6 @@ function Shift({ navigation, shifts, editable, invalidShiftIds }) {
     } else {
       return (
         <>
-          <Text>Day:</Text>
           <Text color="myMidGrayText">
             {format(new Date(item.start), "EEE do LLL")}
           </Text>
@@ -66,7 +65,6 @@ function Shift({ navigation, shifts, editable, invalidShiftIds }) {
                 <HStack space={3} justifyContent="space-between">
                   <VStack>{getDays(item)}</VStack>
                   <VStack>
-                    <Text>Time:</Text>
                     <Text color="myMidGrayText">
                       {format(new Date(item.start), "p")}
                     </Text>

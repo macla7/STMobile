@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { Provider } from "react-redux";
 import { store } from "./src/app/store";
-import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import AuthStackScreen from "./src/features/authFlow/AuthStackScreen";
 import {
   useFonts,
@@ -17,11 +17,6 @@ import {
 } from "@expo-google-fonts/inter";
 import { NativeBaseProvider } from "native-base";
 import { theme } from "./theme";
-import {
-  Keyboard,
-  TouchableWithoutFeedback,
-  KeyboardAvoidingView,
-} from "react-native";
 
 export default function App() {
   let [fontsLoaded] = useFonts({
