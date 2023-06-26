@@ -9,11 +9,6 @@
       "image": "./src/assets/images/splash.png",
       "resizeMode": "cover"
     },
-    "extra": {
-      "eas": {
-        "projectId": "c3767efb-f9ce-41c2-b4b0-7de2689008bb"
-      }
-    },
     "ios": {
       "bundleIdentifier": "au.com.shiftmarket"
     },
