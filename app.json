@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Shift it.",
-    "slug": "shiftIt",
+    "slug": "shift_it",
     "version": "1.0.0",
     "assetBundlePatterns": ["**/*"],
     "icon": "./src/assets/images/icon.png",
@@ -27,7 +27,7 @@
         "image": "./src/assets/images/splash.png",
         "backgroundColor": "#064e3b"
       },
-      "package": "com.macla7.shiftIt"
+      "package": "com.macla7.shift_it"
     }
   }
 }
