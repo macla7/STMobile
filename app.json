@@ -2,7 +2,7 @@
   "expo": {
     "name": "Shift it.",
     "slug": "shift_it",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "assetBundlePatterns": ["**/*"],
     "icon": "./src/assets/images/icon.png",
     "splash": {
@@ -23,6 +23,11 @@
         "backgroundColor": "#064e3b"
       },
       "package": "com.macla7.shift_it"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "65fafb0c-5e9e-4192-b638-62e2ef295637"
+      }
     }
   }
 }
