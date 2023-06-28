@@ -48,7 +48,6 @@ function TabNavigator() {
   const dispatch = useDispatch();
   const consumer = createConsumer(`ws://${domain}/cable`);
   const userId = useSelector(selectUserId);
-  const notificationListener = useRef();
   const pushTokens = useSelector(selectPushTokens);
 
   // For now, we will just sub to notification channel when in component
@@ -78,21 +77,23 @@ function TabNavigator() {
   }, []);
 
   useEffect(() => {
-    if (setCurrentPushToken.id == 0) {
-      generateUniqueId().then((deviceId) =>
-        checkDevice(userId, pushTokens, deviceId)
-      );
+    console.log("in use effect...");
+    console.log(JSON.stringify(pushTokens));
 
-      return () => {
-        Notifications.removeNotificationSubscription(
-          notificationListener.current
-        );
-      };
-    }
-  }, [JSON.stringify(pushTokens[0])]);
+    generateUniqueId().then((deviceId) =>
+      checkDevice(userId, pushTokens, deviceId)
+    );
+  }, [JSON.stringify(pushTokens)]);
 
   function checkDevice(userId, pushTokens, deviceId) {
-    if (Device.checkDevice) {
+    console.log("Checking device");
+    console.log(Device.isDevice);
+
+    if (pushTokens.length > 0 && pushTokens[0].id == 0) {
+      return;
+    }
+
+    if (Device.isDevice) {
       registerForPushNotificationsAsync(userId, pushTokens, deviceId);
     } else {
       alert("Must use physical device for Push Notifications");
@@ -118,6 +119,7 @@ function TabNavigator() {
     let pushTokenObjNow = getPushTokenObjNow(token, userId, deviceId);
     const pushTokenInDB = returnDevicePushTokenDB(deviceId, pushTokens);
 
+    console.log("do we call this multiple times?");
     savePushToken(pushTokenObjNow, pushTokenInDB);
   }
 
@@ -145,6 +147,8 @@ function TabNavigator() {
     pushTokens.find((obj) => obj.device_id === deviceId) || false;
 
   const savePushToken = (pushTokenObjNow, pushTokenInDB) => {
+    console.log("in savePushToken");
+    console.log(pushTokenInDB);
     if (pushTokenInDB) {
       updatePushToken(pushTokenObjNow, pushTokenInDB);
     } else {
