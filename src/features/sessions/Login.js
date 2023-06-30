@@ -31,7 +31,7 @@ function Login({ navigation }) {
 
   function onSubmit() {
     const registerUserDetails = {
-      email: email,
+      email: email.toLowerCase(),
       password: password,
     };
 
