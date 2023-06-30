@@ -20,6 +20,7 @@ export async function deleteValueFor(key) {
 const initialState = {
   goToRegister: false,
   auth_token: null,
+  loginError: "",
   user: {
     id: null,
     username: null,
@@ -81,6 +82,9 @@ export const sessionSlice = createSlice({
     goToLogin: (state) => {
       state.goToRegister = false;
     },
+    clearLoginError: (state) => {
+      state.loginError = "";
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -118,15 +122,22 @@ export const sessionSlice = createSlice({
       })
       // you got the thing
       .addCase(loginUserAsync.fulfilled, (state, action) => {
+        console.log("action.payload is");
+        console.log(action.payload);
+
         return produce(state, (draftState) => {
-          draftState["user"] = {
-            id: action.payload.user.id,
-            email: action.payload.user.email,
-            avatar: action.payload.user.avatar,
-            avatar_url: action.payload.user.avatar_url,
-          };
-          draftState.auth_token = action.payload.access_token;
-          save("auth_token", action.payload.access_token);
+          if (action.payload.user == undefined) {
+            draftState.loginError = "Login details are incorrect";
+          } else {
+            draftState["user"] = {
+              id: action.payload.user.id,
+              email: action.payload.user.email,
+              avatar: action.payload.user.avatar,
+              avatar_url: action.payload.user.avatar_url,
+            };
+            draftState.auth_token = action.payload.access_token;
+            save("auth_token", action.payload.access_token);
+          }
         });
       })
       // error
@@ -191,6 +202,8 @@ export const selectUserAvatar = (state) => state.sessions.user?.avatar;
 
 export const selectUserAvatarUrl = (state) => state.sessions.user?.avatar_url;
 
+export const selectLoginError = (state) => state.sessions.loginError;
+
 export const selectIsLoggedIn = (state) => {
   const loggedOut =
     state.sessions.auth_token == null ||
@@ -200,6 +213,6 @@ export const selectIsLoggedIn = (state) => {
 
 export const selectAuthToken = (state) => state.sessions.auth_token;
 
-export const {} = sessionSlice.actions;
+export const { clearLoginError } = sessionSlice.actions;
 
 export default sessionSlice.reducer;

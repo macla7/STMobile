@@ -1,6 +1,10 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { loginUserAsync } from "./sessionSlice";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  loginUserAsync,
+  selectLoginError,
+  clearLoginError,
+} from "./sessionSlice";
 import {
   Center,
   Box,
@@ -20,8 +24,10 @@ import {
 
 function Login({ navigation }) {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState("fred@bing.com");
-  const [password, setPassword] = useState("Bing123!");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const loginError = useSelector(selectLoginError);
+  const [errors, setErrors] = useState({});
 
   function onSubmit() {
     const registerUserDetails = {
@@ -31,6 +37,10 @@ function Login({ navigation }) {
 
     dispatch(loginUserAsync(registerUserDetails));
   }
+
+  useEffect(() => {
+    setErrors({ ...errors, loginError: loginError });
+  }, [loginError]);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -44,8 +54,17 @@ function Login({ navigation }) {
               Sign in to continue!
             </Heading>
 
-            <VStack space={3} mt="5">
-              <FormControl color="myDarkGreen">
+            <VStack space={3}>
+              <FormControl
+                color="myDarkGreen"
+                isInvalid={errors.loginError !== ""}
+              >
+                <Box h="6">
+                  <FormControl.ErrorMessage>
+                    {errors.loginError}
+                  </FormControl.ErrorMessage>
+                </Box>
+
                 <FormControl.Label
                   _text={{
                     color: "myDarkGreen",
@@ -57,10 +76,12 @@ function Login({ navigation }) {
                   color="myDarkGreen"
                   type="email"
                   value={email}
-                  onChange={(e) => setEmail(e.nativeEvent.text)}
+                  onChange={(e) => {
+                    setEmail(e.nativeEvent.text);
+                    dispatch(clearLoginError());
+                  }}
                 />
-              </FormControl>
-              <FormControl>
+
                 <FormControl.Label
                   _text={{
                     color: "myDarkGreen",
@@ -72,7 +93,10 @@ function Login({ navigation }) {
                   color="myDarkGreen"
                   type="password"
                   value={password}
-                  onChange={(e) => setPassword(e.nativeEvent.text)}
+                  onChange={(e) => {
+                    setPassword(e.nativeEvent.text);
+                    dispatch(clearLoginError());
+                  }}
                 />
               </FormControl>
               <Button

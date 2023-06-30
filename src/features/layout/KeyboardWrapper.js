@@ -22,7 +22,7 @@ function KeyboardWrapper({ children }) {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-        <Box paddingTop={headerHeight} h="100%">
+        <Box pt={headerHeight + "px"} h="100%">
           {children}
         </Box>
       </TouchableWithoutFeedback>
