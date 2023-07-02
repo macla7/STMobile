@@ -107,7 +107,6 @@ export const pushTokenSlice = createSlice({
       // you got the thing
       .addCase(createPushTokenAsync.fulfilled, (state, action) => {
         return produce(state, (draftState) => {
-          draftState.pushTokens = action.payload.pushTokens;
           draftState.currentPushToken = action.payload.currentPushToken;
           draftState.status = Statuses.UpToDate;
         });
@@ -144,7 +143,6 @@ export const pushTokenSlice = createSlice({
       // you got the thing
       .addCase(updatePushTokenAsync.fulfilled, (state, action) => {
         return produce(state, (draftState) => {
-          draftState.pushTokens = action.payload.pushTokens;
           draftState.currentPushToken = action.payload.currentPushToken;
           draftState.status = Statuses.UpToDate;
         });

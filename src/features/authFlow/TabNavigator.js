@@ -77,19 +77,13 @@ function TabNavigator() {
   }, []);
 
   useEffect(() => {
-    console.log("in use effect...");
-    console.log(JSON.stringify(pushTokens));
-
     generateUniqueId().then((deviceId) =>
       checkDevice(userId, pushTokens, deviceId)
     );
   }, [JSON.stringify(pushTokens)]);
 
   function checkDevice(userId, pushTokens, deviceId) {
-    console.log("Checking device");
-    console.log(Device.isDevice);
-
-    if (pushTokens.length > 0 && pushTokens[0].id == 0) {
+    if (pushTokens[0] && pushTokens[0].id == 0) {
       return;
     }
 
@@ -116,10 +110,13 @@ function TabNavigator() {
   ) {
     let token = await getPermissionForPushAsync();
 
-    let pushTokenObjNow = getPushTokenObjNow(token, userId, deviceId);
+    let pushTokenObjNow = {
+      push_token: token,
+      user_id: userId,
+      device_id: deviceId,
+    };
     const pushTokenInDB = returnDevicePushTokenDB(deviceId, pushTokens);
 
-    console.log("do we call this multiple times?");
     savePushToken(pushTokenObjNow, pushTokenInDB);
   }
 
@@ -132,23 +129,17 @@ function TabNavigator() {
       finalStatus = status;
     }
     if (finalStatus !== "granted") {
-      alert("Failed to get push token for push notification!");
-      return;
+      alert("You have not granted permission for push notifications.");
+      return "";
     }
     return (await Notifications.getExpoPushTokenAsync()).data;
   }
-
-  const getPushTokenObjNow = (token, userId, deviceId) => {
-    return { push_token: token, user_id: userId, device_id: deviceId };
-  };
 
   // looks at array and returns a pushToken object if device's match
   const returnDevicePushTokenDB = (deviceId, pushTokens) =>
     pushTokens.find((obj) => obj.device_id === deviceId) || false;
 
   const savePushToken = (pushTokenObjNow, pushTokenInDB) => {
-    console.log("in savePushToken");
-    console.log(pushTokenInDB);
     if (pushTokenInDB) {
       updatePushToken(pushTokenObjNow, pushTokenInDB);
     } else {
