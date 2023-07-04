@@ -8,6 +8,7 @@ import {
   selectCurrentPushToken,
   destroyPushTokenAsync,
 } from "../users/pushTokenSlice";
+import ConfirmDeleteAccount from "./ConfirmDeleteAccount";
 
 const ProfileStack = createNativeStackNavigator();
 
@@ -25,6 +26,7 @@ function GroupsStackScreen() {
     dispatch(logoutUserAsync());
     dispatch(destroyPushTokenAsync(currentPushToken));
   }
+
   return (
     <ProfileStack.Navigator
       screenOptions={{
@@ -49,6 +51,13 @@ function GroupsStackScreen() {
           ),
           headerTransparent: true,
         })}
+      />
+      <ProfileStack.Screen
+        name="Delete Account"
+        component={ConfirmDeleteAccount}
+        options={{
+          presentation: "modal",
+        }}
       />
     </ProfileStack.Navigator>
   );

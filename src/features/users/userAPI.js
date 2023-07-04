@@ -75,16 +75,15 @@ export async function updateUser(payload) {
     });
 }
 
-export async function destroyUser(payload) {
-  const user = payload.user;
+export async function destroyUser(userId) {
+  const auth_token = await getValueFor("auth_token");
 
-  return fetch(`${API_URL}/users/${user.user_id}.json`, {
+  return fetch(`${API_URL}/users/${userId}.json`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.auth_token}`,
+      Authorization: `Bearer ${auth_token}`,
     },
-    body: JSON.stringify({ user }),
   })
     .then((response) => response.json())
     .catch((error) => {

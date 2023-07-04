@@ -16,11 +16,16 @@ import {
 } from "native-base";
 import * as ImagePicker from "expo-image-picker";
 import { selectUserId, selectUserAvatarUrl } from "../sessions/sessionSlice";
-import { fetchUserAsync, selectUser, updateUserAsync } from "./userSlice";
+import {
+  fetchUserAsync,
+  selectUser,
+  updateUserAsync,
+  destroyUserAsync,
+} from "./userSlice";
 import AtopTabNavGroup from "../buttons/AtopTabNavGroup";
 import KeyboardWrapper from "../layout/KeyboardWrapper";
 
-function Profile() {
+function Profile({ navigation }) {
   const user = useSelector(selectUser);
   const userId = useSelector(selectUserId);
   const [name, setName] = useState(user.name);
@@ -210,6 +215,17 @@ function Profile() {
 
             <HStack w="100%">
               <Text>{user.email}</Text>
+            </HStack>
+
+            <HStack mt="8" pt="4" borderTopWidth="1" borderColor="myBorderGray">
+              <Pressable
+                w="100%"
+                onPress={() => {
+                  navigation.navigate("Delete Account");
+                }}
+              >
+                <Text color="myPink">Delete Account</Text>
+              </Pressable>
             </HStack>
           </CContentTile>
 

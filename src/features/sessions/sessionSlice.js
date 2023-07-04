@@ -122,9 +122,6 @@ export const sessionSlice = createSlice({
       })
       // you got the thing
       .addCase(loginUserAsync.fulfilled, (state, action) => {
-        console.log("action.payload is");
-        console.log(action.payload);
-
         return produce(state, (draftState) => {
           if (action.payload.user == undefined) {
             draftState.loginError = "Login details are incorrect";
