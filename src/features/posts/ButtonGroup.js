@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faMessage } from "@fortawesome/free-regular-svg-icons/faMessage";
 
 function ButtonGroup({
+  ended,
   postId,
   minPrice,
   navigation,
@@ -53,13 +54,18 @@ function ButtonGroup({
         flex="1"
         variant="unstyled"
         p="0"
-        onPress={() =>
-          navigation.navigate("Bid", {
-            reserve: minPrice,
-            returnScreen: "Home Feed",
-            postId: postId,
-          })
-        }
+        opacity={ended ? "0.5" : "1"}
+        onPress={() => {
+          if (ended) {
+            alert("This post has ended, no more bidding can take place.");
+          } else {
+            navigation.navigate("Bid", {
+              reserve: minPrice,
+              returnScreen: "Home Feed",
+              postId: postId,
+            });
+          }
+        }}
       >
         <HStack h="100%" alignItems="center">
           <Box>

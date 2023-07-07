@@ -95,7 +95,11 @@ function Post(props) {
                 <HStack alignItems="center">
                   <FontAwesomeIcon icon={faClock} color="#171717" />
                   <Text ml="1">
-                    Ends in {formatDistanceToNow(new Date(props.post.ends_at))}
+                    {new Date(props.post.ends_at) > new Date()
+                      ? "Ends in " +
+                        formatDistanceToNow(new Date(props.post.ends_at))
+                      : "Ended " +
+                        formatDistanceToNow(new Date(props.post.ends_at))}
                   </Text>
                 </HStack>
               </HStack>
@@ -121,6 +125,7 @@ function Post(props) {
         <Box flex={1}>
           <Bids
             bids={bids}
+            ended={new Date(props.post.ends_at) < new Date()}
             postId={props.post.id}
             navigation={props.navigation}
             reserveBid={{
@@ -170,6 +175,7 @@ function Post(props) {
       </Flex>
 
       <ButtonGroup
+        ended={new Date(props.post.ends_at) < new Date()}
         minPrice={minPrice}
         postId={props.post.id}
         navigation={props.navigation}
