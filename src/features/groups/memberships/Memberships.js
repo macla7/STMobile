@@ -1,7 +1,6 @@
 import React from "react";
-import { Text, FlatList, VStack, HStack, Pressable, Box } from "native-base";
+import { Text, FlatList, VStack, HStack, Pressable } from "native-base";
 import DP from "../../layout/DP";
-import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 function Memberships({ memberships, navigation }) {
   return (
