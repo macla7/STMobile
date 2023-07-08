@@ -1,24 +1,25 @@
 import React from "react";
-import { Text, FlatList, VStack, Box, HStack } from "native-base";
-import { parseISO, format } from "date-fns";
+import { Text, FlatList, VStack, HStack, Pressable, Box } from "native-base";
 import DP from "../../layout/DP";
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 
-function Memberships({ memberships }) {
-  function since(item) {
-    return format(parseISO(item.created_at), "EEE do LLL").toString();
-  }
-
+function Memberships({ memberships, navigation }) {
   return (
     <FlatList
       w="100%"
       data={memberships}
       renderItem={({ item }) => (
-        <Box
+        <Pressable
           borderBottomWidth="1"
           borderColor="myBorderGray"
           pl="4"
           pr="5"
           py="2"
+          onPress={() => {
+            navigation.navigate("Member Details", {
+              member: item,
+            });
+          }}
         >
           <HStack justifyContent="space-between">
             <HStack flex="1">
@@ -33,12 +34,9 @@ function Memberships({ memberships }) {
                     <Text color="myDarkGrayText" bold>
                       {item.user.name}
                     </Text>
-                    <Text color="myMidGrayText">
-                      {item.role == "admin" ? "Admin" : "member"}
-                    </Text>
                   </VStack>
-                  <Text fontSize="xs" color="myDarkGrayText">
-                    Since {since(item)}
+                  <Text color="myMidGrayText">
+                    {item.role == "admin" ? "Admin" : "Member"}
                   </Text>
                 </HStack>
 
@@ -46,7 +44,7 @@ function Memberships({ memberships }) {
               </VStack>
             </HStack>
           </HStack>
-        </Box>
+        </Pressable>
       )}
       keyExtractor={(item) => item.id}
     />

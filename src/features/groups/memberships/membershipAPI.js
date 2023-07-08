@@ -38,17 +38,20 @@ export async function createMembership(membership) {
     });
 }
 
-export async function updateMembership(payload) {
-  const membership = payload.membership;
+export async function updateMembership(membership) {
   const auth_token = await getValueFor("auth_token");
-  return fetch(`${API_URL}/memberships/${membership.id}.json`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${auth_token}`,
-    },
-    body: JSON.stringify({ membership }),
-  })
+
+  return fetch(
+    `${API_URL}/groups/${membership.group_id}/memberships/${membership.id}.json`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${auth_token}`,
+      },
+      body: JSON.stringify({ membership }),
+    }
+  )
     .then((response) => response.json())
     .catch((error) => {
       console.log("Error: ", error);

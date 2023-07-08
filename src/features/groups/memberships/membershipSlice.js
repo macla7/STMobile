@@ -157,10 +157,10 @@ export const membershipSlice = createSlice({
       // you got the thing
       .addCase(updateMembershipAsync.fulfilled, (state, action) => {
         return produce(state, (draftState) => {
-          const index = draftState.memberships.findIndex(
-            (membership) => membership.id === action.payload.id
-          );
-          draftState.memberships[index] = action.payload;
+          // const index = draftState.memberships.findIndex(
+          //   (membership) => membership.id === action.payload.id
+          // );
+          draftState.memberships = action.payload;
           draftState.status = Statuses.UpToDate;
         });
       })

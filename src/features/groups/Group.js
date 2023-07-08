@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Text } from "native-base";
-import {
-  fetchMembershipsAsync,
-  selectStatus,
-  Statuses,
-} from "./memberships/membershipSlice";
+import { selectStatus, Statuses } from "./memberships/membershipSlice";
 import { selectPosts, fetchPostsAsync } from "../posts/postSlice";
 import Posts from "../posts/Posts";
 import { CScrollBackgroundRefresh } from "../layout/LayoutComponents";
@@ -23,10 +19,6 @@ function Group({ route, navigation }) {
   useEffect(() => {
     dispatch(fetchPostsAsync(group.id));
   }, [posts.length]);
-
-  useEffect(() => {
-    dispatch(fetchMembershipsAsync(group.id));
-  }, []);
 
   function refresh() {
     dispatch(fetchPostsAsync(group.id));

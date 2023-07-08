@@ -8,6 +8,7 @@ import Search from "../users/Search";
 import GroupForm from "./GroupForm";
 import ConfirmInvites from "../users/ConfirmInvites";
 import ConfirmAsking from "./ConfirmAsking";
+import MemberDetails from "../users/MemberDetails";
 
 const GroupsStack = createNativeStackNavigator();
 
@@ -61,6 +62,13 @@ function GroupsStackScreen() {
       <GroupsStack.Screen
         name="Create Group"
         component={GroupForm}
+        options={({ route }) => ({
+          headerTransparent: true,
+        })}
+      />
+      <GroupsStack.Screen
+        name="Member Details"
+        component={MemberDetails}
         options={({ route }) => ({
           headerTransparent: true,
         })}

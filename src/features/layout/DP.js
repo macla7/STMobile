@@ -1,6 +1,6 @@
 import React from "react";
 import CachedImage from "expo-cached-image";
-import { Text, Center, Box } from "native-base";
+import { Text, Box } from "native-base";
 
 function DP({ uri, size }) {
   function getImageThumbnail(uri) {
@@ -25,7 +25,7 @@ function DP({ uri, size }) {
           width: size,
           height: size,
           resizeMode: "contain",
-          borderRadius: 50,
+          borderRadius: 100,
         }}
         resizeMode="cover"
       />

@@ -1,24 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button } from "native-base";
+import { Button, HStack } from "native-base";
 import {
   selectMemberships,
   isUserAMember,
   isUserAnAdmin,
-  selectIsAdmin,
+  fetchMembershipsAsync,
 } from "./memberships/membershipSlice";
 import {
   CBackground,
   CWholeSpaceContentTile,
 } from "../layout/LayoutComponents";
 import Memberships from "./memberships/Memberships";
-import { useHeaderHeight } from "@react-navigation/elements";
 
 function GroupInfo({ route, navigation }) {
   const dispatch = useDispatch();
   const { group } = route.params;
   const userId = useSelector((state) => state.sessions.user.id);
   const memberships = useSelector(selectMemberships);
+
+  useEffect(() => {
+    dispatch(fetchMembershipsAsync(group.id));
+  }, []);
 
   useEffect(() => {
     dispatch(isUserAMember(userId));
@@ -28,19 +31,21 @@ function GroupInfo({ route, navigation }) {
   return (
     <CBackground>
       <CWholeSpaceContentTile>
-        <Memberships memberships={memberships} />
-        <Button
-          variant="myButtonYellowVariant"
-          onPress={() =>
-            navigation.navigate("Invite", {
-              group: group,
-            })
-          }
-          w="100%"
-          borderRadius="0"
-        >
-          Invite
-        </Button>
+        <Memberships memberships={memberships} navigation={navigation} />
+        <HStack>
+          <Button
+            variant="myButtonYellowVariant"
+            flex="1"
+            onPress={() =>
+              navigation.navigate("Invite", {
+                group: group,
+              })
+            }
+            borderRadius="0"
+          >
+            Invite
+          </Button>
+        </HStack>
       </CWholeSpaceContentTile>
     </CBackground>
   );
