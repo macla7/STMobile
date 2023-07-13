@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Shift it.",
+    "name": "Shift it",
     "slug": "shift_it",
     "version": "1.0.1",
     "assetBundlePatterns": ["**/*"],
@@ -14,13 +14,14 @@
     },
     "android": {
       "icon": "./src/assets/images/adaptive-icon.png",
+      "serviceAccountKeyPath": "/Users/mitch/Documents/aws_creds/shifttrader-a45859255231.json",
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/images/adaptive-icon.png",
-        "backgroundColor": "#064e3b"
+        "backgroundColor": "#3433E2"
       },
       "splash": {
         "image": "./src/assets/images/splash.png",
-        "backgroundColor": "#064e3b"
+        "backgroundColor": "#3433E2"
       },
       "package": "com.macla7.shift_it"
     },
