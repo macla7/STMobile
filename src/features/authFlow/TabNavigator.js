@@ -206,7 +206,7 @@ function TabNavigator() {
         },
         tabBarActiveTintColor: "#EC3186",
         tabBarInactiveTintColor: "gray",
-        tabBarHideOnKeyboard: false,
+        tabBarHideOnKeyboard: Platform.OS === "ios" ? false : true,
       })}
     >
       <Tab.Screen

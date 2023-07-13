@@ -44,7 +44,10 @@ function Login({ navigation }) {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ flex: 1 }}
+      >
         <Center>
           <Box safeArea p="2" py="8" w="90%" maxW="290">
             <Heading size="xl" fontWeight="600" color="myDarkGreen">
