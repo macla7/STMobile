@@ -14,7 +14,6 @@
     },
     "android": {
       "icon": "./src/assets/images/adaptive-icon.png",
-      "serviceAccountKeyPath": "/Users/mitch/Documents/aws_creds/shifttrader-a45859255231.json",
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/images/adaptive-icon.png",
         "backgroundColor": "#3433E2"
