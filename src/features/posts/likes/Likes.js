@@ -64,7 +64,13 @@ function Likes(props) {
       flex="1"
       variant="unstyled"
       p="0"
-      onPress={(e) => action(e)}
+      onPress={(e) => {
+        if (props.example) {
+          alert("This is just an example post");
+        } else {
+          action(e);
+        }
+      }}
       borderColor=""
     >
       <HStack h="100%" alignItems="center">

@@ -3,8 +3,19 @@ import { useSelector, useDispatch } from "react-redux";
 import Posts from "../posts/Posts";
 import { selectHomePosts, fetchPostsHomeAsync } from "../posts/postSlice";
 import { CScrollBackgroundRefresh } from "../layout/LayoutComponents";
-import { Button, Center } from "native-base";
+import { Button, Center, Heading, Text, View } from "native-base";
 import { useHeaderHeight } from "@react-navigation/elements";
+import Post from "../posts/Post";
+import {
+  addDays,
+  formatISO,
+  subDays,
+  setHours,
+  setMinutes,
+  setSeconds,
+  subHours,
+} from "date-fns";
+import { Asset } from "expo-asset";
 
 function Home({ navigation }) {
   const headerHeight = useHeaderHeight();
@@ -19,10 +30,128 @@ function Home({ navigation }) {
     dispatch(fetchPostsHomeAsync());
   }
 
+  const examplePost = JSON.parse(`{
+        "id": 0,
+        "body": "Got an exam on, someone please help 🙏",
+        "user_id": 324,
+        "ends_at": "${formatISO(addDays(new Date(), 12))}",
+        "created_at": "${formatISO(subDays(new Date(), 2))}",
+        "updated_at": "${formatISO(subDays(new Date(), 2))}",
+        "group_id": 1,
+        "reserve": -20000000,
+        "group_name": "Cafe Coffee",
+        "postor_name": "Tess Georges",
+        "avatar_url": "${
+          Asset.fromModule(
+            require("../../assets/images/pexels-jayson-hinrichsen-17504621.jpg")
+          ).uri
+        }",
+        "shifts": [
+            {
+                "id": 4,
+                "position": "Barista",
+                "start": "${formatISO(
+                  setSeconds(
+                    setMinutes(setHours(addDays(new Date(), 19), 9), 0),
+                    0
+                  )
+                )}",
+                "end": "${formatISO(
+                  setSeconds(
+                    setMinutes(setHours(addDays(new Date(), 19), 15), 0),
+                    0
+                  )
+                )}",
+                "post_id": 4,
+                "created_at": "2023-07-15T07:33:10.640Z",
+                "updated_at": "2023-07-15T07:33:10.640Z"
+            }
+        ],
+        "likes": [
+            {
+                "id": 27,
+                "post_id": 4,
+                "user_id": 402,
+                "created_at": "2023-07-15T08:32:44.012Z",
+                "updated_at": "2023-07-15T08:32:44.012Z"
+            }
+        ],
+        "comments": [
+            {
+                "id": 1,
+                "post_id": 4,
+                "user_id": 1,
+                "body": "Would love too!",
+                "created_at": "${formatISO(subDays(new Date(), 2))}",
+                "updated_at": "${formatISO(subDays(new Date(), 2))}",
+                "avatar_url": "${
+                  Asset.fromModule(
+                    require("../../assets/images/pexels-nicholas-swatz-2769753.jpg")
+                  ).uri
+                }",
+                "commentor_name": "Fred Smith"
+            }
+        ],
+        "bids": [
+            {
+                "id": 16,
+                "post_id": 4,
+                "user_id": 402,
+                "price": 10000000,
+                "created_at": "${formatISO(subHours(new Date(), 2))}",
+                "updated_at": "${formatISO(subHours(new Date(), 2))}",
+                "avatar_url": "${
+                  Asset.fromModule(
+                    require("../../assets/images/pexels-spencer-selover-775358.jpg")
+                  ).uri
+                }",
+                "bidder_name": "Bob Clark"
+            },
+            {
+                "id": 11,
+                "post_id": 4,
+                "user_id": 2,
+                "price": 5000000,
+                "created_at": "${formatISO(subDays(new Date(), 1))}",
+                "updated_at": "${formatISO(subDays(new Date(), 1))}",
+                "avatar_url": "${
+                  Asset.fromModule(
+                    require("../../assets/images/pexels-athena-1877913.jpg")
+                  ).uri
+                }",
+                "bidder_name": "Amy Chen"
+            },
+            {
+                "id": 10,
+                "post_id": 4,
+                "user_id": 1,
+                "price": -10000000,
+                "created_at": "${formatISO(subDays(new Date(), 2))}",
+                "updated_at": "${formatISO(subDays(new Date(), 2))}",
+                "avatar_url": "${
+                  Asset.fromModule(
+                    require("../../assets/images/pexels-nicholas-swatz-2769753.jpg")
+                  ).uri
+                }",
+                "bidder_name": "Fred Smith"
+            }
+        ]
+    }`);
+
   return (
-    <CScrollBackgroundRefresh refreshAction={() => refresh()}>
+    <CScrollBackgroundRefresh>
       {homePosts.length == 0 ? (
-        <Center w="100%" h="100%" paddingTop={headerHeight}>
+        <Center w="100%">
+          <Heading pt="1" size="sm">
+            Example Post
+          </Heading>
+          <Post
+            post={examplePost}
+            key={examplePost.id}
+            navigation={navigation}
+            singularView={false}
+            example={true}
+          />
           <Button
             width="80%"
             m="4"

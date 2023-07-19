@@ -158,12 +158,16 @@ function Post(props) {
               flex="1"
               variant="unstyled"
               p="0"
-              onPress={() =>
-                props.navigation.navigate("Post", {
-                  returnScreen: "Home Feed",
-                  postId: props.post.id,
-                })
-              }
+              onPress={() => {
+                if (props.example) {
+                  alert("This is just an example post");
+                } else {
+                  props.navigation.navigate("Post", {
+                    returnScreen: "Home Feed",
+                    postId: props.post.id,
+                  });
+                }
+              }}
             >
               <Text>{comments.length} Comments</Text>
             </Button>
@@ -182,6 +186,7 @@ function Post(props) {
         likes={likes}
         commentRef={props.commentRef}
         singularView={props.singularView}
+        example={props.example}
       />
 
       {props.singularView ? <Comments comments={comments} /> : null}

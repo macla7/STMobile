@@ -13,6 +13,7 @@ function ButtonGroup({
   likes,
   commentRef,
   singularView,
+  example,
 }) {
   useEffect(() => {
     if (singularView) {
@@ -28,19 +29,23 @@ function ButtonGroup({
       borderTopWidth="1"
       borderColor="myBorderGray"
     >
-      <Likes likes={likes} postId={postId} />
+      <Likes likes={likes} postId={postId} example={example} />
 
       <Button
         flex="1"
         variant="unstyled"
         p="0"
         onPress={() => {
-          navigation.navigate("Post", {
-            returnScreen: "Home Feed",
-            postId: postId,
-          });
-          if (singularView) {
-            commentRef.current.focus();
+          if (example) {
+            alert("This is just an example post");
+          } else {
+            navigation.navigate("Post", {
+              returnScreen: "Home Feed",
+              postId: postId,
+            });
+            if (singularView) {
+              commentRef.current.focus();
+            }
           }
         }}
       >
@@ -56,14 +61,18 @@ function ButtonGroup({
         p="0"
         opacity={ended ? "0.5" : "1"}
         onPress={() => {
-          if (ended) {
-            alert("This post has ended, no more bidding can take place.");
+          if (example) {
+            alert("This is just an example post");
           } else {
-            navigation.navigate("Bid", {
-              reserve: minPrice,
-              returnScreen: "Home Feed",
-              postId: postId,
-            });
+            if (ended) {
+              alert("This post has ended, no more bidding can take place.");
+            } else {
+              navigation.navigate("Bid", {
+                reserve: minPrice,
+                returnScreen: "Home Feed",
+                postId: postId,
+              });
+            }
           }
         }}
       >

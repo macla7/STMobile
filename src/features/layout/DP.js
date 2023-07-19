@@ -19,7 +19,7 @@ function DP({ uri, size }) {
           expiresIn: 2628288,
         }}
         cacheKey={`${getImageThumbnail(uri)}`}
-        placeholderContent={<Text>Hello</Text>}
+        placeholderContent={<Text>...</Text>}
         alt="avatar"
         style={{
           width: size,
