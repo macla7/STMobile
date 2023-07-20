@@ -41,11 +41,7 @@ function Home({ navigation }) {
         "reserve": -20000000,
         "group_name": "Cafe Coffee",
         "postor_name": "Tess Georges",
-        "avatar_url": "${
-          Asset.fromModule(
-            require("../../assets/images/pexels-jayson-hinrichsen-17504621.jpg")
-          ).uri
-        }",
+        "avatar_url": "https://shiftmarket.herokuapp.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBck1CIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--138ea1df8b223ff85a40c3146918b5570514c9cf/profilePictureUser421.jpg",
         "shifts": [
             {
                 "id": 4,
@@ -84,11 +80,7 @@ function Home({ navigation }) {
                 "body": "Would love too!",
                 "created_at": "${formatISO(subDays(new Date(), 2))}",
                 "updated_at": "${formatISO(subDays(new Date(), 2))}",
-                "avatar_url": "${
-                  Asset.fromModule(
-                    require("../../assets/images/pexels-nicholas-swatz-2769753.jpg")
-                  ).uri
-                }",
+                "avatar_url": "https://shiftmarket.herokuapp.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBckVCIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--c2e88df50446700c2152f5f38f15ba4ba1801376/profilePictureUser420.jpg",
                 "commentor_name": "Fred Smith"
             }
         ],
@@ -100,11 +92,7 @@ function Home({ navigation }) {
                 "price": 10000000,
                 "created_at": "${formatISO(subHours(new Date(), 2))}",
                 "updated_at": "${formatISO(subHours(new Date(), 2))}",
-                "avatar_url": "${
-                  Asset.fromModule(
-                    require("../../assets/images/pexels-spencer-selover-775358.jpg")
-                  ).uri
-                }",
+                "avatar_url": "https://shiftmarket.herokuapp.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBcTBCIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--2e9f2a9b0046539f89ac6ee560ba1ad155a5643b/profilePictureUser418.jpg",
                 "bidder_name": "Bob Clark"
             },
             {
@@ -114,11 +102,7 @@ function Home({ navigation }) {
                 "price": 5000000,
                 "created_at": "${formatISO(subDays(new Date(), 1))}",
                 "updated_at": "${formatISO(subDays(new Date(), 1))}",
-                "avatar_url": "${
-                  Asset.fromModule(
-                    require("../../assets/images/pexels-athena-1877913.jpg")
-                  ).uri
-                }",
+                "avatar_url": "https://shiftmarket.herokuapp.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBcThCIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--e4a4a8d088c06790dc942d862602a44343f47a22/profilePictureUser419.jpg",
                 "bidder_name": "Amy Chen"
             },
             {
@@ -128,11 +112,7 @@ function Home({ navigation }) {
                 "price": -10000000,
                 "created_at": "${formatISO(subDays(new Date(), 2))}",
                 "updated_at": "${formatISO(subDays(new Date(), 2))}",
-                "avatar_url": "${
-                  Asset.fromModule(
-                    require("../../assets/images/pexels-nicholas-swatz-2769753.jpg")
-                  ).uri
-                }",
+                "avatar_url": "https://shiftmarket.herokuapp.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBckVCIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--c2e88df50446700c2152f5f38f15ba4ba1801376/profilePictureUser420.jpg",
                 "bidder_name": "Fred Smith"
             }
         ]
