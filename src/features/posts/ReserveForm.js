@@ -13,30 +13,33 @@ function ReserveForm({ route, navigation }) {
   const { returnScreen } = route.params;
 
   return (
-    <CBackground>
-      <CWholeSpaceContentTile>
-        <MoneySlider
-          type="reserve"
-          minValue={-100}
-          maxValue={100}
-          defaultValue={0}
-        />
-        <Button
-          mt="2"
-          variant="myButtonYellowVariant"
-          onPress={() => {
-            // Pass and merge params back to home screen
-            navigation.navigate({
-              name: returnScreen,
-              params: { reserve: currentMicroDollars },
-              merge: true,
-            });
-          }}
-        >
-          Done
-        </Button>
-      </CWholeSpaceContentTile>
-    </CBackground>
+    <>
+      <CBackground>
+        <CWholeSpaceContentTile>
+          <MoneySlider
+            type="reserve"
+            minValue={-100}
+            maxValue={100}
+            defaultValue={0}
+          />
+        </CWholeSpaceContentTile>
+      </CBackground>
+      <Button
+        variant="myButtonYellowVariant"
+        onPress={() => {
+          // Pass and merge params back to home screen
+          navigation.navigate({
+            name: returnScreen,
+            params: { reserve: currentMicroDollars },
+            merge: true,
+          });
+        }}
+        w="100%"
+        borderRadius="0"
+      >
+        Done
+      </Button>
+    </>
   );
 }
 

@@ -7,7 +7,6 @@ import KeyboardWrapper from "../layout/KeyboardWrapper";
 
 function GroupForm({ route, navigation }) {
   const dispatch = useDispatch();
-  const { returnScreen } = route.params;
   const [formData, setData] = useState({});
   const [errors, setErrors] = useState({});
   const groups = useSelector(selectGroups);
@@ -43,9 +42,8 @@ function GroupForm({ route, navigation }) {
       return false;
     }
     submitGroup();
-    navigation.navigate({
-      name: returnScreen,
-    });
+    setData({ ...formData, name: "" });
+    navigation.goBack();
     return true;
   };
 

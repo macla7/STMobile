@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Posts from "../posts/Posts";
 import { selectHomePosts, fetchPostsHomeAsync } from "../posts/postSlice";
 import { CScrollBackgroundRefresh } from "../layout/LayoutComponents";
-import { Button, Center, Heading, Text, View } from "native-base";
+import { Button, Center, Heading } from "native-base";
 import { useHeaderHeight } from "@react-navigation/elements";
 import Post from "../posts/Post";
 import {
@@ -15,7 +15,6 @@ import {
   setSeconds,
   subHours,
 } from "date-fns";
-import { Asset } from "expo-asset";
 
 function Home({ navigation }) {
   const headerHeight = useHeaderHeight();
@@ -119,7 +118,7 @@ function Home({ navigation }) {
     }`);
 
   return (
-    <CScrollBackgroundRefresh>
+    <CScrollBackgroundRefresh refreshAction={refresh}>
       {homePosts.length == 0 ? (
         <Center w="100%">
           <Heading pt="1" size="sm">
@@ -140,7 +139,9 @@ function Home({ navigation }) {
             color="myDarkGrayText"
             variant="myButtonYellowVariant"
             onPress={() => {
-              navigation.navigate("Create", { screen: "Create Post" });
+              navigation.navigate("Create", {
+                screen: "Create Post",
+              });
             }}
           >
             Create a Post
@@ -154,10 +155,11 @@ function Home({ navigation }) {
             variant="myButtonYellowVariant"
             onPress={() => {
               navigation.navigate("Groups", {
-                screen: "Create Group",
                 params: {
                   returnScreen: "Home",
                 },
+                screen: "Create Group",
+                initial: false,
               });
             }}
           >
@@ -171,7 +173,10 @@ function Home({ navigation }) {
             color="myDarkGrayText"
             variant="myButtonYellowVariant"
             onPress={() => {
-              navigation.navigate("Groups", { screen: "Discover" });
+              navigation.navigate("Groups", {
+                screen: "Discover",
+                initial: false,
+              });
             }}
           >
             Join a Group

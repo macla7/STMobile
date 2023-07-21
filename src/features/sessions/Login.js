@@ -4,6 +4,7 @@ import {
   loginUserAsync,
   selectLoginError,
   clearLoginError,
+  loginUserWithTokenAsync,
 } from "./sessionSlice";
 import {
   Center,
@@ -24,8 +25,8 @@ import {
 
 function Login({ navigation }) {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("mitch@bing.com");
+  const [password, setPassword] = useState("Bing123!");
   const loginError = useSelector(selectLoginError);
   const [errors, setErrors] = useState({});
 
@@ -41,6 +42,10 @@ function Login({ navigation }) {
   useEffect(() => {
     setErrors({ ...errors, loginError: loginError });
   }, [loginError]);
+
+  useEffect(() => {
+    dispatch(loginUserWithTokenAsync());
+  }, []);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>

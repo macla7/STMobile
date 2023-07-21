@@ -25,7 +25,7 @@ function CreatePostStackScreen({ navigation }) {
         initialParams={{
           postEndsDate: Date.now(),
           groupId: 0,
-          groupName: "Group Not Selected..",
+          groupName: "Select Group",
           description: "",
           reserve: 0,
         }}

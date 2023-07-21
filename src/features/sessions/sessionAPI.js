@@ -57,12 +57,15 @@ export async function logoutUser(payload) {
 }
 
 export async function loginUserWithToken(payload) {
-  return fetch(`${API_URL}/users/session-data`, {
-    method: "GET",
+  const auth_token = await getValueFor("auth_token");
+
+  return fetch(`${API_URL}/users/session-data/with-token`, {
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${payload.auth_token}`,
+      Authorization: `Bearer ${auth_token}`,
     },
+    body: JSON.stringify(payload),
   })
     .then((response) => response.json())
     .catch((error) => {

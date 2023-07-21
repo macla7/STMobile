@@ -21,6 +21,7 @@ function GroupsStackScreen() {
         },
         headerTintColor: "#CDFF00",
       }}
+      initialRouteName="My Groups"
     >
       <GroupsStack.Screen name="My Groups" component={Groups} />
       <GroupsStack.Screen name="Discover" component={DiscoverGroups} />

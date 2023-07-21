@@ -20,6 +20,7 @@ function CommentForm({ postId, commentRef }) {
     };
 
     dispatch(createCommentAsync(commentDetails));
+    setComment("");
 
     // if above succeeds ..?
     let notification_blueprint = {
@@ -54,7 +55,9 @@ function CommentForm({ postId, commentRef }) {
           <Button
             ml="2"
             variant="unstyled"
-            onPress={() => commentOnPost(comment)}
+            onPress={() => {
+              commentOnPost(comment);
+            }}
           >
             <FontAwesomeIcon icon={faPaperPlane} color="#171717" />
           </Button>

@@ -63,9 +63,9 @@ export const logoutUserAsync = createAsyncThunk(
 
 export const loginUserWithTokenAsync = createAsyncThunk(
   "sessions/loginUserWithToken",
-  async (auth_token) => {
+  async () => {
     const payload = {
-      auth_token: auth_token,
+      client_id: client_id,
     };
     const response = await loginUserWithToken(payload);
     return response;
@@ -178,8 +178,10 @@ export const sessionSlice = createSlice({
           draftState["user"] = {
             id: action.payload.user.id,
             email: action.payload.user.email,
+            avatar: action.payload.user.avatar,
+            avatar_url: action.payload.user.avatar_url,
           };
-          draftState.auth_token = localStorage.getItem("auth_token");
+          draftState.auth_token = action.payload.access_token;
         });
       })
       // error

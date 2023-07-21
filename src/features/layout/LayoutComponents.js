@@ -22,9 +22,9 @@ export function CScrollBackground({ children }) {
       w="100%"
     >
       <Box bgColor="myBackgroundGray" width="100%" flex={1}>
-        <Center w="100%" flex={1}>
+        <Box w="100%" flex={1}>
           {children}
-        </Center>
+        </Box>
       </Box>
     </ScrollView>
   );
@@ -58,7 +58,7 @@ export function CScrollBackgroundRefresh({ children, refreshAction }) {
 
 export function CContentTile({ children }) {
   return (
-    <Center my="1" h="100%">
+    <Center my="1">
       <HStack>
         <Center flex="1" p="4" bgColor="white">
           {children}
