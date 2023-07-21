@@ -2,7 +2,7 @@
   "expo": {
     "name": "Shift it",
     "slug": "shift_it",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "assetBundlePatterns": ["**/*"],
     "icon": "./src/assets/images/icon.png",
     "splash": {
