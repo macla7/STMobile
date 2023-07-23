@@ -34,8 +34,20 @@ function AuthStackScreen() {
             headerShadowVisible: false,
           }}
         >
-          <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="Register" component={Register} />
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{
+              headerTransparent: true,
+            }}
+          />
+          <Stack.Screen
+            name="Register"
+            component={Register}
+            options={{
+              headerTransparent: true,
+            }}
+          />
           <Stack.Screen name="Token" component={Token} />
           <Stack.Screen name="ChangePassword" component={ChangePassword} />
           <Stack.Screen name="EmailForm" component={EmailForm} />

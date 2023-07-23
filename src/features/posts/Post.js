@@ -99,7 +99,8 @@ function Post(props) {
                       ? "Ends in " +
                         formatDistanceToNow(new Date(props.post.ends_at))
                       : "Ended " +
-                        formatDistanceToNow(new Date(props.post.ends_at))}
+                        formatDistanceToNow(new Date(props.post.ends_at)) +
+                        " ago"}
                   </Text>
                 </HStack>
               </HStack>
