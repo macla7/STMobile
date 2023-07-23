@@ -25,7 +25,7 @@ const initialState = {
       group_id: 0,
       role: 0,
       status: true,
-      user: {},
+      user: { avatar_url: "" },
     },
   ],
   status: Statuses.Initial,
@@ -121,7 +121,7 @@ export const membershipSlice = createSlice({
       // you got the thing
       .addCase(createMembershipAsync.fulfilled, (state, action) => {
         return produce(state, (draftState) => {
-          draftState.memberships.push(action.payload);
+          draftState.memberships = action.payload;
           draftState.status = Statuses.UpToDate;
         });
       })

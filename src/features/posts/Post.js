@@ -19,7 +19,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faClock } from "@fortawesome/free-regular-svg-icons/faClock";
 import Comments from "./comments/Comments";
 import { domain } from "@env";
-import { TouchableWithoutFeedback, Keyboard } from "react-native";
 
 global.addEventListener = () => {};
 global.removeEventListener = () => {};
@@ -75,127 +74,123 @@ function Post(props) {
   }
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <Center my="1" bgColor="white" borderColor="myBorderGray" borderWidth="1">
-        <Center width="100%" px="2" py="1">
-          <Text color="myDarkGrayText">{props.post.group_name}</Text>
-        </Center>
-        <Box width="100%" p="2">
-          <HStack width="100%">
-            {props.post.avatar_url ? (
-              <DP uri={`${props.post.avatar_url}`} size={40} />
-            ) : (
-              ""
-            )}
-            <Box ml="2" flexGrow={1}>
-              <VStack>
-                <Text color="myDarkGrayText" bold>
-                  {props.post.postor_name}
-                </Text>
-                <HStack justifyContent="space-between">
-                  <Text>
-                    {format(new Date(props.post.created_at), "d MMM")}
-                  </Text>
-                  <HStack alignItems="center">
-                    <FontAwesomeIcon icon={faClock} color="#171717" />
-                    <Text ml="1">
-                      {new Date(props.post.ends_at) > new Date()
-                        ? "Ends in " +
-                          formatDistanceToNow(new Date(props.post.ends_at))
-                        : "Ended " +
-                          formatDistanceToNow(new Date(props.post.ends_at))}
-                    </Text>
-                  </HStack>
-                </HStack>
-              </VStack>
-            </Box>
-          </HStack>
-        </Box>
-
-        <Flex direction="row">
-          <VStack flex={1}>
-            <ScrollView maxH="48">
-              <Shift
-                shifts={props.post.shifts}
-                editable={false}
-                invalidShiftIds={[]}
-              />
-
-              <Box width="100%" px="2" mb="2">
-                <Text>{props.post.body}</Text>
-              </Box>
-            </ScrollView>
-          </VStack>
-          <Box flex={1}>
-            <Bids
-              bids={bids}
-              ended={new Date(props.post.ends_at) < new Date()}
-              postId={props.post.id}
-              navigation={props.navigation}
-              reserveBid={{
-                price: props.post.reserve,
-                avatar_url: props.post.avatar_url,
-                created_at: props.post.created_at,
-                bidder_name: props.post.postor_name,
-              }}
-            />
-          </Box>
-        </Flex>
-
-        <Flex
-          direction="row"
-          justifyContent="space-between"
-          h="10"
-          w="100%"
-          borderTopWidth="1"
-          borderColor="myBorderGray"
-        >
-          <HStack flex="1" justifyContent="flex-start">
-            <Center mx="2">
-              <Text>{likes.length} Likes</Text>
-            </Center>
-          </HStack>
-
-          <HStack flex="1" justifyContent="flex-end">
-            <Center mx="2">
-              <Button
-                flex="1"
-                variant="unstyled"
-                p="0"
-                onPress={() => {
-                  if (props.example) {
-                    alert("This is just an example post");
-                  } else {
-                    props.navigation.navigate("Post", {
-                      returnScreen: "Home Feed",
-                      postId: props.post.id,
-                    });
-                  }
-                }}
-              >
-                <Text>{comments.length} Comments</Text>
-              </Button>
-            </Center>
-            <Center mr="2">
-              <Text>{bids.length} Bids</Text>
-            </Center>
-          </HStack>
-        </Flex>
-
-        <ButtonGroup
-          ended={new Date(props.post.ends_at) < new Date()}
-          minPrice={minPrice}
-          postId={props.post.id}
-          navigation={props.navigation}
-          likes={likes}
-          commentRef={props.commentRef}
-          singularView={props.singularView}
-          example={props.example}
-        />
-
-        {props.singularView ? <Comments comments={comments} /> : null}
+    <Center my="1" bgColor="white" borderColor="myBorderGray" borderWidth="1">
+      <Center width="100%" px="2" py="1">
+        <Text color="myDarkGrayText">{props.post.group_name}</Text>
       </Center>
-    </TouchableWithoutFeedback>
+      <Box width="100%" p="2">
+        <HStack width="100%">
+          {props.post.avatar_url ? (
+            <DP uri={`${props.post.avatar_url}`} size={40} />
+          ) : (
+            ""
+          )}
+          <Box ml="2" flexGrow={1}>
+            <VStack>
+              <Text color="myDarkGrayText" bold>
+                {props.post.postor_name}
+              </Text>
+              <HStack justifyContent="space-between">
+                <Text>{format(new Date(props.post.created_at), "d MMM")}</Text>
+                <HStack alignItems="center">
+                  <FontAwesomeIcon icon={faClock} color="#171717" />
+                  <Text ml="1">
+                    {new Date(props.post.ends_at) > new Date()
+                      ? "Ends in " +
+                        formatDistanceToNow(new Date(props.post.ends_at))
+                      : "Ended " +
+                        formatDistanceToNow(new Date(props.post.ends_at))}
+                  </Text>
+                </HStack>
+              </HStack>
+            </VStack>
+          </Box>
+        </HStack>
+      </Box>
+
+      <Flex direction="row">
+        <VStack flex={1}>
+          <ScrollView maxH="48">
+            <Shift
+              shifts={props.post.shifts}
+              editable={false}
+              invalidShiftIds={[]}
+            />
+
+            <Box width="100%" px="2" mb="2">
+              <Text>{props.post.body}</Text>
+            </Box>
+          </ScrollView>
+        </VStack>
+        <Box flex={1}>
+          <Bids
+            bids={bids}
+            ended={new Date(props.post.ends_at) < new Date()}
+            postId={props.post.id}
+            navigation={props.navigation}
+            reserveBid={{
+              price: props.post.reserve,
+              avatar_url: props.post.avatar_url,
+              created_at: props.post.created_at,
+              bidder_name: props.post.postor_name,
+            }}
+          />
+        </Box>
+      </Flex>
+
+      <Flex
+        direction="row"
+        justifyContent="space-between"
+        h="10"
+        w="100%"
+        borderTopWidth="1"
+        borderColor="myBorderGray"
+      >
+        <HStack flex="1" justifyContent="flex-start">
+          <Center mx="2">
+            <Text>{likes.length} Likes</Text>
+          </Center>
+        </HStack>
+
+        <HStack flex="1" justifyContent="flex-end">
+          <Center mx="2">
+            <Button
+              flex="1"
+              variant="unstyled"
+              p="0"
+              onPress={() => {
+                if (props.example) {
+                  alert("This is just an example post");
+                } else {
+                  props.navigation.navigate("Post", {
+                    returnScreen: "Home Feed",
+                    postId: props.post.id,
+                  });
+                }
+              }}
+            >
+              <Text>{comments.length} Comments</Text>
+            </Button>
+          </Center>
+          <Center mr="2">
+            <Text>{bids.length} Bids</Text>
+          </Center>
+        </HStack>
+      </Flex>
+
+      <ButtonGroup
+        ended={new Date(props.post.ends_at) < new Date()}
+        minPrice={minPrice}
+        postId={props.post.id}
+        navigation={props.navigation}
+        likes={likes}
+        commentRef={props.commentRef}
+        singularView={props.singularView}
+        example={props.example}
+      />
+
+      {props.singularView ? <Comments comments={comments} /> : null}
+    </Center>
   );
 }
 

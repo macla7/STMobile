@@ -8,9 +8,10 @@ import { selectUserId } from "../sessions/sessionSlice";
 import { Box, Text, Button, FlatList, Flex } from "native-base";
 import { createMembershipAsync } from "../groups/memberships/membershipSlice";
 import { updateInviteAsync } from "../groups/invites/inviteSlice";
-import { CBackground } from "../layout/LayoutComponents";
+import { CScrollBackgroundRefresh } from "../layout/LayoutComponents";
 import { formatDistanceToNow } from "date-fns";
 import DP from "../layout/DP";
+import { fetchNotificationsAsync } from "./notificationSlice";
 
 function Notifications({ navigation }) {
   const notifications = useSelector(selectNotifications);
@@ -47,7 +48,7 @@ function Notifications({ navigation }) {
     let membershipObj = createMembershipObj(notification, userId);
     dispatch(createMembershipAsync(membershipObj));
 
-    let invite = createInviteObj(notification);
+    let invite = createInviteObj(notification, true);
     dispatch(updateInviteAsync(invite));
 
     actionNotification(notification, true);
@@ -60,7 +61,7 @@ function Notifications({ navigation }) {
     );
     dispatch(createMembershipAsync(membershipObj));
 
-    let invite = createInviteObj(notification);
+    let invite = createInviteObj(notification, true);
     dispatch(updateInviteAsync(invite));
 
     actionNotification(notification, true);
@@ -75,14 +76,21 @@ function Notifications({ navigation }) {
     };
   }
 
-  function createInviteObj(notification) {
+  function createInviteObj(notification, bool) {
     return {
       inviteDetails: {
-        accepted: true,
+        accepted: bool,
       },
       id: notification.notification_blueprint.notificationable_id,
       group_id: notification.group_id,
     };
+  }
+
+  function handleDecline(notification) {
+    let invite = createInviteObj(notification, false);
+    dispatch(updateInviteAsync(invite));
+
+    actionNotification(notification, true);
   }
 
   function actionNotification(notification, bool) {
@@ -93,17 +101,21 @@ function Notifications({ navigation }) {
     dispatch(updateNotificationAsync(notificationDetails));
   }
 
+  function refresh() {
+    dispatch(fetchNotificationsAsync());
+  }
+
   return (
-    <CBackground>
-      <FlatList
-        data={notifications}
-        renderItem={({ item }) => (
+    <CScrollBackgroundRefresh refreshAction={refresh}>
+      {notifications.map((item) => {
+        return (
           <Flex
             borderBottomWidth="1"
             borderColor="myBorderGray"
             p="2"
             direction="row"
             flex="1"
+            key={item.id}
           >
             <Box>
               <Box>
@@ -135,7 +147,7 @@ function Notifications({ navigation }) {
                 <Button
                   variant="myButtonGrayVariant"
                   onPress={() => {
-                    actionNotification(item, false);
+                    handleDecline(item);
                   }}
                   h="8"
                   p="1"
@@ -147,10 +159,9 @@ function Notifications({ navigation }) {
               </Flex>
             </Box>
           </Flex>
-        )}
-        keyExtractor={(item) => item.id}
-      />
-    </CBackground>
+        );
+      })}
+    </CScrollBackgroundRefresh>
   );
 }
 
