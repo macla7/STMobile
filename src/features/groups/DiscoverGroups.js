@@ -68,7 +68,7 @@ function DiscoverGroups({ navigation }) {
                 Name of Group:
               </FormControl.Label>
               <Input
-                placeholder="coworker@example.com"
+                placeholder="Your Workplace's Name"
                 value={formData.name}
                 onChangeText={(value) => {
                   setData({ ...formData, name: value });

@@ -18,7 +18,7 @@ import { selectEmailValidity, emailIsNoLongerValid } from "./passwordSlice";
 
 function EmailForm({ navigation }) {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState("mitchclarkmapie@hotmail.com");
+  const [email, setEmail] = useState("");
   const [errors, setErrors] = useState(null);
   const emailValidity = useSelector(selectEmailValidity);
 

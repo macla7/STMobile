@@ -159,25 +159,25 @@ export const inviteSlice = createSlice({
       })
       // you got the thing
       .addCase(createInviteAsync.fulfilled, (state, action) => {
-        let notification_blueprint;
-        if (action.payload.request) {
-          // ask to join request
-          notification_blueprint = {
-            notificationable_type: "Invite",
-            notificationable_id: action.payload.id,
-            notification_type: 3,
-          };
-        } else {
-          // regular invite
-          notification_blueprint = {
-            notificationable_type: "Invite",
-            notificationable_id: action.payload.id,
-            notification_type: 1,
-            recipient_id: action.payload.external_user_id,
-          };
-        }
+        // let notification_blueprint;
+        // if (action.payload.request) {
+        //   // ask to join request
+        //   notification_blueprint = {
+        //     notificationable_type: "Invite",
+        //     notificationable_id: action.payload.id,
+        //     notification_type: 3,
+        //   };
+        // } else {
+        //   // regular invite
+        //   notification_blueprint = {
+        //     notificationable_type: "Invite",
+        //     notificationable_id: action.payload.id,
+        //     notification_type: 1,
+        //     recipient_id: action.payload.external_user_id,
+        //   };
+        // }
 
-        createNotificationBlueprint(notification_blueprint);
+        // createNotificationBlueprint(notification_blueprint);
 
         return produce(state, (draftState) => {
           draftState.invites.push(action.payload);

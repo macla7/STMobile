@@ -28,8 +28,8 @@ import { useHeaderHeight } from "@react-navigation/elements";
 
 function Login({ navigation }) {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState("mitch@bing.com");
-  const [password, setPassword] = useState("Bing123!");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const loginError = useSelector(selectLoginError);
   const [errors, setErrors] = useState({});
   const headerHeight = useHeaderHeight();
