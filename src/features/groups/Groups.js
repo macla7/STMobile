@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMyGroupsAsync, selectMyGroups } from "./groupSlice";
 import { selectUserId } from "../sessions/sessionSlice";
-import { Box, VStack, Button, HStack, Text, Pressable } from "native-base";
+import { Box, VStack, View, HStack, Text, Pressable } from "native-base";
 import { CScrollBackgroundRefresh } from "../layout/LayoutComponents";
 import { useIsFocused } from "@react-navigation/native";
 import AtopTabNavGroup from "../buttons/AtopTabNavGroup";
@@ -24,38 +24,39 @@ function Groups({ navigation }) {
   }
 
   return (
-    <CScrollBackgroundRefresh refreshAction={refresh}>
-      {myGroups.map((item) => {
-        return (
-          <Pressable
-            borderBottomWidth="1"
-            borderColor="myBorderGray"
-            pl="4"
-            pr="5"
-            py="2"
-            key={item.id}
-            onPress={() =>
-              navigation.navigate("Group", {
-                group: item,
-              })
-            }
-          >
-            <Box>
-              <HStack space={3} justifyContent="space-between">
-                <VStack w="100%">
-                  <Text color="myDarkGrayText" bold>
-                    {item.name}
-                  </Text>
-                  <Text color="myMidGrayText">
-                    {item.number_of_memberships} members
-                  </Text>
-                </VStack>
-              </HStack>
-            </Box>
-          </Pressable>
-        );
-      })}
-
+    <View flex="1">
+      <CScrollBackgroundRefresh refreshAction={refresh}>
+        {myGroups.map((item) => {
+          return (
+            <Pressable
+              borderBottomWidth="1"
+              borderColor="myBorderGray"
+              pl="4"
+              pr="5"
+              py="2"
+              key={item.id}
+              onPress={() =>
+                navigation.navigate("Group", {
+                  group: item,
+                })
+              }
+            >
+              <Box>
+                <HStack space={3} justifyContent="space-between">
+                  <VStack w="100%">
+                    <Text color="myDarkGrayText" bold>
+                      {item.name}
+                    </Text>
+                    <Text color="myMidGrayText">
+                      {item.number_of_memberships} members
+                    </Text>
+                  </VStack>
+                </HStack>
+              </Box>
+            </Pressable>
+          );
+        })}
+      </CScrollBackgroundRefresh>
       <AtopTabNavGroup
         left="Discover"
         right="Greate Group"
@@ -66,7 +67,7 @@ function Groups({ navigation }) {
           })
         }
       />
-    </CScrollBackgroundRefresh>
+    </View>
   );
 }
 
