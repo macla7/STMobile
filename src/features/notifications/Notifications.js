@@ -114,7 +114,6 @@ function Notifications({ navigation }) {
             borderColor="myBorderGray"
             p="2"
             direction="row"
-            flex="1"
             key={item.id}
           >
             <Box>

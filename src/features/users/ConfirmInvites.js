@@ -4,8 +4,7 @@ import {
   createInviteAsync,
   selectToBeConfirmed,
   setNotice,
-  setConfirmed,
-  selectConfirmed,
+  selectToBeActioned,
 } from "../groups/invites/inviteSlice";
 import { Button } from "native-base";
 import {
@@ -17,7 +16,7 @@ import CheckboxListing from "../layout/CheckboxListing";
 function ConfirmInvites({ route, navigation }) {
   const userId = useSelector((state) => state.sessions.user.id);
   const toBeConfirmed = useSelector(selectToBeConfirmed);
-  const confirmed = useSelector(selectConfirmed);
+  const toBeActioned = useSelector(selectToBeActioned);
   const dispatch = useDispatch();
   const { group } = route.params;
 
@@ -36,17 +35,13 @@ function ConfirmInvites({ route, navigation }) {
   return (
     <CBackground>
       <CWholeSpaceContentTile>
-        <CheckboxListing
-          items={toBeConfirmed}
-          confirming={true}
-          setState={setConfirmed}
-        />
+        <CheckboxListing items={toBeConfirmed} />
 
         <Button
           variant="myButtonYellowVariant"
           onPress={() => {
-            inviteUsers(confirmed);
-            dispatch(setNotice("Invites sent."));
+            inviteUsers(toBeActioned);
+            dispatch(setNotice("Invites sent"));
             navigation.goBack();
           }}
           w="90%"

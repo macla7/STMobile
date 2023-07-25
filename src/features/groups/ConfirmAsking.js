@@ -2,12 +2,10 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   createInviteAsync,
-  selectToBeConfirmed,
-  setConfirmed,
-  selectConfirmed,
   setNotice,
+  selectToBeActioned,
+  selectToBeConfirmed,
 } from "./invites/inviteSlice";
-
 import { Button } from "native-base";
 import {
   CBackground,
@@ -17,8 +15,8 @@ import CheckboxListing from "../layout/CheckboxListing";
 
 function ConfirmAsking({ navigation }) {
   const userId = useSelector((state) => state.sessions.user.id);
+  const toBeActioned = useSelector(selectToBeActioned);
   const toBeConfirmed = useSelector(selectToBeConfirmed);
-  const confirmed = useSelector(selectConfirmed);
   const dispatch = useDispatch();
 
   function requestToJoinGroups(groups) {
@@ -36,17 +34,13 @@ function ConfirmAsking({ navigation }) {
   return (
     <CBackground>
       <CWholeSpaceContentTile>
-        <CheckboxListing
-          items={toBeConfirmed}
-          confirming={true}
-          setState={setConfirmed}
-        />
+        <CheckboxListing items={toBeConfirmed} />
 
         <Button
           variant="myButtonYellowVariant"
           onPress={() => {
-            requestToJoinGroups(confirmed);
-            dispatch(setNotice("Invites sent."));
+            requestToJoinGroups(toBeActioned);
+            dispatch(setNotice("Request sent"));
             navigation.goBack();
           }}
           w="90%"

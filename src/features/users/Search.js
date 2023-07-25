@@ -5,6 +5,7 @@ import {
   selectNotice,
   setNotice,
   setToBeConfirmed,
+  selectToBeActioned,
 } from "../groups/invites/inviteSlice";
 import { VStack, FormControl, Input, Button } from "native-base";
 import {
@@ -20,6 +21,7 @@ function Search({ route, navigation }) {
   const notice = useSelector(selectNotice);
   const { group } = route.params;
   const [formData, setData] = useState({});
+  const toBeActioned = useSelector(selectToBeActioned);
 
   useEffect(() => {
     dispatch(setNotice("Look for coworkers to invite to your group."));
@@ -90,15 +92,12 @@ function Search({ route, navigation }) {
           </FormControl>
         </VStack>
 
-        <CheckboxListing
-          items={userList}
-          confirming={false}
-          setState={setToBeConfirmed}
-        />
+        <CheckboxListing items={userList} />
 
         <Button
           variant="myButtonYellowVariant"
           onPress={() => {
+            dispatch(setToBeConfirmed(toBeActioned));
             navigation.navigate("Confirm Invites", {
               group: group,
             });

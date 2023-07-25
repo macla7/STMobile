@@ -7,8 +7,8 @@ import {
   updateInvite,
   fetchRequests,
   updateRequest,
+  fetchInvitesAndRequestsPending,
 } from "./inviteAPI";
-import { createNotificationBlueprint } from "../../notifications/notificationBlueprintAPI";
 
 export const Statuses = {
   Initial: "Not Fetched",
@@ -19,7 +19,7 @@ export const Statuses = {
 };
 
 const initialState = {
-  invites: [
+  invitesAndRequestsPending: [
     {
       id: 0,
       group_id: 0,
@@ -40,7 +40,7 @@ const initialState = {
     },
   ],
   status: Statuses.Initial,
-
+  toBeActioned: [],
   toBeConfirmed: [],
   confirmed: [],
   notice: "",
@@ -50,6 +50,15 @@ export const fetchInvitesAsync = createAsyncThunk(
   "invites/fetchInvites",
   async (groupId) => {
     const response = await fetchInvites(groupId);
+    return response;
+  }
+);
+fetchInvitesAndRequestsPendingAsync;
+
+export const fetchInvitesAndRequestsPendingAsync = createAsyncThunk(
+  "invites/fetchPending",
+  async (groupId) => {
+    const response = await fetchInvitesAndRequestsPending(groupId);
     return response;
   }
 );
@@ -105,8 +114,9 @@ export const inviteSlice = createSlice({
     setNotice: (state, action) => {
       state.notice = action.payload;
     },
-    setConfirmed: (state, action) => {
-      state.confirmed = action.payload;
+
+    setToBeActioned: (state, action) => {
+      state.toBeActioned = action.payload;
     },
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -128,6 +138,27 @@ export const inviteSlice = createSlice({
       })
       // error
       .addCase(fetchInvitesAsync.rejected, (state) => {
+        return produce(state, (draftState) => {
+          draftState.status = Statuses.Error;
+        });
+      })
+      .addCase(fetchInvitesAndRequestsPendingAsync.pending, (state) => {
+        return produce(state, (draftState) => {
+          draftState.status = Statuses.Loading;
+        });
+      })
+      // you got the thing
+      .addCase(
+        fetchInvitesAndRequestsPendingAsync.fulfilled,
+        (state, action) => {
+          return produce(state, (draftState) => {
+            draftState.invitesAndRequestsPending = action.payload;
+            draftState.status = Statuses.UpToDate;
+          });
+        }
+      )
+      // error
+      .addCase(fetchInvitesAndRequestsPendingAsync.rejected, (state) => {
         return produce(state, (draftState) => {
           draftState.status = Statuses.Error;
         });
@@ -159,28 +190,12 @@ export const inviteSlice = createSlice({
       })
       // you got the thing
       .addCase(createInviteAsync.fulfilled, (state, action) => {
-        // let notification_blueprint;
-        // if (action.payload.request) {
-        //   // ask to join request
-        //   notification_blueprint = {
-        //     notificationable_type: "Invite",
-        //     notificationable_id: action.payload.id,
-        //     notification_type: 3,
-        //   };
-        // } else {
-        //   // regular invite
-        //   notification_blueprint = {
-        //     notificationable_type: "Invite",
-        //     notificationable_id: action.payload.id,
-        //     notification_type: 1,
-        //     recipient_id: action.payload.external_user_id,
-        //   };
-        // }
-
-        // createNotificationBlueprint(notification_blueprint);
-
+        console.log("action??");
+        console.log(action.payload);
         return produce(state, (draftState) => {
-          draftState.invites.push(action.payload);
+          draftState.toBeActioned = [];
+          draftState.toBeConfirmed = [];
+          draftState.invitesAndRequestsPending = action.payload;
           draftState.status = Statuses.UpToDate;
           draftState.freshInvite = action.payload;
         });
@@ -256,9 +271,11 @@ export const {
   setNotice,
   setConfirmed,
   cleanFreshNotification,
+  setToBeActioned,
 } = inviteSlice.actions;
 
-export const selectInvites = (state) => state.invites.invites;
+export const selectInvitesAndRequestsPending = (state) =>
+  state.invites.invitesAndRequestsPending;
 
 export const selectRequests = (state) => state.invites.requests;
 
@@ -269,6 +286,8 @@ export const selectFreshInvite = (state) => state.invites.freshInvite;
 export const selectToBeConfirmed = (state) => state.invites.toBeConfirmed;
 
 export const selectConfirmed = (state) => state.invites.confirmed;
+
+export const selectToBeActioned = (state) => state.invites.toBeActioned;
 
 export const selectNotice = (state) => state.invites.notice;
 

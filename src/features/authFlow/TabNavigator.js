@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, useRef } from "react";
+import React, { useMemo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import GroupsStackScreen from "../groups/GroupsStackScreen.js";
 import HomeStackScreen from "../home/HomeStackScreen.js";

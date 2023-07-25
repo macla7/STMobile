@@ -19,6 +19,23 @@ export async function fetchInvites() {
     });
 }
 
+export async function fetchInvitesAndRequestsPending() {
+  const auth_token = await getValueFor("auth_token");
+  return fetch(`${API_URL}/invites/pending.json`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${auth_token}`,
+    },
+  })
+    .then((response) => response.json())
+    .catch((error) => {
+      console.log("Error: ", error);
+      // Not a longer term proper soloution
+      return {};
+    });
+}
+
 export async function fetchRequests(group_id) {
   const auth_token = await getValueFor("auth_token");
   return fetch(`${API_URL}/${group_id}/requests`, {
@@ -42,6 +59,7 @@ export async function createInvite(inviteDetails) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Accept: "application/json",
       Authorization: `Bearer ${auth_token}`,
     },
     body: JSON.stringify({ invite: inviteDetails }),

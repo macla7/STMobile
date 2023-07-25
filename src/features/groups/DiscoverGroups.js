@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchOtherGroupsAsync, selectOtherGroups } from "./groupSlice";
 import { selectNotice, setNotice } from "./invites/inviteSlice";
-import { setToBeConfirmed } from "./invites/inviteSlice";
+import {
+  fetchInvitesAndRequestsPendingAsync,
+  selectToBeActioned,
+  setToBeConfirmed,
+} from "./invites/inviteSlice";
 import { VStack, Button, FormControl, Input } from "native-base";
 import {
   CBackground,
@@ -16,12 +20,14 @@ function DiscoverGroups({ navigation }) {
   const notice = useSelector(selectNotice);
   const [formData, setData] = useState({});
   const [groupList, setGroupList] = useState(otherGroups);
+  const toBeActioned = useSelector(selectToBeActioned);
 
   // Called on initialise, because dispatch changes (on intialise)
   // and on myGroups.length change
   useEffect(() => {
     dispatch(setNotice("Look for Groups to join."));
     dispatch(fetchOtherGroupsAsync());
+    dispatch(fetchInvitesAndRequestsPendingAsync());
   }, [dispatch, otherGroups.length]);
 
   useEffect(() => {
@@ -80,15 +86,12 @@ function DiscoverGroups({ navigation }) {
           </FormControl>
         </VStack>
 
-        <CheckboxListing
-          items={groupList}
-          confirming={false}
-          setState={setToBeConfirmed}
-        />
+        <CheckboxListing items={groupList} />
 
         <Button
           variant="myButtonYellowVariant"
           onPress={() => {
+            dispatch(setToBeConfirmed(toBeActioned));
             navigation.navigate("Ask to Join");
           }}
           w="100%"
