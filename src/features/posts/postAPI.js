@@ -72,14 +72,15 @@ export async function createPost(post) {
     });
 }
 
-export async function updatePost(post) {
-  return fetch(`${API_URL}/posts/${post.id}.json`, {
+export async function updatePost(postDetails) {
+  const auth_token = await getValueFor("auth_token");
+  return fetch(`${API_URL}/posts/${postDetails.id}.json`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.auth_token}`,
+      Authorization: `Bearer ${auth_token}`,
     },
-    body: JSON.stringify({ post: post.postDetails }),
+    body: JSON.stringify({ post: postDetails.post }),
   })
     .then((response) => response.json())
     .catch((error) => {

@@ -1,7 +1,11 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Posts from "../posts/Posts";
-import { selectHomePosts, fetchPostsHomeAsync } from "../posts/postSlice";
+import {
+  selectHomePosts,
+  fetchPostsHomeAsync,
+  selectStatus,
+} from "../posts/postSlice";
 import { CScrollBackgroundRefresh } from "../layout/LayoutComponents";
 import { Button, Center, Heading } from "native-base";
 import { useHeaderHeight } from "@react-navigation/elements";
@@ -17,13 +21,21 @@ import {
 } from "date-fns";
 
 function Home({ navigation }) {
-  const headerHeight = useHeaderHeight();
   const homePosts = useSelector(selectHomePosts);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchPostsHomeAsync());
   }, [homePosts.length]);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      refresh(); // Call the function when the screen is focused (navigated to)
+    });
+    return () => {
+      unsubscribe(); // Clean up the listener when the component is unmounted (navigated away)
+    };
+  }, []);
 
   function refresh() {
     dispatch(fetchPostsHomeAsync());

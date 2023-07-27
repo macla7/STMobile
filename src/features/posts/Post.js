@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react";
+import { useSelector } from "react-redux";
 import Bids from "./bids/Bids.js";
 import Shift from "./shifts/Shift.js";
 import {
@@ -10,6 +11,7 @@ import {
   Center,
   Button,
   ScrollView,
+  Pressable,
 } from "native-base";
 import { createConsumer } from "@rails/actioncable";
 import DP from "../layout/DP";
@@ -19,6 +21,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faClock } from "@fortawesome/free-regular-svg-icons/faClock";
 import Comments from "./comments/Comments";
 import { domain } from "@env";
+import { selectUserId } from "../sessions/sessionSlice.js";
+import { faEllipsis } from "@fortawesome/free-solid-svg-icons/faEllipsis";
 
 global.addEventListener = () => {};
 global.removeEventListener = () => {};
@@ -30,6 +34,7 @@ function Post(props) {
   const [minPrice, setMinPrice] = useState(null);
   const [likes, setLikes] = useState(props.post.likes);
   const [comments, setComments] = useState(props.post.comments);
+  const userId = useSelector(selectUserId);
 
   const postsChannel = useMemo(() => {
     return consumer.subscriptions.create(
@@ -73,11 +78,29 @@ function Post(props) {
     }
   }
 
+  function canSeeSettings(item) {
+    if (item.user_id == userId || isUserAdmin(item.post_admins, userId)) {
+      return true;
+    }
+    return false;
+  }
+
+  function isUserAdmin(post_admins, userId) {
+    if (post_admins) {
+      // Loop through the post_admins array
+      for (let i = 0; i < post_admins.length; i++) {
+        // Check if the current user's ID matches the given userId
+        if (post_admins[i].id === userId) {
+          return true;
+        }
+      }
+    }
+    // If no match is found, return false
+    return false;
+  }
+
   return (
     <Center my="1" bgColor="white" borderColor="myBorderGray" borderWidth="1">
-      <Center width="100%" px="2" py="1">
-        <Text color="myDarkGrayText">{props.post.group_name}</Text>
-      </Center>
       <Box width="100%" p="2">
         <HStack width="100%">
           {props.post.avatar_url ? (
@@ -87,11 +110,33 @@ function Post(props) {
           )}
           <Box ml="2" flexGrow={1}>
             <VStack>
-              <Text color="myDarkGrayText" bold>
-                {props.post.postor_name}
-              </Text>
               <HStack justifyContent="space-between">
-                <Text>{format(new Date(props.post.created_at), "d MMM")}</Text>
+                <Text color="myDarkGrayText" bold>
+                  {props.post.postor_name} -{" "}
+                  {format(new Date(props.post.created_at), "d MMM")}
+                </Text>
+                {canSeeSettings(props.post) ? (
+                  <Pressable
+                    onPress={() => {
+                      props.navigation.navigate("Post Settings", {
+                        postId: props.post.id,
+                      });
+                    }}
+                  >
+                    <FontAwesomeIcon
+                      icon={faEllipsis}
+                      style={{ color: "#4b5563" }}
+                    />
+                  </Pressable>
+                ) : null}
+              </HStack>
+
+              <HStack justifyContent="space-between" alignItems="center">
+                <Box wMax="50%">
+                  <Text color="myDarkGrayText" fontSize="xs">
+                    {props.post.group_name}
+                  </Text>
+                </Box>
                 <HStack alignItems="center">
                   <FontAwesomeIcon icon={faClock} color="#171717" />
                   <Text ml="1">

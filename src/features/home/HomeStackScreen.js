@@ -4,7 +4,9 @@ import Home from "./Home";
 import BidForm from "../posts/bids/BidForm";
 import BidConfirmation from "../posts/bids/BidConfirmation";
 import PostScreen from "../posts/PostScreen.js";
-import { Text } from "native-base";
+import PostSettings from "../posts/PostSettings";
+import ConfirmDeletePost from "../posts/ConfirmDeletePost";
+import { Text, Pressable } from "native-base";
 
 const HomeStack = createNativeStackNavigator();
 
@@ -37,6 +39,20 @@ function HomeStackScreen({ navigation }) {
         component={PostScreen}
         options={{
           headerTransparent: true,
+        }}
+      />
+      <HomeStack.Screen
+        name="Post Settings"
+        component={PostSettings}
+        options={{
+          presentation: "modal",
+        }}
+      />
+      <HomeStack.Screen
+        name="Confirm Delete Post"
+        component={ConfirmDeletePost}
+        options={{
+          presentation: "modal",
         }}
       />
     </HomeStack.Navigator>

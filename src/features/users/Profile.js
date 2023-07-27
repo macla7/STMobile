@@ -24,6 +24,11 @@ import {
 } from "./userSlice";
 import AtopTabNavGroup from "../buttons/AtopTabNavGroup";
 import KeyboardWrapper from "../layout/KeyboardWrapper";
+import {
+  destroyPushTokenAsync,
+  selectCurrentPushToken,
+} from "../users/pushTokenSlice";
+import { logoutUserAsync } from "../sessions/sessionSlice";
 
 function Profile({ navigation }) {
   const user = useSelector(selectUser);
@@ -36,6 +41,7 @@ function Profile({ navigation }) {
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
   const userAvatarUrl = useSelector(selectUserAvatarUrl);
+  const currentPushToken = useSelector(selectCurrentPushToken);
 
   useEffect(() => {
     dispatch(fetchUserAsync(userId));
@@ -106,6 +112,15 @@ function Profile({ navigation }) {
   const onSubmit = () => {
     validate() ? console.log("Submitted") : console.log("Validation Failed");
   };
+
+  function onDestroy() {
+    if (currentPushToken.id != 0) {
+      console.log("deleting push Token");
+      dispatch(destroyPushTokenAsync(currentPushToken));
+    }
+    dispatch(destroyUserAsync(userId));
+    dispatch(logoutUserAsync());
+  }
 
   return (
     <KeyboardWrapper>
@@ -221,7 +236,10 @@ function Profile({ navigation }) {
               <Pressable
                 w="100%"
                 onPress={() => {
-                  navigation.navigate("Delete Account");
+                  navigation.navigate("Delete Account", {
+                    onDestroy: onDestroy,
+                    returnScreen: "Profile",
+                  });
                 }}
               >
                 <Text color="myPink">Delete Account</Text>
