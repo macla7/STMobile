@@ -6,7 +6,8 @@ import BidConfirmation from "../posts/bids/BidConfirmation";
 import PostScreen from "../posts/PostScreen.js";
 import PostSettings from "../posts/PostSettings";
 import ConfirmDeletePost from "../posts/ConfirmDeletePost";
-import { Text, Pressable } from "native-base";
+import Info from "./Info";
+import { Text, Pressable, InfoOutlineIcon, Center } from "native-base";
 
 const HomeStack = createNativeStackNavigator();
 
@@ -30,6 +31,11 @@ function HomeStackScreen({ navigation }) {
               Shift it.
             </Text>
           ),
+          headerRight: () => (
+            <Pressable onPress={() => navigation.navigate("Info")}>
+              <InfoOutlineIcon color="#CDFF00" size="6" />
+            </Pressable>
+          ),
         })}
       />
       <HomeStack.Screen name="Bid" component={BidForm} />
@@ -51,6 +57,13 @@ function HomeStackScreen({ navigation }) {
       <HomeStack.Screen
         name="Confirm Delete Post"
         component={ConfirmDeletePost}
+        options={{
+          presentation: "modal",
+        }}
+      />
+      <HomeStack.Screen
+        name="Info"
+        component={Info}
         options={{
           presentation: "modal",
         }}

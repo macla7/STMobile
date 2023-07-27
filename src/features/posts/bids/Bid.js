@@ -9,7 +9,7 @@ function Bid(props) {
     <Box
       justifyContent="center"
       alignItems="center"
-      flex={1}
+      customerFlex={props.flexGrow ? props.flexGrow : 1}
       shadow="1"
       flexDirection="row"
       bgColor={props.bid.price < 0 ? "myPink" : "myLightGreen"}
