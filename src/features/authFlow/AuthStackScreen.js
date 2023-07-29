@@ -1,6 +1,9 @@
-import React from "react";
-import { selectIsLoggedIn } from "../sessions/sessionSlice";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectIsLoggedIn,
+  loginUserWithTokenAsync,
+} from "../sessions/sessionSlice";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Login from "../sessions/Login";
 import Register from "../sessions/Register";
@@ -13,7 +16,12 @@ import { Center, Text } from "native-base";
 const Stack = createNativeStackNavigator();
 
 function AuthStackScreen() {
+  const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
+
+  useEffect(() => {
+    dispatch(loginUserWithTokenAsync());
+  }, []);
 
   return (
     <>

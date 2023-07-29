@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faClock } from "@fortawesome/free-regular-svg-icons/faClock";
 
 function PostSettings({ route, navigation }) {
-  const { postId } = route.params;
+  const { postId, bids } = route.params;
   return (
     <CBackground>
       <Center py="2">
@@ -44,6 +44,25 @@ function PostSettings({ route, navigation }) {
             <Text color="myPink" ml="2">
               Delete post
             </Text>
+          </HStack>
+        </Pressable>
+        <Pressable
+          onPress={() => {
+            console.log("hody");
+            navigation.navigate("Confirm Bids", {
+              bids: bids,
+            });
+          }}
+          borderRadius="6"
+          p="4"
+          w="90%"
+          mb="1"
+          mx="1"
+          bgColor="white"
+        >
+          <HStack alignItems="center">
+            <FontAwesomeIcon icon={faClock} color="#171717" />
+            <Text ml="2">Approve Bids</Text>
           </HStack>
         </Pressable>
       </Center>

@@ -47,10 +47,6 @@ function Login({ navigation }) {
     setErrors({ ...errors, loginError: loginError });
   }, [loginError]);
 
-  useEffect(() => {
-    dispatch(loginUserWithTokenAsync());
-  }, []);
-
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <KeyboardAvoidingView

@@ -9,6 +9,7 @@ import GroupForm from "./GroupForm";
 import ConfirmInvites from "../users/ConfirmInvites";
 import ConfirmAsking from "./ConfirmAsking";
 import MemberDetails from "../users/MemberDetails";
+import ConfirmBids from "./ConfirmBids";
 
 const GroupsStack = createNativeStackNavigator();
 

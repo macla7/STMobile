@@ -120,6 +120,7 @@ function Post(props) {
                     onPress={() => {
                       props.navigation.navigate("Post Settings", {
                         postId: props.post.id,
+                        bids: props.post.bids,
                       });
                     }}
                   >
