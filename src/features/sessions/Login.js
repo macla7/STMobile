@@ -4,7 +4,7 @@ import {
   loginUserAsync,
   selectLoginError,
   clearLoginError,
-  loginUserWithTokenAsync,
+  selectStatus,
 } from "./sessionSlice";
 import {
   Center,
@@ -18,6 +18,7 @@ import {
   ScrollView,
   Text,
   View,
+  CheckBox,
 } from "native-base";
 import {
   KeyboardAvoidingView,
@@ -25,6 +26,8 @@ import {
   Keyboard,
 } from "react-native";
 import { useHeaderHeight } from "@react-navigation/elements";
+import BouncyCheckbox from "react-native-bouncy-checkbox";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function Login({ navigation }) {
   const dispatch = useDispatch();
@@ -33,6 +36,31 @@ function Login({ navigation }) {
   const loginError = useSelector(selectLoginError);
   const [errors, setErrors] = useState({});
   const headerHeight = useHeaderHeight();
+  const [rememberMe, setRememberMe] = useState(false);
+  const status = useSelector(selectStatus);
+
+  useEffect(() => {
+    checkRememberMe();
+  }, []);
+
+  const checkRememberMe = async () => {
+    try {
+      const emailFromStorage = await AsyncStorage.getItem("email");
+      const passwordFromStorage = await AsyncStorage.getItem("password");
+
+      if (emailFromStorage && passwordFromStorage) {
+        setEmail(emailFromStorage);
+        setPassword(passwordFromStorage);
+        setRememberMe(true);
+      }
+    } catch (error) {
+      console.error("Error checking Remember Me:", error);
+    }
+  };
+
+  useEffect(() => {
+    setErrors({ ...errors, loginError: loginError });
+  }, [loginError]);
 
   function onSubmit() {
     const registerUserDetails = {
@@ -40,12 +68,34 @@ function Login({ navigation }) {
       password: password,
     };
 
+    if (rememberMe) {
+      // Save the credentials to AsyncStorage if 'Remember Me' is checked
+      saveCredentials(email.toLowerCase(), password);
+    } else {
+      // Clear any saved credentials from AsyncStorage if 'Remember Me' is not checked
+      clearCredentials();
+    }
+
     dispatch(loginUserAsync(registerUserDetails));
   }
 
-  useEffect(() => {
-    setErrors({ ...errors, loginError: loginError });
-  }, [loginError]);
+  const saveCredentials = async (email, password) => {
+    try {
+      await AsyncStorage.setItem("email", email);
+      await AsyncStorage.setItem("password", password);
+    } catch (error) {
+      console.error("Error saving credentials:", error);
+    }
+  };
+
+  const clearCredentials = async () => {
+    try {
+      await AsyncStorage.removeItem("email");
+      await AsyncStorage.removeItem("password");
+    } catch (error) {
+      console.error("Error clearing credentials:", error);
+    }
+  };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -82,6 +132,12 @@ function Login({ navigation }) {
                       <FormControl.ErrorMessage>
                         {errors.loginError}
                       </FormControl.ErrorMessage>
+
+                      <FormControl.HelperText>
+                        {status != "Not Fetched" && status != "Up To Date"
+                          ? status
+                          : ""}
+                      </FormControl.HelperText>
                     </Box>
 
                     <FormControl.Label
@@ -118,6 +174,17 @@ function Login({ navigation }) {
                       }}
                     />
                   </FormControl>
+                  <HStack alignItems="center">
+                    <BouncyCheckbox
+                      size={30}
+                      fillColor="#3433E2"
+                      iconStyle={{ margin: 0 }}
+                      disableBuiltInState
+                      onPress={() => setRememberMe(!rememberMe)}
+                      isChecked={rememberMe}
+                    />
+                    <Text>Remember Me</Text>
+                  </HStack>
                   <Button
                     mt="2"
                     variant="myButtonYellowVariant"

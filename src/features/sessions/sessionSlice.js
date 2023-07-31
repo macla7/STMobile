@@ -17,7 +17,15 @@ export async function deleteValueFor(key) {
   await SecureStore.deleteItemAsync(key);
 }
 
+export const Statuses = {
+  Initial: "Not Fetched",
+  Loading: "Loading..",
+  UpToDate: "Up To Date",
+  Error: "Error",
+};
+
 const initialState = {
+  status: Statuses.Initial,
   goToRegister: false,
   auth_token: null,
   loginError: "",
@@ -117,12 +125,13 @@ export const sessionSlice = createSlice({
       // while you wait
       .addCase(loginUserAsync.pending, (state) => {
         return produce(state, (draftState) => {
-          // draftState.status = Statuses.Loading;
+          draftState.status = Statuses.Loading;
         });
       })
       // you got the thing
       .addCase(loginUserAsync.fulfilled, (state, action) => {
         return produce(state, (draftState) => {
+          draftState.status = Statuses.UpToDate;
           if (action.payload.user == undefined) {
             draftState.loginError = "Login details are incorrect";
           } else {
@@ -140,7 +149,7 @@ export const sessionSlice = createSlice({
       // error
       .addCase(loginUserAsync.rejected, (state) => {
         return produce(state, (draftState) => {
-          // draftState.status = Statuses.Error;
+          draftState.status = Statuses.Error;
         });
       })
       // while you wait
@@ -192,6 +201,8 @@ export const sessionSlice = createSlice({
       });
   },
 });
+
+export const selectStatus = (state) => state.sessions.status;
 
 export const selectUserEmail = (state) => state.sessions.user?.email;
 

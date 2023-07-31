@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   selectIsLoggedIn,
   loginUserWithTokenAsync,
-} from "../sessions/sessionSlice";
+} from "./../sessions/sessionSlice";
+import { AppState } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Login from "../sessions/Login";
 import Register from "../sessions/Register";
@@ -16,10 +17,27 @@ import { Center, Text } from "native-base";
 const Stack = createNativeStackNavigator();
 
 function AuthStackScreen() {
-  const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const dispatch = useDispatch();
+
+  const handleAppStateChange = (nextAppState) => {
+    if (nextAppState === "active") {
+      dispatch(loginUserWithTokenAsync());
+    }
+  };
 
   useEffect(() => {
+    // Add the AppState change listener
+    AppState.addEventListener("change", handleAppStateChange);
+
+    // Clean up the listener when the component unmounts
+    return () => {
+      AppState.removeEventListener("change", handleAppStateChange);
+    };
+  }, [dispatch]);
+
+  useEffect(() => {
+    // When the app is started or brought to the foreground
     dispatch(loginUserWithTokenAsync());
   }, []);
 
