@@ -6,9 +6,9 @@ import BidConfirmation from "../posts/bids/BidConfirmation";
 import PostScreen from "../posts/PostScreen.js";
 import PostSettings from "../posts/PostSettings";
 import ConfirmDeletePost from "../posts/ConfirmDeletePost";
-import Info from "./Info";
+import InfoStackScreen from "./InfoStackScreen";
 import { Text, Pressable, InfoOutlineIcon, Center } from "native-base";
-import ConfirmBids from "../groups/ConfirmBids";
+// import ConfirmBids from "../groups/ConfirmBids";
 
 const HomeStack = createNativeStackNavigator();
 
@@ -33,7 +33,7 @@ function HomeStackScreen({ navigation }) {
             </Text>
           ),
           headerRight: () => (
-            <Pressable onPress={() => navigation.navigate("Info")}>
+            <Pressable onPress={() => navigation.navigate("InfoStackScreen")}>
               <InfoOutlineIcon color="#CDFF00" size="6" />
             </Pressable>
           ),
@@ -63,19 +63,20 @@ function HomeStackScreen({ navigation }) {
         }}
       />
       <HomeStack.Screen
-        name="Info"
-        component={Info}
+        name="InfoStackScreen"
+        component={InfoStackScreen}
         options={{
           presentation: "modal",
+          title: "Info",
         }}
       />
-      <HomeStack.Screen
+      {/* <HomeStack.Screen
         name="Confirm Bids"
         component={ConfirmBids}
         options={{
           presentation: "modal",
         }}
-      />
+      /> */}
     </HomeStack.Navigator>
   );
 }

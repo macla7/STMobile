@@ -184,13 +184,15 @@ export const sessionSlice = createSlice({
       // you got the thing
       .addCase(loginUserWithTokenAsync.fulfilled, (state, action) => {
         return produce(state, (draftState) => {
-          draftState["user"] = {
-            id: action.payload.user.id,
-            email: action.payload.user.email,
-            avatar: action.payload.user.avatar,
-            avatar_url: action.payload.user.avatar_url,
-          };
-          draftState.auth_token = action.payload.access_token;
+          if (action.payload.user !== undefined) {
+            draftState["user"] = {
+              id: action.payload.user.id,
+              email: action.payload.user.email,
+              avatar: action.payload.user.avatar,
+              avatar_url: action.payload.user.avatar_url,
+            };
+            draftState.auth_token = action.payload.access_token;
+          }
         });
       })
       // error

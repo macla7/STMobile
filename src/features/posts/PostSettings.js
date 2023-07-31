@@ -46,7 +46,7 @@ function PostSettings({ route, navigation }) {
             </Text>
           </HStack>
         </Pressable>
-        <Pressable
+        {/* <Pressable
           onPress={() => {
             console.log("hody");
             navigation.navigate("Confirm Bids", {
@@ -64,7 +64,7 @@ function PostSettings({ route, navigation }) {
             <FontAwesomeIcon icon={faClock} color="#171717" />
             <Text ml="2">Approve Bids</Text>
           </HStack>
-        </Pressable>
+        </Pressable> */}
       </Center>
     </CBackground>
   );
