@@ -43,6 +43,7 @@ export function CScrollBackgroundRefresh({ children, refreshAction }) {
     <ScrollView
       w="100%"
       minHeight="100%"
+      style={{ backgroundColor: "#f5f5f5" }}
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }

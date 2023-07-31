@@ -121,7 +121,7 @@ function InfoSecond({ navigation }) {
           <HStack alignItems="center">
             <Text>
               This is an example Post. Here you can see that Tess is trying to
-              get her 9am Barista shift at 'Cafe Coffee' covered
+              get her 9AM Barista shift at 'Cafe Coffee' covered
             </Text>
           </HStack>
         </Box>

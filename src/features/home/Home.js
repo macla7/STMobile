@@ -8,7 +8,7 @@ import {
 } from "../posts/postSlice";
 import { CScrollBackgroundRefresh } from "../layout/LayoutComponents";
 import { Button, Center, Heading } from "native-base";
-import { useHeaderHeight } from "@react-navigation/elements";
+
 import Post from "../posts/Post";
 import {
   addDays,
@@ -158,25 +158,7 @@ function Home({ navigation }) {
           >
             Create a Post
           </Button>
-          <Button
-            width="80%"
-            m="4"
-            fontSize="md"
-            fontWeight="400"
-            color="myDarkGrayText"
-            variant="myButtonYellowVariant"
-            onPress={() => {
-              navigation.navigate("Groups", {
-                params: {
-                  returnScreen: "Home",
-                },
-                screen: "Create Group",
-                initial: false,
-              });
-            }}
-          >
-            Make a Group
-          </Button>
+
           <Button
             width="80%"
             m="4"
@@ -192,6 +174,21 @@ function Home({ navigation }) {
             }}
           >
             Join a Group
+          </Button>
+          <Button
+            width="80%"
+            m="4"
+            fontSize="md"
+            fontWeight="400"
+            color="myDarkGrayText"
+            variant="myButtonYellowVariant"
+            onPress={() => {
+              navigation.navigate("InfoStackScreen", {
+                title: "Info",
+              });
+            }}
+          >
+            App Overview
           </Button>
         </Center>
       ) : (
