@@ -35,7 +35,7 @@ function BidForm({ route, navigation }) {
       <CWholeSpaceContentTile>
         <MoneySlider
           type="bid"
-          minValue={reserve / 1000000 + 1}
+          minValue={reserve / 1000000}
           maxValue={reserve / 1000000 + 50}
           defaultValue={reserve / 1000000 + 5}
         />

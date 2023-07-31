@@ -44,14 +44,20 @@ function Bid(props) {
                     ? props.bid.price < 0
                       ? "Will Pay "
                       : "Asks for  "
+                    : props.bid.price == 0
+                    ? "Will work for free"
                     : props.bid.price < 0
                     ? "Wants "
                     : "Offers "}
                 </Text>
-                <Money
-                  microDollars={props.bid.price}
-                  color={props.bid.price < 0 ? "myLightGreen" : "myDarkGreen"}
-                />
+                {props.bid.price == 0 ? (
+                  ""
+                ) : (
+                  <Money
+                    microDollars={props.bid.price}
+                    color={props.bid.price < 0 ? "myLightGreen" : "myDarkGreen"}
+                  />
+                )}
               </HStack>
             </VStack>
           </Box>
