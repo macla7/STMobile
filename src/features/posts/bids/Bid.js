@@ -43,14 +43,21 @@ function Bid(props) {
                   {props.reserve == true
                     ? props.bid.price < 0
                       ? "Will Pay "
-                      : "Asks for  "
+                      : "Asks for "
                     : props.bid.price == 0
                     ? "Will work for free"
                     : props.bid.price < 0
                     ? "Wants "
                     : "Offers "}
                 </Text>
-                {props.bid.price == 0 ? (
+                {props.bid.price == 0 && props.reserve == true ? (
+                  <Text
+                    bold
+                    color={props.bid.price < 0 ? "myLightGreen" : "myDarkGreen"}
+                  >
+                    nothing
+                  </Text>
+                ) : props.bid.price == 0 ? (
                   ""
                 ) : (
                   <Money

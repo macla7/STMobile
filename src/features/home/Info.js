@@ -1,14 +1,24 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
   CScrollBackground,
   CWholeSpaceContentTile,
 } from "../layout/LayoutComponents";
 import { Button, Text, Box, HStack, Spacer } from "native-base";
 import { useIsFocused } from "@react-navigation/native";
+import { selectNewUser, noLongerNewUser } from "../sessions/sessionSlice";
 
 function Info({ navigation }) {
   const [isLoading, setIsLoading] = useState(false);
   const isFocused = useIsFocused();
+  const dispatch = useDispatch();
+  const newUser = useSelector(selectNewUser);
+
+  useEffect(() => {
+    if (newUser) {
+      dispatch(noLongerNewUser());
+    }
+  }, []);
 
   useEffect(() => {
     if (isFocused) {

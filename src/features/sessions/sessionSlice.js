@@ -29,6 +29,7 @@ const initialState = {
   goToRegister: false,
   auth_token: null,
   loginError: "",
+  newUser: false,
   user: {
     id: null,
     username: null,
@@ -93,6 +94,9 @@ export const sessionSlice = createSlice({
     clearLoginError: (state) => {
       state.loginError = "";
     },
+    noLongerNewUser: (state) => {
+      state.newUser = false;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -112,6 +116,7 @@ export const sessionSlice = createSlice({
             avatar_url: action.payload.user.avatar_url,
           };
           draftState.auth_token = action.payload.access_token;
+          draftState.newUser = true;
           // default headers set >>>??!!
           save("auth_token", action.payload.access_token);
         });
@@ -216,6 +221,8 @@ export const selectUserAvatarUrl = (state) => state.sessions.user?.avatar_url;
 
 export const selectLoginError = (state) => state.sessions.loginError;
 
+export const selectNewUser = (state) => state.sessions.newUser;
+
 export const selectIsLoggedIn = (state) => {
   const loggedOut =
     state.sessions.auth_token == null ||
@@ -225,6 +232,6 @@ export const selectIsLoggedIn = (state) => {
 
 export const selectAuthToken = (state) => state.sessions.auth_token;
 
-export const { clearLoginError } = sessionSlice.actions;
+export const { clearLoginError, noLongerNewUser } = sessionSlice.actions;
 
 export default sessionSlice.reducer;

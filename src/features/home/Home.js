@@ -8,7 +8,6 @@ import {
 } from "../posts/postSlice";
 import { CScrollBackgroundRefresh } from "../layout/LayoutComponents";
 import { Button, Center, Heading } from "native-base";
-
 import Post from "../posts/Post";
 import {
   addDays,
@@ -19,26 +18,35 @@ import {
   setSeconds,
   subHours,
 } from "date-fns";
+import { selectNewUser } from "../sessions/sessionSlice";
 
 function Home({ navigation }) {
   const homePosts = useSelector(selectHomePosts);
   const dispatch = useDispatch();
+  const newUser = useSelector(selectNewUser);
 
   useEffect(() => {
-    dispatch(fetchPostsHomeAsync());
-  }, [homePosts.length]);
+    refresh();
+  }, []);
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
+      newUserFlow();
       refresh(); // Call the function when the screen is focused (navigated to)
     });
     return () => {
       unsubscribe(); // Clean up the listener when the component is unmounted (navigated away)
     };
-  }, []);
+  }, [newUser]);
 
   function refresh() {
     dispatch(fetchPostsHomeAsync());
+  }
+
+  function newUserFlow() {
+    if (newUser) {
+      navigation.navigate("InfoStackScreen");
+    }
   }
 
   const examplePost = JSON.parse(`{
