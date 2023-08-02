@@ -37,3 +37,21 @@ export async function createBid(bidDetails) {
       return {};
     });
 }
+
+export async function updateBid(payload) {
+  const auth_token = await getValueFor("auth_token");
+  return fetch(`${API_URL}/bids/bulk_update.json`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${auth_token}`,
+    },
+    body: JSON.stringify(payload),
+  })
+    .then((response) => response.json())
+    .catch((error) => {
+      console.log("Error: ", error);
+      // Not a longer term proper soloution
+      return {};
+    });
+}

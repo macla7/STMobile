@@ -8,7 +8,7 @@ import PostSettings from "../posts/PostSettings";
 import ConfirmDeletePost from "../posts/ConfirmDeletePost";
 import InfoStackScreen from "./InfoStackScreen";
 import { Text, Pressable, InfoOutlineIcon, Center } from "native-base";
-// import ConfirmBids from "../groups/ConfirmBids";
+import ConfirmBids from "../groups/ConfirmBids";
 
 const HomeStack = createNativeStackNavigator();
 
@@ -70,13 +70,13 @@ function HomeStackScreen({ navigation }) {
           title: "Info",
         }}
       />
-      {/* <HomeStack.Screen
-        name="Confirm Bids"
+      <HomeStack.Screen
+        name="Approve Bids"
         component={ConfirmBids}
         options={{
           presentation: "modal",
         }}
-      /> */}
+      />
     </HomeStack.Navigator>
   );
 }

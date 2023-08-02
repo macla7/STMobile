@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  createInviteAsync,
-  setNotice,
   selectToBeActioned,
-  selectToBeConfirmed,
-} from "./invites/inviteSlice";
+  setToBeActioned,
+  updateBidAsync,
+  fetchPostAsync,
+  selectPost,
+} from "../posts/postSlice";
 import { Button } from "native-base";
 import {
   CBackground,
@@ -14,35 +15,36 @@ import {
 import BidCheckboxListing from "./BidCheckboxListing";
 
 function ConfirmBids({ navigation, route }) {
-  const userId = useSelector((state) => state.sessions.user.id);
   const toBeActioned = useSelector(selectToBeActioned);
-  const toBeConfirmed = useSelector(selectToBeConfirmed);
   const dispatch = useDispatch();
-  const { bids } = route.params;
+  const { postId } = route.params;
+  const post = useSelector(selectPost);
 
-  function requestToJoinGroups(groups) {
-    groups.forEach((group) => {
-      let inviteDetails = {
-        group_id: group.id,
-        internal_user_id: null,
-        external_user_id: userId,
-        request: true,
-      };
-      dispatch(createInviteAsync(inviteDetails));
-    });
+  function updateBidsForApprovals(bids) {
+    const updatedBids = bids.map((bid) => ({
+      approved: bid.approved,
+      id: bid.id,
+    }));
+    dispatch(updateBidAsync({ post_id: postId, updated_bids: updatedBids }));
   }
+
+  useEffect(() => {
+    dispatch(fetchPostAsync(postId));
+  }, []);
+
+  useEffect(() => {
+    dispatch(setToBeActioned(post.bids));
+  }, [post]);
 
   return (
     <CBackground>
       <CWholeSpaceContentTile>
-        {/* <CheckboxListing items={toBeConfirmed} /> */}
-        <BidCheckboxListing items={bids} />
+        <BidCheckboxListing items={post.bids} />
 
         <Button
           variant="myButtonYellowVariant"
           onPress={() => {
-            // requestToJoinGroups(toBeActioned);
-            // dispatch(setNotice("Request sent"));
+            updateBidsForApprovals(toBeActioned);
             navigation.goBack();
           }}
           w="90%"

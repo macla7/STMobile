@@ -10,7 +10,7 @@ import {
 } from "./postAPI";
 import { fetchLikes, createLike, destroyLike } from "./likes/likeAPI";
 import { createComment } from "./comments/commentAPI";
-import { fetchBids, createBid } from "./bids/bidAPI";
+import { fetchBids, createBid, updateBid } from "./bids/bidAPI";
 import { formatISO } from "date-fns";
 
 export const Statuses = {
@@ -101,6 +101,7 @@ export const initialState = {
       hide: false,
     },
   ],
+  toBeActioned: [],
   status: Statuses.Initial,
   freshPost: { id: 0 },
   currentPostId: 0,
@@ -203,6 +204,14 @@ export const createBidAsync = createAsyncThunk(
   }
 );
 
+export const updateBidAsync = createAsyncThunk(
+  "posts/updateBid",
+  async (payload) => {
+    const response = await updateBid(payload);
+    return response;
+  }
+);
+
 export const postSlice = createSlice({
   name: "post",
   initialState,
@@ -216,6 +225,9 @@ export const postSlice = createSlice({
     },
     setDeleting: (state, action) => {
       state.deleting = action.payload;
+    },
+    setToBeActioned: (state, action) => {
+      state.toBeActioned = action.payload;
     },
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -432,6 +444,29 @@ export const postSlice = createSlice({
         });
       })
       // while you wait
+      .addCase(updateBidAsync.pending, (state) => {
+        return produce(state, (draftState) => {});
+      })
+      // you got the thing
+      .addCase(updateBidAsync.fulfilled, (state, action) => {
+        return produce(state, (draftState) => {
+          // setNestedResource(draftState, action, "bids");
+          // let's just return the post and then confirmBids will update
+          draftState.currentPostId = action.payload.id;
+          draftState.post = action.payload;
+          draftState.status = Statuses.UpToDate;
+        });
+      })
+      // error
+      .addCase(updateBidAsync.rejected, (state) => {
+        return produce(state, (draftState) => {
+          draftState.status = Statuses.Error;
+        });
+      })
+
+      // ---------- Comments ----------
+
+      // while you wait
       .addCase(createCommentAsync.pending, (state) => {
         return produce(state, (draftState) => {});
       })
@@ -459,7 +494,7 @@ function setNestedResource(draftState, action, resource) {
   }
 }
 
-export const { setCurrentPostId, setHomePosts, setDeleting } =
+export const { setCurrentPostId, setHomePosts, setDeleting, setToBeActioned } =
   postSlice.actions;
 
 export const selectPost = (state) => state.posts.post;
@@ -475,5 +510,7 @@ export const selectDeleting = (state) => state.posts.deleting;
 export const selectFreshPost = (state) => state.posts.freshPost;
 
 export const selectCurrentPostId = (state) => state.posts.currentPostId;
+
+export const selectToBeActioned = (state) => state.posts.toBeActioned;
 
 export default postSlice.reducer;

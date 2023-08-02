@@ -5,6 +5,18 @@ import { formatDistanceToNow } from "date-fns";
 import DP from "../../layout/DP";
 
 function Bid(props) {
+  function approvedText(approved, reserve) {
+    if (reserve !== true) {
+      if (approved == true) {
+        return "Approved";
+      } else if (approved == false) {
+        return "Denied";
+      } else {
+        return "";
+      }
+    }
+    return "";
+  }
   return (
     <Box
       justifyContent="center"
@@ -28,13 +40,21 @@ function Bid(props) {
           )}
           <Box ml="2" flexGrow={1}>
             <VStack justifyContent="flex-start" flexGrow={1}>
-              <Text
-                bold
-                fontSize="2xs"
-                color={props.bid.price < 0 ? "myLightGreen" : "myDarkGreen"}
-              >
-                {props.bid.bidder_name}
-              </Text>
+              <HStack justifyContent="space-between" alignItems="center">
+                <Text
+                  bold
+                  fontSize="2xs"
+                  color={props.bid.price < 0 ? "myLightGreen" : "myDarkGreen"}
+                >
+                  {props.bid.bidder_name}
+                </Text>
+                <Text
+                  fontSize="2xs"
+                  color={props.bid.price < 0 ? "white" : "white"}
+                >
+                  {props.bidNum == 0 ? "🏆" : ""}
+                </Text>
+              </HStack>
               <HStack>
                 <Text
                   bold
@@ -81,8 +101,12 @@ function Bid(props) {
                   addSuffix: true,
                 })}
           </Text>
-          <Text fontSize="sm" color={props.bid.price < 0 ? "white" : "white"}>
-            {props.bidNum == 0 ? "🏆" : ""}
+          <Text
+            bold
+            fontSize="2xs"
+            color={props.bid.price < 0 ? "myLightGreen" : "myDarkGreen"}
+          >
+            {approvedText(props.bid.approved, props.reserve)}
           </Text>
         </HStack>
       </VStack>

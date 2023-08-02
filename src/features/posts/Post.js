@@ -121,6 +121,10 @@ function Post(props) {
                       props.navigation.navigate("Post Settings", {
                         postId: props.post.id,
                         bids: props.post.bids,
+                        isUserAdmin: isUserAdmin(
+                          props.post.post_admins,
+                          userId
+                        ),
                       });
                     }}
                   >
