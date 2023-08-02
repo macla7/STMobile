@@ -89,9 +89,10 @@ function TabNavigator() {
 
     if (Device.isDevice) {
       registerForPushNotificationsAsync(userId, pushTokens, deviceId);
-    } else {
-      alert("Must use physical device for Push Notifications");
     }
+    // else {
+    //   alert("Must use physical device for Push Notifications");
+    // }
 
     if (Platform.OS === "android") {
       Notifications.setNotificationChannelAsync("default", {

@@ -10,6 +10,7 @@ import moneyReducer from "../features/posts/money/moneySlice";
 import invitesReducer from "../features/groups/invites/inviteSlice";
 import passwordsReducer from "../features/passwords/passwordSlice";
 import pushTokensReducer from "../features/users/pushTokenSlice";
+import appVersionsReducer from "../features/authFlow/appVersionSlice";
 
 export const store = configureStore({
   reducer: {
@@ -24,5 +25,6 @@ export const store = configureStore({
     invites: invitesReducer,
     passwords: passwordsReducer,
     pushTokens: pushTokensReducer,
+    appVersions: appVersionsReducer,
   },
 });
