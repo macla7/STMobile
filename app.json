@@ -2,7 +2,7 @@
   "expo": {
     "name": "Shift it",
     "slug": "shift_it",
-    "version": "1.0.10",
+    "version": "1.0.11",
     "assetBundlePatterns": ["**/*"],
     "icon": "./src/assets/images/icon.png",
     "splash": {
@@ -28,6 +28,12 @@
       "eas": {
         "projectId": "65fafb0c-5e9e-4192-b638-62e2ef295637"
       }
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/65fafb0c-5e9e-4192-b638-62e2ef295637"
     }
   },
   "build": {

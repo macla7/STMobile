@@ -50,7 +50,7 @@ function AuthStackScreen() {
   }, [appVersion]);
 
   function checkAppVersion() {
-    const mobileVersion = Constants.manifest.version;
+    const mobileVersion = Constants.expoConfig.version;
     // Compare the versions
     if (outOfDateVersion(appVersion, mobileVersion)) {
       // Show the alert to notify the user about the outdated app
