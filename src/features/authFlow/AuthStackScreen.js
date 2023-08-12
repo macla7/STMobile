@@ -101,7 +101,7 @@ function AuthStackScreen() {
           screenOptions={{
             headerTitle: (props) => (
               <Text fontSize="3xl" color="myLightGreen" fontWeight="500">
-                Shift it.
+                Shift It.
               </Text>
             ),
             headerStyle: {

@@ -9,6 +9,8 @@ import ConfirmDeletePost from "../posts/ConfirmDeletePost";
 import InfoStackScreen from "./InfoStackScreen";
 import { Text, Pressable, InfoOutlineIcon, Center } from "native-base";
 import ConfirmBids from "../groups/ConfirmBids";
+import CommentSettings from "../posts/comments/CommentSettings";
+import ConfirmDeleteComment from "../posts/comments/ConfirmDeleteComment";
 
 const HomeStack = createNativeStackNavigator();
 
@@ -29,7 +31,7 @@ function HomeStackScreen({ navigation }) {
         options={({ route }) => ({
           headerTitle: (props) => (
             <Text fontSize="3xl" color="myLightGreen" fontWeight="500">
-              Shift it.
+              Shift It.
             </Text>
           ),
           headerRight: () => (
@@ -56,8 +58,22 @@ function HomeStackScreen({ navigation }) {
         }}
       />
       <HomeStack.Screen
+        name="Comment Settings"
+        component={CommentSettings}
+        options={{
+          presentation: "modal",
+        }}
+      />
+      <HomeStack.Screen
         name="Confirm Delete Post"
         component={ConfirmDeletePost}
+        options={{
+          presentation: "modal",
+        }}
+      />
+      <HomeStack.Screen
+        name="Confirm Delete Comment"
+        component={ConfirmDeleteComment}
         options={{
           presentation: "modal",
         }}

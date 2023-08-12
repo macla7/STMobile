@@ -36,3 +36,21 @@ export async function createComment(commentDetails) {
       return {};
     });
 }
+
+export async function updateComment(commentDetails) {
+  const auth_token = await getValueFor("auth_token");
+  return fetch(`${API_URL}/comments/${commentDetails.id}.json`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${auth_token}`,
+    },
+    body: JSON.stringify({ comment: commentDetails.comment }),
+  })
+    .then((response) => response.json())
+    .catch((error) => {
+      console.log("Error: ", error);
+      // Not a longer term proper soloution
+      return {};
+    });
+}

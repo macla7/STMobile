@@ -9,7 +9,7 @@ import {
   fetchPostsHome,
 } from "./postAPI";
 import { fetchLikes, createLike, destroyLike } from "./likes/likeAPI";
-import { createComment } from "./comments/commentAPI";
+import { createComment, updateComment } from "./comments/commentAPI";
 import { fetchBids, createBid, updateBid } from "./bids/bidAPI";
 import { formatISO } from "date-fns";
 
@@ -184,6 +184,14 @@ export const createCommentAsync = createAsyncThunk(
   "posts/createComment",
   async (commentDetails) => {
     const response = await createComment(commentDetails);
+    return response;
+  }
+);
+
+export const updateCommentAsync = createAsyncThunk(
+  "posts/updateComment",
+  async (commentDetails) => {
+    const response = await updateComment(commentDetails);
     return response;
   }
 );
@@ -479,6 +487,25 @@ export const postSlice = createSlice({
       })
       // error
       .addCase(createCommentAsync.rejected, (state) => {
+        return produce(state, (draftState) => {
+          draftState.status = Statuses.Error;
+        });
+      })
+
+      // while you wait
+      .addCase(updateCommentAsync.pending, (state) => {
+        return produce(state, (draftState) => {});
+      })
+      // you got the thing
+      .addCase(updateCommentAsync.fulfilled, (state, action) => {
+        return produce(state, (draftState) => {
+          setNestedResource(draftState, action, "comments");
+          draftState.status = Statuses.UpToDate;
+          draftState.deleting = Statuses.UpToDate;
+        });
+      })
+      // error
+      .addCase(updateCommentAsync.rejected, (state) => {
         return produce(state, (draftState) => {
           draftState.status = Statuses.Error;
         });

@@ -79,13 +79,14 @@ function Post(props) {
   }
 
   function canSeeSettings(item) {
-    if (item.user_id == userId || isUserAdmin(item.post_admins, userId)) {
+    if (item.user_id == userId || isUserAdmin(userId)) {
       return true;
     }
     return false;
   }
 
-  function isUserAdmin(post_admins, userId) {
+  function isUserAdmin(userId) {
+    let post_admins = props.post.post_admins;
     if (post_admins) {
       // Loop through the post_admins array
       for (let i = 0; i < post_admins.length; i++) {
@@ -102,7 +103,7 @@ function Post(props) {
   return (
     <Center my="1" bgColor="white" borderColor="myBorderGray" borderWidth="1">
       <Box width="100%" p="2">
-        <HStack width="100%">
+        <HStack width="100%" overflow="hidden">
           {props.post.avatar_url ? (
             <DP uri={`${props.post.avatar_url}`} size={40} />
           ) : (
@@ -121,10 +122,7 @@ function Post(props) {
                       props.navigation.navigate("Post Settings", {
                         postId: props.post.id,
                         bids: props.post.bids,
-                        isUserAdmin: isUserAdmin(
-                          props.post.post_admins,
-                          userId
-                        ),
+                        isUserAdmin: isUserAdmin(userId),
                       });
                     }}
                   >
@@ -136,8 +134,12 @@ function Post(props) {
                 ) : null}
               </HStack>
 
-              <HStack justifyContent="space-between" alignItems="center">
-                <Box wMax="50%">
+              <HStack
+                justifyContent="space-between"
+                alignItems="center"
+                overflow="hidden"
+              >
+                <Box flex={1}>
                   <Text color="myDarkGrayText" fontSize="xs">
                     {props.post.group_name}
                   </Text>
@@ -240,7 +242,13 @@ function Post(props) {
         example={props.example}
       />
 
-      {props.singularView ? <Comments comments={comments} /> : null}
+      {props.singularView ? (
+        <Comments
+          comments={comments}
+          canSeeSettings={canSeeSettings}
+          navigation={props.navigation}
+        />
+      ) : null}
     </Center>
   );
 }
