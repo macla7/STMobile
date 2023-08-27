@@ -152,7 +152,7 @@ function Login({ navigation }) {
                     color="myDarkGreen"
                     isInvalid={errors.loginError !== ""}
                   >
-                    <Box h="6">
+                    <Box h="6" pt="2">
                       <FormControl.ErrorMessage>
                         {errors.loginError}
                       </FormControl.ErrorMessage>
