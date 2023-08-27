@@ -18,12 +18,13 @@ import {
   ScrollView,
   Text,
   View,
-  CheckBox,
+  Flex,
 } from "native-base";
 import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
+  Animated,
 } from "react-native";
 import { useHeaderHeight } from "@react-navigation/elements";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
@@ -38,6 +39,28 @@ function Login({ navigation }) {
   const headerHeight = useHeaderHeight();
   const [rememberMe, setRememberMe] = useState(false);
   const status = useSelector(selectStatus);
+  const [throbbingValue] = useState(new Animated.Value(1));
+
+  useEffect(() => {
+    startThrobAnimation();
+  }, []);
+
+  const startThrobAnimation = () => {
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(throbbingValue, {
+          toValue: 1.05,
+          duration: 500,
+          useNativeDriver: false,
+        }),
+        Animated.timing(throbbingValue, {
+          toValue: 1,
+          duration: 500,
+          useNativeDriver: false,
+        }),
+      ])
+    ).start();
+  };
 
   useEffect(() => {
     checkRememberMe();
@@ -114,6 +137,7 @@ function Login({ navigation }) {
                 <Heading size="xl" fontWeight="600" color="myDarkGreen">
                   Welcome
                 </Heading>
+
                 <Heading
                   mt="1"
                   color="myDarkGreen"
@@ -132,12 +156,19 @@ function Login({ navigation }) {
                       <FormControl.ErrorMessage>
                         {errors.loginError}
                       </FormControl.ErrorMessage>
-
-                      <FormControl.HelperText>
-                        {status != "Not Fetched" && status != "Up To Date"
-                          ? status
-                          : ""}
-                      </FormControl.HelperText>
+                      <Flex alignItems="start" justifyContent="center">
+                        <Animated.Text
+                          style={{
+                            transform: [{ scale: throbbingValue }],
+                          }}
+                        >
+                          <FormControl.HelperText>
+                            {status != "Not Fetched" && status != "Up To Date"
+                              ? status
+                              : ""}
+                          </FormControl.HelperText>
+                        </Animated.Text>
+                      </Flex>
                     </Box>
 
                     <FormControl.Label

@@ -9,7 +9,7 @@ function Bids(props) {
 
   let ended = true;
   return (
-    <Box opacity={props.ended ? "0.5" : "1"}>
+    <Box>
       <VStack justifyContent="space-between">
         {sortedBids.length == 0 ? (
           <Bid

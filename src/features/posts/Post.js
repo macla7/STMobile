@@ -18,7 +18,8 @@ import DP from "../layout/DP";
 import { format, formatDistanceToNow } from "date-fns";
 import ButtonGroup from "./ButtonGroup";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faClock } from "@fortawesome/free-regular-svg-icons/faClock";
+import { faClock } from "@fortawesome/free-regular-svg-icons/faClock.js";
+import { faLock } from "@fortawesome/free-solid-svg-icons/faLock";
 import Comments from "./comments/Comments";
 import { domain } from "@env";
 import { selectUserId } from "../sessions/sessionSlice.js";
@@ -145,7 +146,12 @@ function Post(props) {
                   </Text>
                 </Box>
                 <HStack alignItems="center">
-                  <FontAwesomeIcon icon={faClock} color="#171717" />
+                  {new Date(props.post.ends_at) > new Date() ? (
+                    <FontAwesomeIcon icon={faClock} color="#171717" />
+                  ) : (
+                    <FontAwesomeIcon icon={faLock} color="#171717" />
+                  )}
+
                   <Text ml="1">
                     {new Date(props.post.ends_at) > new Date()
                       ? "Ends in " +

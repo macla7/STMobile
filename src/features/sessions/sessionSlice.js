@@ -183,12 +183,13 @@ export const sessionSlice = createSlice({
       // while you wait
       .addCase(loginUserWithTokenAsync.pending, (state) => {
         return produce(state, (draftState) => {
-          // draftState.status = Statuses.Loading;
+          draftState.status = Statuses.Loading;
         });
       })
       // you got the thing
       .addCase(loginUserWithTokenAsync.fulfilled, (state, action) => {
         return produce(state, (draftState) => {
+          draftState.status = Statuses.UpToDate;
           if (action.payload.user !== undefined) {
             draftState["user"] = {
               id: action.payload.user.id,
@@ -203,7 +204,7 @@ export const sessionSlice = createSlice({
       // error
       .addCase(loginUserWithTokenAsync.rejected, (state) => {
         return produce(state, (draftState) => {
-          // draftState.status = Statuses.Error;
+          draftState.status = Statuses.Error;
         });
       });
   },
