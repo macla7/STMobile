@@ -35,7 +35,7 @@ function InfoFourth({ navigation }) {
         <Center my="1">
           <Flex direction="row">
             <Spacer />
-            <GroupsIcon width="40" height="40" fill="#3433E2" />
+            <GroupsIcon width="40" height="40" fill="#4243ed" />
             <Spacer />
           </Flex>
         </Center>
@@ -49,7 +49,7 @@ function InfoFourth({ navigation }) {
         <Center my="1">
           <Flex direction="row">
             <Spacer />
-            <AddIcon size="xl" color="#3433E2" />
+            <AddIcon size="xl" color="#4243ed" />
             <Spacer />
           </Flex>
         </Center>

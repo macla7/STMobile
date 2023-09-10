@@ -25,9 +25,9 @@ function Money(props) {
 
   function createDollarsText(dollars) {
     if (dollars < 0) {
-      return "$ " + dollars * -1;
+      return "$" + dollars * -1;
     }
-    return "$ " + dollars;
+    return "$" + dollars;
   }
 
   function createCentsText(cents) {
@@ -41,8 +41,8 @@ function Money(props) {
 
   return (
     <Text color={props.color ? props.color : ""}>
-      {handleMoneyText("dollars", dollarsFromMicro(props.microDollars))}.
-      {handleMoneyText("cents", centsFromMicro(props.microDollars))}
+      {handleMoneyText("dollars", dollarsFromMicro(props.microDollars))}
+      {/* {handleMoneyText("cents", centsFromMicro(props.microDollars))} */}
     </Text>
   );
 }

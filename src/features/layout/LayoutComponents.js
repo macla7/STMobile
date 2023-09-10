@@ -101,14 +101,7 @@ export function CWholeSpaceRefreshTile({ children, refreshAction }) {
 
 export function CInternalBorderTile({ children, borderColor }) {
   return (
-    <Box
-      borderColor={borderColor}
-      borderBottomWidth="1"
-      p="1"
-      mb="1"
-      mx="1"
-      bgColor="white"
-    >
+    <Box p="1" mb="1" mx="1">
       {children}
     </Box>
   );

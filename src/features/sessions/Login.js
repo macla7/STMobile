@@ -134,22 +134,17 @@ function Login({ navigation }) {
           >
             <Center>
               <Box p="2" w="90%" maxW="290" pt="100">
-                <Heading size="xl" fontWeight="600" color="myDarkGreen">
+                <Heading size="xl" fontWeight="600" color="myBlue">
                   Welcome
                 </Heading>
 
-                <Heading
-                  mt="1"
-                  color="myDarkGreen"
-                  fontWeight="medium"
-                  size="xs"
-                >
+                <Heading mt="1" color="myBlue" fontWeight="medium" size="xs">
                   Sign in to continue!
                 </Heading>
 
                 <VStack space={3}>
                   <FormControl
-                    color="myDarkGreen"
+                    color="myBlue"
                     isInvalid={errors.loginError !== ""}
                   >
                     <Box h="6" pt="2">
@@ -173,13 +168,13 @@ function Login({ navigation }) {
 
                     <FormControl.Label
                       _text={{
-                        color: "myDarkGreen",
+                        color: "myBlue",
                       }}
                     >
                       Email ID
                     </FormControl.Label>
                     <Input
-                      color="myDarkGreen"
+                      color="myBlue"
                       type="email"
                       value={email}
                       onChange={(e) => {
@@ -190,13 +185,13 @@ function Login({ navigation }) {
 
                     <FormControl.Label
                       _text={{
-                        color: "myDarkGreen",
+                        color: "myBlue",
                       }}
                     >
                       Password
                     </FormControl.Label>
                     <Input
-                      color="myDarkGreen"
+                      color="myBlue"
                       type="password"
                       value={password}
                       onChange={(e) => {
@@ -208,7 +203,7 @@ function Login({ navigation }) {
                   <HStack alignItems="center">
                     <BouncyCheckbox
                       size={30}
-                      fillColor="#3433E2"
+                      fillColor="#4243ed"
                       iconStyle={{ margin: 0 }}
                       disableBuiltInState
                       onPress={() => setRememberMe(!rememberMe)}
@@ -225,14 +220,14 @@ function Login({ navigation }) {
                   </Button>
                   <VStack>
                     <HStack mt="6" justifyContent="center">
-                      <Text fontSize="sm" color="myDarkGreen">
+                      <Text fontSize="sm" color="myBlue">
                         I'm a new user{" "}
                       </Text>
                       <Center>
                         <Text
                           fontSize="xs"
                           fontWeight="500"
-                          color="myDarkGreen"
+                          color="myBlue"
                           underline
                           onPress={() => navigation.navigate("Register")}
                         >
@@ -245,7 +240,7 @@ function Login({ navigation }) {
                       <Text
                         fontSize="xs"
                         fontWeight="500"
-                        color="myDarkGreen"
+                        color="myBlue"
                         underline
                         onPress={() => navigation.navigate("EmailForm")}
                       >

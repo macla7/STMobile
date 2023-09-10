@@ -41,7 +41,8 @@ function GroupInfo({ route, navigation }) {
                 group: group,
               })
             }
-            borderRadius="0"
+            borderRadius="9"
+            margin="2"
           >
             Invite
           </Button>

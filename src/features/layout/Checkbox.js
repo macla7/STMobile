@@ -101,7 +101,7 @@ function Checkbox({ item }) {
                 ref={(ref) => (bouncyCheckboxRef.current = ref)}
                 onPress={() => adjustActionList(item)}
                 isChecked={checked}
-                fillColor="#3433E2"
+                fillColor="#4243ed"
                 disableBuiltInState
                 iconStyle={{ margin: 0 }}
               />

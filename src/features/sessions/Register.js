@@ -138,15 +138,10 @@ export default function App() {
           >
             <Center>
               <Box p="2" w="90%" maxW="290" pt="10">
-                <Heading size="lg" color="myDarkGreen" fontWeight="semibold">
+                <Heading size="lg" color="myBlue" fontWeight="semibold">
                   Welcome
                 </Heading>
-                <Heading
-                  mt="1"
-                  color="myDarkGreen"
-                  fontWeight="medium"
-                  size="xs"
-                >
+                <Heading mt="1" color="myBlue" fontWeight="medium" size="xs">
                   Sign up to continue!
                 </Heading>
                 <VStack space={3}>
@@ -164,7 +159,7 @@ export default function App() {
 
                     <FormControl.Label
                       _text={{
-                        color: "myDarkGreen",
+                        color: "myBlue",
                       }}
                     >
                       Name
@@ -174,7 +169,7 @@ export default function App() {
                     </FormControl.ErrorMessage>
                     <Input
                       type="name"
-                      color="myDarkGreen"
+                      color="myBlue"
                       value={name}
                       onChange={(e) => {
                         setName(e.nativeEvent.text);
@@ -187,7 +182,7 @@ export default function App() {
                   <FormControl isInvalid={errors["email"] !== undefined}>
                     <FormControl.Label
                       _text={{
-                        color: "myDarkGreen",
+                        color: "myBlue",
                       }}
                     >
                       Email
@@ -197,7 +192,7 @@ export default function App() {
                     </FormControl.ErrorMessage>
                     <Input
                       type="email"
-                      color="myDarkGreen"
+                      color="myBlue"
                       value={email}
                       onChange={(e) => {
                         setEmail(e.nativeEvent.text);
@@ -209,7 +204,7 @@ export default function App() {
                   <FormControl isInvalid={errors["password"] !== undefined}>
                     <FormControl.Label
                       _text={{
-                        color: "myDarkGreen",
+                        color: "myBlue",
                       }}
                     >
                       Password
@@ -219,7 +214,7 @@ export default function App() {
                     </FormControl.ErrorMessage>
                     <Input
                       type="password"
-                      color="myDarkGreen"
+                      color="myBlue"
                       value={password}
                       onChange={(e) => {
                         setPassword(e.nativeEvent.text);
@@ -233,7 +228,7 @@ export default function App() {
                   >
                     <FormControl.Label
                       _text={{
-                        color: "myDarkGreen",
+                        color: "myBlue",
                       }}
                     >
                       Confirm Password
@@ -243,7 +238,7 @@ export default function App() {
                     </FormControl.ErrorMessage>
                     <Input
                       type="password"
-                      color="myDarkGreen"
+                      color="myBlue"
                       value={confirmPassword}
                       onChange={(e) => {
                         setConfirmPassword(e.nativeEvent.text);

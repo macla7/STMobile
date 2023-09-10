@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Text, View } from "native-base";
+import { Button, Text, View, HStack } from "native-base";
 import { selectStatus, Statuses } from "./memberships/membershipSlice";
 import { selectPosts, fetchPostsAsync } from "../posts/postSlice";
 import Posts from "../posts/Posts";
@@ -38,18 +38,21 @@ function Group({ route, navigation }) {
           <Posts navigation={navigation} posts={posts} />
         </CScrollBackgroundRefresh>
       </View>
-      <Button
-        variant="myButtonYellowVariant"
-        onPress={() =>
-          navigation.navigate("GroupInfo", {
-            group: route.params.group,
-          })
-        }
-        w="100%"
-        borderRadius="0"
-      >
-        Group Members
-      </Button>
+      <HStack>
+        <Button
+          variant="myButtonYellowVariant"
+          onPress={() =>
+            navigation.navigate("GroupInfo", {
+              group: route.params.group,
+            })
+          }
+          borderRadius="9"
+          margin="2"
+          flex="1"
+        >
+          Group Members
+        </Button>
+      </HStack>
     </View>
   );
 }

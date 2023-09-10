@@ -10,6 +10,7 @@ function GroupForm({ route, navigation }) {
   const [formData, setData] = useState({});
   const [errors, setErrors] = useState({});
   const groups = useSelector(selectGroups);
+  const { returnScreen, initGroupId } = route.params;
 
   useEffect(() => {
     dispatch(fetchGroupsAsync());
@@ -43,7 +44,13 @@ function GroupForm({ route, navigation }) {
     }
     submitGroup();
     setData({ ...formData, name: "" });
-    navigation.goBack();
+    if (returnScreen == "Your Groups") {
+      navigation.navigate(returnScreen, {
+        initGroupId: initGroupId,
+      });
+    } else {
+      navigation.goBack();
+    }
     return true;
   };
 

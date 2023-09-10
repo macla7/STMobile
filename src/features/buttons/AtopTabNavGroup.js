@@ -7,7 +7,8 @@ function AtopTabNavGroup({ left, right, leftFunction, rightFunction }) {
     <Box position="absolute" bottom="0" width="100%">
       <HStack>
         <Button
-          borderRadius="0"
+          margin="2"
+          borderRadius="9"
           flex="1"
           variant="myButtonYellowVariant"
           onPress={() => leftFunction()}
@@ -15,8 +16,9 @@ function AtopTabNavGroup({ left, right, leftFunction, rightFunction }) {
           {left}
         </Button>
         <Button
+          margin="2"
           borderLeftWidth="0"
-          borderRadius="0"
+          borderRadius="9"
           flex="1"
           variant="myButtonYellowVariant"
           onPress={() => rightFunction()}

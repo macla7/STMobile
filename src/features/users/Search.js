@@ -7,7 +7,7 @@ import {
   setToBeConfirmed,
   selectToBeActioned,
 } from "../groups/invites/inviteSlice";
-import { VStack, FormControl, Input, Button } from "native-base";
+import { VStack, FormControl, Input, Button, HStack } from "native-base";
 import {
   CBackground,
   CWholeSpaceContentTile,
@@ -94,19 +94,22 @@ function Search({ route, navigation }) {
 
         <CheckboxListing items={userList} />
 
-        <Button
-          variant="myButtonYellowVariant"
-          onPress={() => {
-            dispatch(setToBeConfirmed(toBeActioned));
-            navigation.navigate("Confirm Invites", {
-              group: group,
-            });
-          }}
-          w="100%"
-          borderRadius="0"
-        >
-          Confirm Invites
-        </Button>
+        <HStack>
+          <Button
+            variant="myButtonYellowVariant"
+            onPress={() => {
+              dispatch(setToBeConfirmed(toBeActioned));
+              navigation.navigate("Confirm Invites", {
+                group: group,
+              });
+            }}
+            borderRadius="9"
+            margin="2"
+            flex="1"
+          >
+            Confirm Invites
+          </Button>
+        </HStack>
       </CWholeSpaceContentTile>
     </CBackground>
   );

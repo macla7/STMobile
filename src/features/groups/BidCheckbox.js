@@ -88,7 +88,7 @@ function BidCheckbox({ item }) {
             size={30}
             isChecked={approved}
             onPress={() => adjustActionList(item)}
-            fillColor="#3433E2"
+            fillColor="#4243ed"
             disableBuiltInState
             iconStyle={{ margin: 0 }}
           />

@@ -3,7 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { createPostAsync, selectFreshPost } from "./postSlice";
 import { resetShifts, selectShifts } from "./shifts/shiftSlice";
 import { createNotificationBlueprint } from "../notifications/notificationBlueprintAPI";
-import { VStack, FormControl, Button, TextArea, View } from "native-base";
+import {
+  VStack,
+  FormControl,
+  Button,
+  TextArea,
+  View,
+  HStack,
+} from "native-base";
 import Money from "../posts/money/Money";
 import Shift from "./shifts/Shift";
 import { CScrollBackground, CContentTile } from "../layout/LayoutComponents";
@@ -143,6 +150,9 @@ function PostForm({ route, navigation }) {
                 )}
               >
                 <FormControl.Label mb="-1">Group</FormControl.Label>
+                <FormControl.HelperText>
+                  Who should see this post
+                </FormControl.HelperText>
                 <FormControl.ErrorMessage>
                   {errors.group}
                 </FormControl.ErrorMessage>
@@ -169,6 +179,9 @@ function PostForm({ route, navigation }) {
                 </Button>
 
                 <FormControl.Label mb="-1">Post Ends</FormControl.Label>
+                <FormControl.HelperText>
+                  When the bidding will end
+                </FormControl.HelperText>
                 <FormControl.ErrorMessage>
                   {errors.postEndsDate}
                 </FormControl.ErrorMessage>
@@ -272,31 +285,41 @@ function PostForm({ route, navigation }) {
           </CContentTile>
         </CScrollBackground>
       </View>
-      {shifts.length == 0 || errors["shifts"] ? (
-        <Button
-          variant="myButtonYellowVariant"
-          w="100%"
-          borderRadius="0"
-          onPress={() => {
-            navigation.navigate("Add Shift", {
-              start: new Date(postEndsDate).toString(),
-              end: new Date(postEndsDate).toString(),
-              endsAt: new Date(postEndsDate).toString(),
-              initPosition: "",
-              editingMode: false,
-              returnScreen: "Create Post",
-            });
-            setErrors({ ...errors, shifts: null });
-            dispatch(resetShifts());
-          }}
-        >
-          {errors["shifts"] ? "Edit Shift" : "Add Shift"}
-        </Button>
-      ) : (
-        <Button mt="2" variant="myButtonYellowVariant" onPress={onSubmit}>
-          Make Post
-        </Button>
-      )}
+      <HStack>
+        {shifts.length == 0 || errors["shifts"] ? (
+          <Button
+            variant="myButtonYellowVariant"
+            borderRadius="9"
+            margin="2"
+            flex="1"
+            onPress={() => {
+              navigation.navigate("Add Shift", {
+                start: new Date(postEndsDate).toString(),
+                end: new Date(postEndsDate).toString(),
+                endsAt: new Date(postEndsDate).toString(),
+                initPosition: "",
+                editingMode: false,
+                returnScreen: "Create Post",
+              });
+              setErrors({ ...errors, shifts: null });
+              dispatch(resetShifts());
+            }}
+          >
+            {errors["shifts"] ? "Edit Shift" : "Add Shift"}
+          </Button>
+        ) : (
+          <Button
+            mt="2"
+            variant="myButtonYellowVariant"
+            onPress={onSubmit}
+            borderRadius="9"
+            margin="2"
+            flex="1"
+          >
+            Make Post
+          </Button>
+        )}
+      </HStack>
     </KeyboardWrapper>
   );
 }

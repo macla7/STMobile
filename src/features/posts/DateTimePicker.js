@@ -109,21 +109,24 @@ function MyDateTimePicker({ route, navigation }) {
           </VStack>
         </CContentTile>
       </CBackground>
-      <Button
-        variant="myButtonYellowVariant"
-        onPress={() => {
-          // Pass and merge params back to home screen
-          navigation.navigate({
-            name: returnScreen,
-            params: returnParams(),
-            merge: true,
-          });
-        }}
-        w="100%"
-        borderRadius="0"
-      >
-        Done
-      </Button>
+      <HStack>
+        <Button
+          variant="myButtonYellowVariant"
+          onPress={() => {
+            // Pass and merge params back to home screen
+            navigation.navigate({
+              name: returnScreen,
+              params: returnParams(),
+              merge: true,
+            });
+          }}
+          borderRadius="9"
+          flex="1"
+          margin="2"
+        >
+          Done
+        </Button>
+      </HStack>
     </>
   );
 }

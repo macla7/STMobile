@@ -7,7 +7,7 @@ import {
   selectToBeActioned,
   setToBeConfirmed,
 } from "./invites/inviteSlice";
-import { VStack, Button, FormControl, Input } from "native-base";
+import { VStack, Button, FormControl, Input, HStack } from "native-base";
 import {
   CBackground,
   CWholeSpaceContentTile,
@@ -88,17 +88,20 @@ function DiscoverGroups({ navigation }) {
 
         <CheckboxListing items={groupList} />
 
-        <Button
-          variant="myButtonYellowVariant"
-          onPress={() => {
-            dispatch(setToBeConfirmed(toBeActioned));
-            navigation.navigate("Ask to Join");
-          }}
-          w="100%"
-          borderRadius="0"
-        >
-          Ask to Join
-        </Button>
+        <HStack>
+          <Button
+            variant="myButtonYellowVariant"
+            onPress={() => {
+              dispatch(setToBeConfirmed(toBeActioned));
+              navigation.navigate("Ask to Join");
+            }}
+            borderRadius="9"
+            margin="2"
+            flex="1"
+          >
+            Ask to Join
+          </Button>
+        </HStack>
       </CWholeSpaceContentTile>
     </CBackground>
   );

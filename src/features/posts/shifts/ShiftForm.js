@@ -129,7 +129,7 @@ function ShiftForm({ navigation, route }) {
                   </FormControl.ErrorMessage>
                 ) : (
                   <FormControl.HelperText>
-                    Needs to be after the Post finishes.
+                    Has to be after the Post finishes.
                   </FormControl.HelperText>
                 )}
                 <Button
@@ -155,9 +155,7 @@ function ShiftForm({ navigation, route }) {
                     setErrors({ ...errors, start: null });
                   }}
                 >
-                  {format(new Date(start), "EEE do LLL")}
-
-                  {format(new Date(start), "p")}
+                  {format(new Date(start), "p - EEEE do LLL")}
                 </Button>
 
                 <FormControl.Label mb="-1">Shift end time</FormControl.Label>
@@ -167,7 +165,7 @@ function ShiftForm({ navigation, route }) {
                   </FormControl.ErrorMessage>
                 ) : (
                   <FormControl.HelperText>
-                    Needs to be after the start time.
+                    Has to be after the start time.
                   </FormControl.HelperText>
                 )}
                 <Button
@@ -193,9 +191,7 @@ function ShiftForm({ navigation, route }) {
                     setErrors({ ...errors, end: null });
                   }}
                 >
-                  {format(new Date(end), "EEE do LLL")}
-
-                  {format(new Date(end), "p")}
+                  {format(new Date(end), "p - EEEE do LLL")}
                 </Button>
               </FormControl>
             </VStack>
@@ -205,8 +201,8 @@ function ShiftForm({ navigation, route }) {
       <Button
         variant="myButtonYellowVariant"
         onPress={onSubmit}
-        w="100%"
-        borderRadius="0"
+        borderRadius="9"
+        margin="2"
       >
         {editingMode ? "Edit Shift" : "Create Shift"}
       </Button>

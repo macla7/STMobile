@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Button } from "native-base";
+import { Button, HStack } from "native-base";
 import { selectMoney } from "./money/moneySlice";
 import {
   CBackground,
@@ -24,21 +24,24 @@ function ReserveForm({ route, navigation }) {
           />
         </CWholeSpaceContentTile>
       </CBackground>
-      <Button
-        variant="myButtonYellowVariant"
-        onPress={() => {
-          // Pass and merge params back to home screen
-          navigation.navigate({
-            name: returnScreen,
-            params: { reserve: currentMicroDollars },
-            merge: true,
-          });
-        }}
-        w="100%"
-        borderRadius="0"
-      >
-        Done
-      </Button>
+      <HStack>
+        <Button
+          variant="myButtonYellowVariant"
+          onPress={() => {
+            // Pass and merge params back to home screen
+            navigation.navigate({
+              name: returnScreen,
+              params: { reserve: currentMicroDollars },
+              merge: true,
+            });
+          }}
+          borderRadius="9"
+          margin="2"
+          flex="1"
+        >
+          Done
+        </Button>
+      </HStack>
     </>
   );
 }

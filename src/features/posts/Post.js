@@ -24,6 +24,7 @@ import Comments from "./comments/Comments";
 import { domain } from "@env";
 import { selectUserId } from "../sessions/sessionSlice.js";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons/faEllipsis";
+import Likes from "./likes/Likes.js";
 
 global.addEventListener = () => {};
 global.removeEventListener = () => {};
@@ -102,7 +103,14 @@ function Post(props) {
   }
 
   return (
-    <Center my="1" bgColor="white" borderColor="myBorderGray" borderWidth="1">
+    <Center
+      my="1"
+      bgColor="white"
+      borderColor="myBorderGray"
+      borderWidth="1"
+      margin="2"
+      borderRadius={9}
+    >
       <Box width="100%" p="2">
         <HStack width="100%" overflow="hidden">
           {props.post.avatar_url ? (
@@ -197,17 +205,14 @@ function Post(props) {
         </Box>
       </Flex>
 
-      <Flex
-        direction="row"
-        justifyContent="space-between"
-        h="10"
-        w="100%"
-        borderTopWidth="1"
-        borderColor="myBorderGray"
-      >
+      <Flex direction="row" justifyContent="space-between" h="10" w="100%">
         <HStack flex="1" justifyContent="flex-start">
-          <Center mx="2">
-            <Text>{likes.length} Likes</Text>
+          <Center mx="3">
+            <Likes
+              likes={likes}
+              postId={props.post.id}
+              example={props.example}
+            />
           </Center>
         </HStack>
 

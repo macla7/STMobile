@@ -80,7 +80,7 @@ function Likes(props) {
           <FontAwesomeIcon icon={faHeartRegular} color="#171717" />
         )}
 
-        <Text mx="2">Like</Text>
+        <Text mx="2">{props.likes.length}</Text>
       </HStack>
     </Button>
   );

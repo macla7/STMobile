@@ -5,6 +5,7 @@
     "version": "1.0.12",
     "assetBundlePatterns": ["**/*"],
     "icon": "./src/assets/images/icon.png",
+    "scheme": "shift_it",
     "splash": {
       "image": "./src/assets/images/splash.png",
       "resizeMode": "cover"
@@ -16,11 +17,11 @@
       "icon": "./src/assets/images/adaptive-icon.png",
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/images/adaptive-icon.png",
-        "backgroundColor": "#3433E2"
+        "backgroundColor": "#4243ed"
       },
       "splash": {
         "image": "./src/assets/images/splash.png",
-        "backgroundColor": "#3433E2"
+        "backgroundColor": "#4243ed"
       },
       "package": "com.macla7.shift_it"
     },

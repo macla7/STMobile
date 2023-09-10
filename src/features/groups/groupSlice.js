@@ -174,7 +174,7 @@ export const groupSlice = createSlice({
       // you got the thing
       .addCase(createGroupAsync.fulfilled, (state, action) => {
         return produce(state, (draftState) => {
-          draftState.groups = action.payload;
+          draftState.myGroups = action.payload;
           draftState.status = Statuses.UpToDate;
         });
       })

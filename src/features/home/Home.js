@@ -141,9 +141,9 @@ function Home({ navigation }) {
     <CScrollBackgroundRefresh refreshAction={refresh}>
       {homePosts.length == 0 ? (
         <Center w="100%">
-          <Heading pt="1" size="sm">
+          {/* <Heading pt="1" size="sm">
             Example Post
-          </Heading>
+          </Heading> */}
           <Post
             post={examplePost}
             key={examplePost.id}
@@ -154,9 +154,6 @@ function Home({ navigation }) {
           <Button
             width="80%"
             m="4"
-            fontSize="md"
-            fontWeight="400"
-            color="myDarkGrayText"
             variant="myButtonYellowVariant"
             onPress={() => {
               navigation.navigate("Create", {
@@ -164,7 +161,7 @@ function Home({ navigation }) {
               });
             }}
           >
-            Create a Post
+            Post a Shift
           </Button>
 
           <Button
@@ -187,7 +184,6 @@ function Home({ navigation }) {
             width="80%"
             m="4"
             fontSize="md"
-            fontWeight="400"
             color="myDarkGrayText"
             variant="myButtonYellowVariant"
             onPress={() => {
@@ -196,7 +192,7 @@ function Home({ navigation }) {
               });
             }}
           >
-            App Overview
+            How it works
           </Button>
         </Center>
       ) : (

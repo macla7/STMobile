@@ -18,9 +18,9 @@ function GroupsStackScreen() {
     <GroupsStack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: "#3433E2",
+          backgroundColor: "#4243ed",
         },
-        headerTintColor: "#CDFF00",
+        headerTintColor: "#fff",
       }}
       initialRouteName="My Groups"
     >

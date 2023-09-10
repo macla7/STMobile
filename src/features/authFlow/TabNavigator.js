@@ -194,15 +194,15 @@ function TabNavigator() {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           if (route.name === "Home") {
-            return <HomeIcon width="25" height="25" fill="#3433E2" />;
+            return <HomeIcon width="25" height="25" fill="#4243ed" />;
           } else if (route.name === "Groups") {
-            return <GroupsIcon width="40" height="40" fill="#3433E2" />;
+            return <GroupsIcon width="40" height="40" fill="#4243ed" />;
           } else if (route.name === "Create") {
-            return <AddIcon size="xl" color="#3433E2" />;
+            return <AddIcon size="xl" color="#4243ed" />;
           } else if (route.name === "NotificationsStackScreen") {
-            return <NotificationsIcon width="25" height="25" fill="#3433E2" />;
+            return <NotificationsIcon width="25" height="25" fill="#4243ed" />;
           } else if (route.name === "ProfileStackScreen") {
-            return <ProfileIcon width="25" height="25" fill="#3433E2" />;
+            return <ProfileIcon width="25" height="25" fill="#4243ed" />;
           }
         },
         tabBarActiveTintColor: "#EC3186",

@@ -19,9 +19,9 @@ function HomeStackScreen({ navigation }) {
     <HomeStack.Navigator
       screenOptions={({}) => ({
         headerStyle: {
-          backgroundColor: "#3433E2",
+          backgroundColor: "#4243ed",
         },
-        headerTintColor: "#CDFF00",
+        headerTintColor: "#fff",
       })}
       initialRouteName="Home Feed"
     >
@@ -30,13 +30,13 @@ function HomeStackScreen({ navigation }) {
         component={Home}
         options={({ route }) => ({
           headerTitle: (props) => (
-            <Text fontSize="3xl" color="myLightGreen" fontWeight="500">
+            <Text fontSize="3xl" color="#fff" fontWeight="500">
               Shift It.
             </Text>
           ),
           headerRight: () => (
             <Pressable onPress={() => navigation.navigate("InfoStackScreen")}>
-              <InfoOutlineIcon color="#CDFF00" size="6" />
+              <InfoOutlineIcon color="#fff" size="6" />
             </Pressable>
           ),
         })}

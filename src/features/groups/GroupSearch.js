@@ -9,8 +9,11 @@ import {
   Text,
   Pressable,
   Box,
+  FormControl,
+  Input,
 } from "native-base";
 import { CBackground, CContentTile } from "../layout/LayoutComponents";
+import GroupForm from "./GroupForm";
 
 function GroupSearch({ navigation, route }) {
   const myGroups = useSelector(selectMyGroups);
@@ -23,6 +26,19 @@ function GroupSearch({ navigation, route }) {
   // and on myGroups.length change
   useEffect(() => {
     dispatch(fetchMyGroupsAsync());
+  }, [dispatch, myGroups.length]);
+
+  useEffect(() => {
+    if (myGroups.length == 0) {
+      navigation.navigate("Groups", {
+        screen: "Create Group",
+        initial: false,
+        params: {
+          returnScreen: "Your Groups",
+          initGroupId: initGroupId,
+        },
+      });
+    }
   }, [dispatch, myGroups.length]);
 
   return (
@@ -72,24 +88,27 @@ function GroupSearch({ navigation, route }) {
           )}
         </CContentTile>
       </CBackground>
-      <Button
-        variant="myButtonYellowVariant"
-        onPress={() => {
-          // Pass and merge params back to home screen
-          navigation.navigate({
-            name: "Create Post",
-            params: {
-              groupId: groupId ? groupId : 0,
-              groupName: groupName ? groupName : "Group Not Selected..",
-            },
-            merge: true,
-          });
-        }}
-        w="100%"
-        borderRadius="0"
-      >
-        Done
-      </Button>
+      <HStack>
+        <Button
+          variant="myButtonYellowVariant"
+          onPress={() => {
+            // Pass and merge params back to home screen
+            navigation.navigate({
+              name: "Create Post",
+              params: {
+                groupId: groupId ? groupId : 0,
+                groupName: groupName ? groupName : "Group Not Selected..",
+              },
+              merge: true,
+            });
+          }}
+          borderRadius="9"
+          margin="2"
+          flex="1"
+        >
+          Done
+        </Button>
+      </HStack>
     </>
   );
 }

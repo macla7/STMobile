@@ -13,9 +13,9 @@ function CreatePostStackScreen({ navigation }) {
     <CreatePostStack.Navigator
       screenOptions={({}) => ({
         headerStyle: {
-          backgroundColor: "#3433E2",
+          backgroundColor: "#4243ed",
         },
-        headerTintColor: "#CDFF00",
+        headerTintColor: "#fff",
       })}
       initialRouteName="Create Post"
     >
