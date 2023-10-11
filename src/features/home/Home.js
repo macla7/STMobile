@@ -51,14 +51,14 @@ function Home({ navigation }) {
 
   const examplePost = JSON.parse(`{
         "id": 0,
-        "body": "Got an exam on, someone please help 🙏",
+        "body": "Got a friends birthday, could some please cover 🙏",
         "user_id": 324,
-        "ends_at": "${formatISO(addDays(new Date(), 12))}",
-        "created_at": "${formatISO(subDays(new Date(), 2))}",
-        "updated_at": "${formatISO(subDays(new Date(), 2))}",
+        "ends_at": "${formatISO(addDays(new Date(), 2))}",
+        "created_at": "${formatISO(subDays(new Date(), 1))}",
+        "updated_at": "${formatISO(subDays(new Date(), 1))}",
         "group_id": 1,
         "reserve": -20000000,
-        "group_name": "Cafe Coffee",
+        "group_name": "Gotham General",
         "postor_name": "Tess Georges",
         "avatar_url": "https://shiftmarket.herokuapp.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBck1CIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--138ea1df8b223ff85a40c3146918b5570514c9cf/profilePictureUser421.jpg",
         "shifts": [
@@ -180,7 +180,7 @@ function Home({ navigation }) {
           >
             Join a Group
           </Button>
-          <Button
+          {/* <Button
             width="80%"
             m="4"
             fontSize="md"
@@ -193,7 +193,7 @@ function Home({ navigation }) {
             }}
           >
             How it works
-          </Button>
+          </Button> */}
         </Center>
       ) : (
         <Posts navigation={navigation} posts={homePosts} />
